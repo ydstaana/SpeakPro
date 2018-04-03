@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt    = require('jsonwebtoken');
 const multer = require('multer');
+const bcrypt = require('bcrypt');
 
 var User = require('../models/UserSchema.js');
 var Schedule = require('../models/SchedSchema.js');
@@ -20,16 +21,34 @@ router.get('/', (req, res) => {
 -view uploads
 -
 */
-const upload = multer({ dest: "uploads/" });
 
-router.post('/upload', upload.single('document'), async (req, res, err) => {
-  if (err) res.sendStatus(400);
-  else{
-    res.json();
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
   }
 })
 
-router.get('/login/:username/:password', function(req, res, next) {
+var upload = multer({ storage: storage })
+
+
+
+router.post('/upload', upload.single('avatar'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  res.json(req.file);
+  console.log(req.files);
+})
+
+router.get('/login/:username/:password', function(req,res,next){
+  User.authenticate(req.body.username, req.body.password, function(err,user){
+    if(err) return next(err);
+    res.json(user);
+  })
+})
+/*router.get('/login/:username/:password', function(req, res, next) {
   User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err);
     
@@ -64,7 +83,7 @@ router.get('/login/:username/:password', function(req, res, next) {
     }
   });
 });
-
+*/
 
 /*JWT Routes Middleware*/
 /*router.use(function(req, res, next) {
@@ -106,6 +125,14 @@ router.post('/user', function(req, res, next) {
     res.json(post);
   });
 });
+/*-------------------------STUDENTS-------------------------*/
+router.get('/students', (req, res, next) => {
+  User.find({userType: "STUDENT"}, function(err, users){
+    if (err) return next(err);
+    res.json(users);
+  });
+});
+
 /*-------------------------TEACHERS-------------------------*/
 router.get('/teachers', (req, res, next) => {
   User.find({userType: "TEACHER"}, function(err, users){
