@@ -13,13 +13,8 @@ mongoose.connect('mongodb://root:root@ds121599.mlab.com:21599/speakpro')
   .then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
 
 var api = require('./server/routes/api');
 /**
@@ -32,9 +27,6 @@ app.set('port', port);
 app.use('/api', api);
 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
 
 
 /**

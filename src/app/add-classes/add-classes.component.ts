@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-classes.component.css']
 })
 export class AddClassesComponent implements OnInit {
+	/*TO DO
+	-api call to get list of available classes
+	-api call to add checked classes */
 
   constructor() { }
 

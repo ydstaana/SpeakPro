@@ -1,4 +1,4 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
 	firstName: String,
@@ -9,9 +9,12 @@ var UserSchema = new mongoose.Schema({
 	email: String,
 	skypeID: String,
 	
-	userType: String
-,	schedule: [mongoose.Schema.Types.ObjectId];
-
+	userType: String,
+	schedule: { 
+		type: [mongoose.Schema.Types.ObjectId], 
+		default: []
+	},
+	newUser: Boolean
 });
 
 var User = mongoose.model('User', UserSchema);
