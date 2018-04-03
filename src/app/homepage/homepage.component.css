@@ -1,0 +1,12 @@
+.logo{
+  height: 64px;
+  padding: 0.5px 0px;
+}
+
+.modal{
+  width: 45%;
+}
+
+.modal .row{
+  margin-bottom: 0px;
+}

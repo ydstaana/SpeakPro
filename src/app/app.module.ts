@@ -32,7 +32,7 @@ import { AddClassesComponent } from './add-classes/add-classes.component';
     MaterializeModule,
     RouterModule.forRoot([
       {path: 'home', component: HomepageComponent},
-      {path: 'registration', component: RegistrationComponent},
+      {path: 'register', component: RegistrationComponent},
       {path: 'student-profile', component: StudentProfileComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'},
     ]),
