@@ -12,6 +12,8 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,6 +32,9 @@ import { AddClassesComponent } from './add-classes/add-classes.component';
     BrowserModule,
     RouterModule,
     MaterializeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: 'home', component: HomepageComponent},
       {path: 'register', component: RegistrationComponent},
