@@ -17,9 +17,9 @@ import {Location} from '@angular/common';
       <nav>
         <ul id="slide-out" class="side-nav fixed">
           <li routerLinkActive="active"><a href="/edit-profile">Edit Profile</a></li>
-          <li routerLinkActive="active"><a [routerLink]="my-schedule">My Schedule</a></li>
-          <li routerLinkActive="active"><a [routerLink]="add-classes">Add Classes</a></li>
-          <li routerLinkActive="active"><a [routerLink]="materials-modules">Materials and Modules</a></li>
+          <li routerLinkActive="active"><a>My Schedule</a></li>
+          <li routerLinkActive="active"><a>Add Classes</a></li>
+          <li routerLinkActive="active"><a>Materials and Modules</a></li>
         </ul>
         <a materialize="sideNav" [materializeParams]="[{edge:'left'}]" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
         
@@ -27,5 +27,4 @@ import {Location} from '@angular/common';
     `
 }) 	
 export class SideNavComponent {
-  routeNames = ["Buttons", "Carousel", "Chips", "Collapsible", "Dialogs", "Dropdown", "Forms", "Tabs", "DatePicker", "Parallax", "ModelBindings"];
 }

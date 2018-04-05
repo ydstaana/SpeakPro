@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
+
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -14,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -33,17 +38,21 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     MaterializeModule,
     FormsModule,
+    HttpModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'home', component: HomepageComponent},
       {path: 'register', component: RegistrationComponent},
       {path: 'student-profile', component: StudentProfileComponent},
+      {path: 'add-class', component: AddClassesComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'},
     ]),
 
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

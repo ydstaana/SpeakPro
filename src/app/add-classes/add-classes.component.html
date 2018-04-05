@@ -10,8 +10,9 @@
   </div>
 </div>
 
+<sideNav></sideNav>
 <main>
-	<sideNav></sideNav>
+	{{classes}}
 	<table>
 		<thead>
 			<td>Timeslot</td>
@@ -20,8 +21,10 @@
 		</thead>
 	</table>
 	<tbody>
+		<td *ngFor="let class of classes">
+		   {{class['timeslot']}}
+		</td>
 		<!-- INSERT TABLE OF AVAILABLE CLASSES -->
 
 	</tbody>
-
 </main>
