@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './../../service/user.service';
 import {Observable} from 'rxjs/Rx';
 import { Sched } from './../../model/sched';
+import { ClassService } from '../../service/class.service';
 
 @Component({
   selector: 'app-add-classes',
   templateUrl: './add-classes.component.html',
   styleUrls: ['./add-classes.component.css'],
-  providers:[UserService]
+  providers:[ClassService]
 })
 export class AddClassesComponent implements OnInit {
 	/*TO DO
@@ -15,14 +15,14 @@ export class AddClassesComponent implements OnInit {
 	-api call to add checked classes */
   classes :Sched[];
 
-  constructor(private userService: UserService) { }
+  constructor(private classService: ClassService) { }
 
   ngOnInit() {
   	this.availableClasses();
   }
 
   availableClasses(){
-    this.userService.getAvailableClasses()
+    this.classService.getAvailableClasses()
     .subscribe(
         data => {
           this.classes = data;
