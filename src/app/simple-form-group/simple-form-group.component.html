@@ -1,0 +1,10 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div *ngIf="first.invalid"> Name is too short. </div>
+<div *ngFor ="let item of samp">
+	<input type="checkbox" id="{{item.name}}" (change)="setValue($event)"><label for="{{item.name}}">{{item.name}}</label>
+</div>
+<button type="submit">Submit</button>
+</form>
+
+<p (click) = "setValue($event)">KIW</p>
+<button (click)="setValue($event)">Set preset value</button>

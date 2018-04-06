@@ -6,6 +6,8 @@ import { MaterializeModule } from 'angular2-materialize';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
+import { ClassService } from '../service/class.service';
+import { UserService } from  '../service/user.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -18,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.component';
 
 
 
@@ -31,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     StudentProfileComponent,
     SideNavComponent,
     FooterComponent,
-    AddClassesComponent
+    AddClassesComponent,
+    SimpleFormGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -46,11 +50,14 @@ import { HttpClientModule } from '@angular/common/http';
       {path: 'register', component: RegistrationComponent},
       {path: 'student-profile', component: StudentProfileComponent},
       {path: 'add-class', component: AddClassesComponent},
+      {path: 'form-group', component: SimpleFormGroupComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'},
     ]),
 
   ],
   providers: [
+    ClassService,
+    UserService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

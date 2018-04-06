@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Rx';
 import { Sched } from './../../model/sched';
 import { ClassService } from '../../service/class.service';
 
+
 @Component({
   selector: 'app-add-classes',
   templateUrl: './add-classes.component.html',
@@ -26,9 +27,14 @@ export class AddClassesComponent implements OnInit {
     .subscribe(
         data => {
           this.classes = data;
+          console.log(this.classes);
         },
         err => console.log(err)
       );
+  }
+
+  clicked(event){
+    console.log(event.currentTarget.value);
   }
 
 }

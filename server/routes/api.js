@@ -36,6 +36,7 @@ var upload = multer({ storage: storage })
 
 
 router.post('/upload', upload.single('avatar'), function (req, res, next) {
+  console.log(upload.onprogress);
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   res.json(req.file);
@@ -118,6 +119,13 @@ router.get('/login/:username/:password', function(req,res,next){
 });*/
 
 /*-------------------------USERS-------------------------*/
+router.get('/user', function(req, res, next) {
+  User.find({}, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* SAVE User */
 router.post('/user', function(req, res, next) {
   User.create(req.body, function (err, post) {
@@ -125,6 +133,25 @@ router.post('/user', function(req, res, next) {
     res.json(post);
   });
 });
+
+/* UPDATE User */
+router.put('/user/:id', function(req, res, next) {
+  User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/*GET SINGLE USER*/
+router.get('/user/:id', function(req, res, next) {
+  User.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+
+
 /*-------------------------STUDENTS-------------------------*/
 router.get('/students', (req, res, next) => {
   User.find({userType: "STUDENT"}, function(err, users){
@@ -153,14 +180,17 @@ router.get('/class', (req, res, next) => {
 
 //GET ALL AVAILABLE CLASSES
 router.get('/class/available', (req, res, next) => {
-  Schedule.find({available : true}, function(err, users){
-    if (err) return next(err);
-    res.json(users);
-  });
+  Schedule.find({available : true})
+  .populate('teacher', 'firstName lastName')
+  .exec(function(err, schedule){
+    if(err) return next(err);
+    console.log(schedule);
+    res.json(schedule);
+  });;
 });
 
 //GET ALL CLASSES OF A SINGLE TEACHER
-router.get('/class/:id', (req, res, next) => {
+router.get('/class/teacher/:id', (req, res, next) => {
   Schedule.find({teacher : req.params.id}, function(err, users){
     if (err) return next(err);
     res.json(users);
@@ -168,12 +198,26 @@ router.get('/class/:id', (req, res, next) => {
 });
 
 //GET AVAILABLE CLASSES OF A SINGLE TEACHER
-router.get('/class/:id', (req, res, next) => {
-  Schedule.find({available: true, teacher : req.params.id}, function(err, users){
-    if (err) return next(err);
-    res.json(users);
+router.get('/class/teacher/:id/available', (req, res, next) => {
+  Schedule.find({available: true, teacher : req.params.id})
+  .populate('teacher', 'firstName')
+  .exec(function(err, schedule){
+    if(err) return next(err);
+    res.json(schedule);
   });
 });
+
+
+//GET ENROLLED CLASSES OF A SINGLE STUDENT
+router.get('/class/student/:id', (req, res, next) => {
+  User.findById(req.params.id)
+  .populate('schedule')
+  .exec(function(err, user){
+    if(err) return next(err);
+    res.json(user.schedule);
+  });
+});
+
 
 //ADD A CLASS
 router.post('/class', function(req, res, next) {
