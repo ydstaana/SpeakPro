@@ -16,29 +16,25 @@
     <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car
     <br>
     <input type="submit" value="Submit">
-    <table>
+    <!-- <table>
       <thead>
         <td>Timeslot</td>
         <td>Teacher</td>
         <td>Action</td>
       </thead>
 
-      <tbody>
-        <tr *ngFor="let class of classes; let i = index">
-          <td>
-            {{class.timeSlot}}
-          </td>
-
-          <td>
-            {{class.teacher.firstName + ' ' + class.teacher.lastName}}
-          </td>
-
-          <td>
-            <input type="checkbox" id="{{i}}">
-            <label for="{{i}}">{{class.available}}</label>
-          </td>
-        </tr>
+      <tbody [formGroup]="form">
+        <ng-container formArrayName="selectedClasses">
+          <tr *ngFor="let class of selectedClasses.controls; let i = index" [formGroupName]="i">
+            <td>{{class.timeSlot}}</td>
+            <td>{{class.teacher.firstName + ' ' + class.teacher.lastName}}</td>
+            <td>
+              <input type="checkbox" id="{{i}}" [formControl]="class">
+              <label for="{{i}}">{{class.available}}</label>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
-    </table>
+    </table> -->
   </form>
 </main>
