@@ -20,4 +20,9 @@ export class ClassService {
       .pipe();
   }
 
+  deleteClass(classes: String[]){
+    return this.http.post<String[]>('http://localhost:3000/api/class/student/5ac74931b97ffd3f681e67f6/drop', classes)
+      .pipe();
+  }
+
 }

@@ -48,4 +48,14 @@ export class AddClassesComponent implements OnInit {
     );
   }
 
+  deleteArray(){
+    this.classService.deleteClass(this.classString)
+    .subscribe(
+      data => {
+        console.log("Success");
+      },
+      err => console.log(err)
+    );
+  }
+
 }

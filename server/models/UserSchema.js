@@ -13,7 +13,8 @@ var UserSchema = new mongoose.Schema({
 	userType: String,
 	schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
 
-	newUser: Boolean
+	newUser: Boolean,
+  active: Boolean
 });
 
 

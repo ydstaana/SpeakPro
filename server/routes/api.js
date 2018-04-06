@@ -151,6 +151,15 @@ router.get('/user/:id', function(req, res, next) {
 });
 
 
+/*BAN A SINGLE USER*/
+router.post('/admin/:id', function(req, res, next) {
+  User.findByIdAndUpdate(req.params.id,{active : false}) 
+  .exec(function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 
 /*-------------------------STUDENTS-------------------------*/
 router.get('/students', (req, res, next) => {
@@ -232,12 +241,18 @@ router.post("/class/student/:id", function (req, res){
     console.log(req.body);
     for(var i in req.body){
       user.schedule.push(req.body[i]);
+      Schedule.findByIdAndUpdate(req.body[i], {student : req.params.id})
+      .exec(function(err, sched){
+        console.log(sched);
+      })
     }
     user.save();
+
   })
 });
 
-router.delete("/class/student/:id", function (req, res){
+//DROP A CLASS OF A SINGLE STUDENT
+router.post("/class/student/:id/drop", function (req, res){
   User.findById(req.params.id)
   .exec(function(err, user){
     console.log(req.body);
@@ -248,9 +263,28 @@ router.delete("/class/student/:id", function (req, res){
   })
 });
 
-//CREATE A NEW CLASS
+//GET STUDENT ENROLLED IN A CLASS
+router.get('/class/:id/student', (req, res, next) => {
+  Schedule.findById(req.params.id)
+  .populate('student')
+  .exec(function(err, sched){
+    if(err) return next(err);
+    res.json(sched.student);
+  });
+});
+
+
+//CREATE A NEW CLASS (OPEN CLASS)
 router.post('/class', function(req, res, next) {
   Schedule.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+//DELETE A CLASS (DROP CLASS)
+router.delete('/class/:id', function(req, res, next) {
+  Schedule.findByIdAndRemove(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
