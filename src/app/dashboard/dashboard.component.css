@@ -1,0 +1,10 @@
+.logo{
+  height: 64px;
+  padding: 0.5px 0px;
+}
+
+.dashboard-content{
+  margin-left: 300px;
+  padding: 1.5%;
+  width: calc(100% - 300px);
+}

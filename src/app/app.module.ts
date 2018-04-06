@@ -15,11 +15,13 @@ import { TeacherApplicationComponent } from './teacher-application/teacher-appli
 import { RegistrationComponent } from './registration/registration.component';
 import { MenuComponent } from './menu/menu.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.component';
 
 
@@ -32,9 +34,11 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     RegistrationComponent,
     MenuComponent,
     StudentProfileComponent,
-    SideNavComponent,
     FooterComponent,
     AddClassesComponent,
+    DashboardComponent,
+    SidebarComponent,
+    EditProfileComponent,
     SimpleFormGroupComponent
   ],
   imports: [
@@ -46,12 +50,18 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: 'home', component: HomepageComponent},
-      {path: 'register', component: RegistrationComponent},
-      {path: 'student-profile', component: StudentProfileComponent},
-      {path: 'add-class', component: AddClassesComponent},
+      { path: 'home', component: HomepageComponent },
+      { path: 'register', component: RegistrationComponent },
+      { path: 'student-profile', component: StudentProfileComponent },
+      { path: 'add-class', component: AddClassesComponent },
+      {
+        path: 'dashboard', component: DashboardComponent, children: [
+          { path: 'edit-profile', component: EditProfileComponent },
+          { path: 'add-classes', component: AddClassesComponent },
+        ]
+      },
       {path: 'form-group', component: SimpleFormGroupComponent},
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]),
 
   ],

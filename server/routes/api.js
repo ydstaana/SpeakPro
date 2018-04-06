@@ -237,6 +237,17 @@ router.post("/class/student/:id", function (req, res){
   })
 });
 
+router.delete("/class/student/:id", function (req, res){
+  User.findById(req.params.id)
+  .exec(function(err, user){
+    console.log(req.body);
+    for(var i in req.body){
+      user.schedule.pop(req.body[i]);
+    }
+    user.save();
+  })
+});
+
 //CREATE A NEW CLASS
 router.post('/class', function(req, res, next) {
   Schedule.create(req.body, function (err, post) {
