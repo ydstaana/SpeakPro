@@ -63,4 +63,14 @@ export class AddClassesComponent implements OnInit {
     this.setClasses(this.classes);
   }
 
+  // sendArray(){
+  //   this.classService.addClass(this.classString)
+  //   .subscribe(
+  //     data => {
+  //       console.log("Success");
+  //     },
+  //     err => console.log(err)
+  //   );
+  // }
+
 }
