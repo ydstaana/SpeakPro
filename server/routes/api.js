@@ -135,8 +135,8 @@ router.post('/user', function(req, res, next) {
 });
 
 /* UPDATE User */
-router.put('/user/:id', function(req, res, next) {
-  User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/user/username', function(req, res, next) {
+  User.findOneAndUpdate({username: req.params.username}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -208,7 +208,7 @@ router.get('/class/teacher/:id/available', (req, res, next) => {
 });
 
 
-//GET ENROLLED CLASSES OF A SINGLE STUDENT
+//GET ENROLLED CLASSES OF A SINGLE STUDENT (VIEW SCHEDULE OF STUDENT)
 router.get('/class/student/:id', (req, res, next) => {
   User.findById(req.params.id)
   .populate('schedule')
@@ -218,8 +218,26 @@ router.get('/class/student/:id', (req, res, next) => {
   });
 });
 
+//ADD CLASSES TO A SINGLE STUDENT
+/*
+  The format of the input should be an array of Strings (ObjectID's)
+  ex:
+    req.body = {
+      ["5ac74931b97ffd3f681e67f6"]
+    }
+*/
+router.post("/class/student/:id", function (req, res){
+  User.findById(req.params.id)
+  .exec(function(err, user){
+    console.log(req.body);
+    for(var i in req.body){
+      user.schedule.push(req.body[i]);
+    }
+    user.save();
+  })
+});
 
-//ADD A CLASS
+//CREATE A NEW CLASS
 router.post('/class', function(req, res, next) {
   Schedule.create(req.body, function (err, post) {
     if (err) return next(err);

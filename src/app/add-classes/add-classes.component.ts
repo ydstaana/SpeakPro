@@ -15,6 +15,7 @@ export class AddClassesComponent implements OnInit {
 	-api call to get list of available classes
 	-api call to add checked classes */
   classes :Sched[];
+  classString = ["5ac37eda2cbcd311f028a748", "5ac37f042cbcd311f028a749"];
 
   constructor(private classService: ClassService) { }
 
@@ -35,6 +36,16 @@ export class AddClassesComponent implements OnInit {
 
   clicked(event){
     console.log(event.currentTarget.value);
+  }
+
+  sendArray(){
+    this.classService.addClass(this.classString)
+    .subscribe(
+      data => {
+        console.log("Success");
+      },
+      err => console.log(err)
+    );
   }
 
 }
