@@ -9,19 +9,36 @@
     <a class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
   </div>
 </div>
+<main>
+  <form action="/action_page.php" method="get">
+    <input type="checkbox" name="vehicle" value="Bike"> I have a bike
+    <br>
+    <input type="checkbox" name="vehicle" value="Car" checked="checked"> I have a car
+    <br>
+    <input type="submit" value="Submit">
+    <table>
+      <thead>
+        <td>Timeslot</td>
+        <td>Teacher</td>
+        <td>Action</td>
+      </thead>
 
+      <tbody>
+        <tr *ngFor="let class of classes; let i = index">
+          <td>
+            {{class.timeSlot}}
+          </td>
 
-<h4>Add Classes</h4>
-<table>
-  <thead>
-    <td>Timeslot</td>
-    <td>Teacher</td>
-    <td>Action</td>
-  </thead>
-  <tbody>
-    <td *ngFor="let class of classes">
-      {{class.timeSlot}}
-    </td>
+          <td>
+            {{class.teacher.firstName + ' ' + class.teacher.lastName}}
+          </td>
 
-  </tbody>
-</table>
+          <td>
+            <input type="checkbox" id="{{i}}">
+            <label for="{{i}}">{{class.available}}</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</main>
