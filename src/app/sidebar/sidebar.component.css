@@ -1,0 +1,11 @@
+nav {
+  height: 0px;
+}
+
+li.active {
+  background-color: #fdd835
+}
+
+.side-nav.fixed{
+  top: 64px;
+}
