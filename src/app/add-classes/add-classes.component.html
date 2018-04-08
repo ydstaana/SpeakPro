@@ -20,7 +20,7 @@
           <th>Teacher</th>
         </thead>
         <tbody>
-          <tr *ngIf="enrolledClasses.length === 0">
+          <tr *ngIf="!enrolledClasses">
             <td colspan="3">
               <div class="preloader-wrapper active">
                 <div class="spinner-layer spinner-yellow-only">
@@ -56,7 +56,7 @@
           <th>Teacher</th>
         </thead>
         <tbody>
-          <tr *ngIf="classes.length === 0">
+          <tr *ngIf="!classes">
             <td colspan="3">
               <div class="preloader-wrapper active">
                 <div class="spinner-layer spinner-yellow-only">

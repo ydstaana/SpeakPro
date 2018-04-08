@@ -14,8 +14,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
   providers: [ClassService]
 })
 export class AddClassesComponent implements OnInit {
-  classes = [];
-  enrolledClasses = [];
+  classes = null;
+  enrolledClasses = null;
   form: FormGroup;
 
   constructor(
