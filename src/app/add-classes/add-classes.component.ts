@@ -101,8 +101,7 @@ export class AddClassesComponent implements OnInit {
       })
   }
 
-<<<<<<< HEAD
-  deleteArray(){
+  /*deleteArray(){
     this.classService.deleteClass(this.classString)
     .subscribe(
       data => {
@@ -110,10 +109,7 @@ export class AddClassesComponent implements OnInit {
       },
       err => console.log(err)
     );
-  }
-=======
+  }*/
 
-
->>>>>>> 8c1884957ff5fe070f6a2d0705064b6efa37f03c
 
 }

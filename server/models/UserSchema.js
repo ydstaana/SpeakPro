@@ -21,13 +21,18 @@ var UserSchema = new mongoose.Schema({
 
 //UNCOMMENT IF LOGIN/ENCRYPT
 
-/*UserSchema.statics.authenticate = function (username, password, callback) {
+UserSchema.statics.authenticate = function (username, password, callback) {
   this.findOne({ username: username })
     .exec(function (err, user) {
       if (err) {
         return callback(err)
       } else if (!user) {
         var err = new Error('User not found.');
+        err.status = 401;
+        return callback(err);
+      }
+      else if(user.active == false){ //User is banned/deactivated
+        var err = new Error("User's account is not active");
         err.status = 401;
         return callback(err);
       }
@@ -51,7 +56,7 @@ UserSchema.pre('save', function (next) {
     user.password = hash;
     next();
   })
-});*/
+});
 
 
 
