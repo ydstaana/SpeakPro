@@ -16,8 +16,11 @@ export class ClassService {
   }
 
   addClass(classes: String[]){
-    return this.http.post<String[]>('http://localhost:3000/api/class/student/5ac74931b97ffd3f681e67f6', classes)
+    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+
+    return this.http.post<String[]>(`http://localhost:3000/api/class/student/${userId}`, classes)
       .pipe();
   }
+
 
 }

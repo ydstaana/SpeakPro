@@ -1,8 +1,10 @@
+import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Sched } from './../../model/sched';
 import { ClassService } from '../../service/class.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 
 @Component({
@@ -12,65 +14,94 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
   providers: [ClassService]
 })
 export class AddClassesComponent implements OnInit {
-  classes: Sched[] = [];
+  classes = [];
+  enrolledClasses = [];
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private classService: ClassService) {
+  constructor(
+    private fb: FormBuilder,
+    private classService: ClassService,
+    private userService: UserService) {
+
     this.createForm();
   }
 
   ngOnInit() {
-    this.availableClasses();
+    this.getEnrollableClasses();
   }
 
-  availableClasses() {
-    this.classService.getAvailableClasses()
-      .subscribe(
-      data => {
-        this.classes = data;
-        this.rebuildForm();
-      },
-      err => console.log(err)
-      );
+  compare(otherArray) {
+    return function (current) {
+      return otherArray.filter(function (other) {
+        return other._id == current._id;
+      }).length == 0;
+    }
   }
 
-  clicked(event) {
-    console.log(event.currentTarget.value);
+  getEnrollableClasses() {
+    let availableClasses: any, enrolledClasses: any;
+    forkJoin([this.classService.getAvailableClasses(), this.userService.getEnrolledClass()])
+      .subscribe(response => {
+        availableClasses = response[0];
+        enrolledClasses = response[1];
+
+        if (enrolledClasses.length > 0) this.classes = availableClasses.filter(this.compare(enrolledClasses));
+        else this.classes = availableClasses;
+
+        this.enrolledClasses = enrolledClasses;
+        this.form.setControl('availableClasses', this.buildCheckboxes());
+
+      });
+
   }
 
-  ngOnChanges(){
-    // this.rebuildForm();
-  }
 
   createForm() {
     this.form = this.fb.group({
-      selectedClasses: this.fb.array([
+      availableClasses: this.fb.array([
       ])
     });
   }
 
-  get selectedClasses(): FormArray {
-    return this.form.get('selectedClasses') as FormArray;
+  get availableClasses() {
+    return this.form.get('availableClasses');
   };
 
-  setClasses(classes: Sched[]){
-    const classesFGs = classes.map(el => this.fb.group(el));
-    const classesFormArray = this.fb.array(classesFGs);
-    this.form.setControl('selectedClasses', classesFormArray)
+  buildCheckboxes() {
+    const arr = this.classes.map(item => {
+      return this.fb.control(false);
+    });
+
+    return this.fb.array(arr);
   }
 
-  rebuildForm(){
-    this.setClasses(this.classes);
+  submit(form) {
+    const msg = confirm('Are you sure you want to enroll this?');
+    if (msg === true) {
+      let selectedClasses = [];
+
+      form.availableClasses
+        .forEach((selected, index) => {
+          if (selected) {
+            selectedClasses.push(this.classes[index]._id, );
+          }
+        });
+
+      this.classService.addClass(selectedClasses)
+        .subscribe(res => {
+          this.getEnrollableClasses();
+        });
+    }
   }
 
-  // sendArray(){
-  //   this.classService.addClass(this.classString)
-  //   .subscribe(
-  //     data => {
-  //       console.log("Success");
-  //     },
-  //     err => console.log(err)
-  //   );
-  // }
+  getEnrolledClass(userId: String) {
+    this.userService.getEnrolledClass()
+      .subscribe((response) => {
+        console.log(response);
+      })
+  }
+
+
+
 
 }

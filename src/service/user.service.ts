@@ -16,4 +16,11 @@ export class UserService {
     return this.http.post<User>('http://localhost:3000/api/user', user)
       .pipe();
   }
+
+  getEnrolledClass() {
+    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    return this.http.get(`http://localhost:3000/api/class/student/${userId}`)
+      .pipe();
+  }
 }
+
