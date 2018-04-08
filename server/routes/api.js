@@ -135,7 +135,7 @@ router.post('/user', function(req, res, next) {
 });
 
 /* UPDATE User */
-router.put('/user/username', function(req, res, next) {
+router.put('/user/:username', function(req, res, next) {
   User.findOneAndUpdate({username: req.params.username}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
