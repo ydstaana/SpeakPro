@@ -13,11 +13,11 @@ router.get('/', (req, res) => {
 });
 
 //TO DO
-/*CREATE API FOR 
+/*CREATE API FOR
 -getting list of available classes
 -adding a class to a teacher
 -adding a class to a student
--upload 
+-upload
 -view uploads
 -
 */
@@ -52,7 +52,7 @@ router.get('/login/:username/:password', function(req,res,next){
 /*router.get('/login/:username/:password', function(req, res, next) {
   User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err);
-    
+
     if(!user){
       res.json({success: false, message: 'Auth failed. User not found'});
     }
@@ -75,7 +75,7 @@ router.get('/login/:username/:password', function(req,res,next){
 
 
          res.json({
-            id : user._id, 
+            id : user._id,
             success: true,
             message : "Token generated",
             token : token
@@ -96,9 +96,9 @@ router.get('/login/:username/:password', function(req,res,next){
   if (token) {
 
     // verifies secret and checks exp
-    jwt.verify(token, secret, function(err, decoded) {      
+    jwt.verify(token, secret, function(err, decoded) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;
@@ -110,9 +110,9 @@ router.get('/login/:username/:password', function(req,res,next){
 
     // if there is no token
     // return an error
-    return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
     });
 
   }

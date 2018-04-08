@@ -53,7 +53,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
       { path: 'home', component: HomepageComponent },
       { path: 'register', component: RegistrationComponent },
       { path: 'student-profile', component: StudentProfileComponent },
-      { path: 'add-class', component: AddClassesComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent },
