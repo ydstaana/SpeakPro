@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
 	password: String,
 	email: String,
 	skypeID: String,
-	
+
 	userType: String,
 	schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
 
@@ -20,7 +20,7 @@ var UserSchema = new mongoose.Schema({
 
 //UNCOMMENT IF LOGIN/ENCRYPT
 
-/*UserSchema.statics.authenticate = function (username, password, callback) {
+UserSchema.statics.authenticate = function (username, password, callback) {
   this.findOne({ username: username })
     .exec(function (err, user) {
       if (err) {
@@ -50,7 +50,7 @@ UserSchema.pre('save', function (next) {
     user.password = hash;
     next();
   })
-});*/
+});
 
 
 
