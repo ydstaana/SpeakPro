@@ -10,19 +10,26 @@ export class ClassService {
 
   }
 
-  getAvailableClasses(){
+  getAvailableClasses() {
     return this.http.get<Sched[]>('http://localhost:3000/api/class/available')
       .pipe();
   }
 
-  addClass(classes: String[]){
+  addClass(classes: String[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
 
     return this.http.post<String[]>(`http://localhost:3000/api/class/student/${userId}`, classes)
       .pipe();
   }
 
-  getAllClassesByTeacher(teacherId){
+  dropClasses(dropClasses: String[]) {
+    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+
+    return this.http.request('delete', `http://localhost:3000/api/class/student/${userId}`, { body: dropClasses })
+      .pipe();
+  }
+
+  getAllClassesByTeacher(teacherId) {
     return this.http.get(`http://localhost:3000/api/class/teacher/${teacherId}`)
       .pipe();
   }
