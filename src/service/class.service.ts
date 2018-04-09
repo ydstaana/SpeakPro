@@ -25,7 +25,7 @@ export class ClassService {
   dropClasses(dropClasses: String[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
 
-    return this.http.request('delete', `http://localhost:3000/api/class/student/${userId}`, { body: dropClasses })
+    return this.http.request('post', `http://localhost:3000/api/class/student/${userId}/drop`, { body: dropClasses })
       .pipe();
   }
 
