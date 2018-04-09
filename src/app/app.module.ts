@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AllStudentsComponent } from './all-students/all-students.component';
 
 
 
@@ -34,6 +35,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     DashboardComponent,
     SidebarComponent,
     EditProfileComponent,
+    AllStudentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
+          { path: 'all-students', component: AllStudentsComponent },
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },

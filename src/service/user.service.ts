@@ -32,5 +32,10 @@ export class UserService {
     return this.http.post(`http://localhost:3000/api/login`, { username: credentials.username, password: credentials.password,})
       .pipe();
   }
+
+  getAllUsers(){
+    return this.http.get('http://localhost:3000/api/user')
+      .pipe();
+  }
 }
 
