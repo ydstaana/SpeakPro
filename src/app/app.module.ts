@@ -7,12 +7,10 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 import { ClassService } from '../service/class.service';
-import { UserService } from  '../service/user.service';
+import { UserService } from '../service/user.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { TeacherApplicationComponent } from './teacher-application/teacher-application.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { MenuComponent } from './menu/menu.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { FooterComponent } from './footer/footer.component';
@@ -22,7 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.component';
+import { AllStudentsComponent } from './all-students/all-students.component';
+import { AllTeachersComponent } from './all-teachers/all-teachers.component';
+import { ClassesByTeacherComponent } from './classes-by-teacher/classes-by-teacher.component';
+import { DropClassesComponent } from './drop-classes/drop-classes.component';
+import { MyClassesComponent } from './my-classes/my-classes.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -30,8 +33,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
   declarations: [
     AppComponent,
     HomepageComponent,
-    TeacherApplicationComponent,
-    RegistrationComponent,
     MenuComponent,
     StudentProfileComponent,
     FooterComponent,
@@ -39,7 +40,12 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     DashboardComponent,
     SidebarComponent,
     EditProfileComponent,
-    SimpleFormGroupComponent
+    AllStudentsComponent,
+    AllTeachersComponent,
+    ClassesByTeacherComponent,
+    DropClassesComponent,
+    MyClassesComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,15 +57,19 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
-      { path: 'register', component: RegistrationComponent },
       { path: 'student-profile', component: StudentProfileComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
+          { path: 'teacher/my-classes', component: MyClassesComponent },
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
+          { path: 'checkout', component: CheckoutComponent}
+          { path: 'drop-classes', component: DropClassesComponent },
+          { path: 'teachers/:id', component: ClassesByTeacherComponent },
+          { path: 'all-students', component: AllStudentsComponent },
+          { path: 'all-teachers', component: AllTeachersComponent },
         ]
       },
-      {path: 'form-group', component: SimpleFormGroupComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]),
 

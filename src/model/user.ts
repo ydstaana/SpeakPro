@@ -1,4 +1,5 @@
 export class User {
+  _id: String;
   firstName: String;
   lastName: String;
   username: String;
@@ -7,4 +8,5 @@ export class User {
   skypeID: String;
   userType: String;
   newUser: Boolean;
+  active: Boolean
 }
