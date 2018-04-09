@@ -13,6 +13,16 @@ var SchedSchema = new mongoose.Schema({
 	},
 	available : Boolean
 });
+
+//This function drops all students from the class being deleted before deleting itself
+SchedSchema.pre('remove', function(next) {
+    this.update(
+        { schedule : this._id}, 
+        { $pull: { schedule: this._id } },
+        { multi: true })  //if reference exists in multiple documents 
+    .exec();
+    next();
+});
 	
 var Sched = mongoose.model('Sched', SchedSchema);
 

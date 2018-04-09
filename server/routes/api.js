@@ -288,13 +288,13 @@ router.post('/class', function(req, res, next) {
 
 //DELETE A CLASS (CLOSE CLASS)
 router.delete('/class/:id', function(req, res, next) {
-  Schedule.findByIdAndRemove(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  Schedule.findById(req.params.id)
+  .remove()
+  .exec(function(err, sched){
+    if(err) return next(err);
+    res.json(sched); //removed
   });
 });
-
-
 
 
 module.exports = router;
