@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
@@ -21,7 +22,8 @@ export class AddClassesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private classService: ClassService,
-    private userService: UserService) {
+    private userService: UserService,
+    private router: Router) {
 
     this.createForm();
   }
@@ -59,7 +61,7 @@ export class AddClassesComponent implements OnInit {
       return selected == true;
     })
 
-    if(typeof arr === 'undefined') return true; //if no classes are checked
+    if (typeof arr === 'undefined') return true; //if no classes are checked
     else return false; //if there is atleast one that is checked
   }
 
@@ -107,6 +109,10 @@ export class AddClassesComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
       })
+  }
+
+  viewTeacher(teacherId) {
+    this.router.navigate(['dashboard', 'teachers', teacherId]);
   }
 
 

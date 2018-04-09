@@ -22,6 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
+import { ClassesByTeacherComponent } from './classes-by-teacher/classes-by-teacher.component';
 
 
 
@@ -38,6 +39,7 @@ import { AllTeachersComponent } from './all-teachers/all-teachers.component';
     EditProfileComponent,
     AllStudentsComponent,
     AllTeachersComponent,
+    ClassesByTeacherComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { AllTeachersComponent } from './all-teachers/all-teachers.component';
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
+          { path: 'teachers/:id', component: ClassesByTeacherComponent },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
         ]

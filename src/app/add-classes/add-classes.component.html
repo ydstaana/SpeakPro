@@ -79,7 +79,7 @@
               <label for="{{i}}"></label>
             </td>
             <td>{{classes[i].timeSlot}}</td>
-            <td>{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</td>
+            <td><a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a></td>
           </tr>
         </tbody>
       </table>

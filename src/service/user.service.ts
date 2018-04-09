@@ -28,23 +28,28 @@ export class UserService {
       .pipe();
   }
 
-  login(credentials){
-    return this.http.post(`http://localhost:3000/api/login`, { username: credentials.username, password: credentials.password,})
+  login(credentials) {
+    return this.http.post(`http://localhost:3000/api/login`, { username: credentials.username, password: credentials.password, })
       .pipe();
   }
 
-  getAllUsers(){
+  getAllUsers() {
     return this.http.get('http://localhost:3000/api/user')
       .pipe();
   }
 
-  getAllStudents(){
+  getAllStudents() {
     return this.http.get('http://localhost:3000/api/students')
       .pipe();
   }
 
-  getAllTeachers(){
+  getAllTeachers() {
     return this.http.get('http://localhost:3000/api/teachers')
+      .pipe();
+  }
+
+  getUserById(userId) {
+    return this.http.get(`http://localhost:3000/api/user/${userId}`)
       .pipe();
   }
 }

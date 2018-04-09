@@ -22,5 +22,10 @@ export class ClassService {
       .pipe();
   }
 
+  getAllClassesByTeacher(teacherId){
+    return this.http.get(`http://localhost:3000/api/class/teacher/${teacherId}`)
+      .pipe();
+  }
+
 
 }
