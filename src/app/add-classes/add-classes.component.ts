@@ -11,8 +11,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 @Component({
   selector: 'app-add-classes',
   templateUrl: './add-classes.component.html',
-  styleUrls: ['./add-classes.component.css'],
-  providers: [ClassService]
+  styleUrls: ['./add-classes.component.css']
 })
 export class AddClassesComponent implements OnInit {
   classes = null;
@@ -88,19 +87,17 @@ export class AddClassesComponent implements OnInit {
   submit(form) {
     const msg = confirm('Are you sure you want to enroll this?');
     if (msg === true) {
-      let selectedClasses = [];
+      this.bindSelected(form)
+        .then((selected) => {
+          this.classService.setCart(selected);
+          this.router.navigate(['dashboard/checkout']);
+        })
 
-      form.availableClasses
-        .forEach((selected, index) => {
-          if (selected) {
-            selectedClasses.push(this.classes[index]._id, );
-          }
-        });
 
-      this.classService.addClass(selectedClasses)
-        .subscribe(res => {
-          this.getEnrollableClasses();
-        });
+      // this.classService.addClass(selectedClasses)
+      //   .subscribe(res => {
+      //     this.getEnrollableClasses();
+      //   });
     }
   }
 
@@ -113,6 +110,22 @@ export class AddClassesComponent implements OnInit {
 
   viewTeacher(teacherId) {
     this.router.navigate(['dashboard', 'teachers', teacherId]);
+  }
+
+  bindSelected(form) {
+    return new Promise((resolve, reject) => {
+      let selectedClasses = [];
+      form.availableClasses
+        .forEach((selected, index) => {
+          if (selected) {
+            selectedClasses.push(this.classes[index]);
+          }
+        });
+
+      resolve(selectedClasses);
+    });
+
+
   }
 
 

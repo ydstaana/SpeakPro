@@ -25,6 +25,7 @@ import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { ClassesByTeacherComponent } from './classes-by-teacher/classes-by-teacher.component';
 import { DropClassesComponent } from './drop-classes/drop-classes.component';
 import { MyClassesComponent } from './my-classes/my-classes.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -44,6 +45,7 @@ import { MyClassesComponent } from './my-classes/my-classes.component';
     ClassesByTeacherComponent,
     DropClassesComponent,
     MyClassesComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { MyClassesComponent } from './my-classes/my-classes.component';
           { path: 'teacher/my-classes', component: MyClassesComponent },
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
+          { path: 'checkout', component: CheckoutComponent}
           { path: 'drop-classes', component: DropClassesComponent },
           { path: 'teachers/:id', component: ClassesByTeacherComponent },
           { path: 'all-students', component: AllStudentsComponent },

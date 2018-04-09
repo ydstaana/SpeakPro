@@ -5,9 +5,18 @@ import { Sched } from '../model/sched';
 
 @Injectable()
 export class ClassService {
+  private cart: any = undefined;
 
   constructor(private http: HttpClient) {
 
+  }
+
+  setCart(cart){
+    this.cart = cart;
+  }
+
+  getCart(){
+    return this.cart;
   }
 
   getAvailableClasses() {
