@@ -14,6 +14,18 @@ export class AllTeachersComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.fetch();
+  }
+
+  suspendUser(userId) {
+    this.userService.suspendUser(userId)
+      .subscribe(response => {
+        alert('Teacher has been suspended');
+        this.fetch();
+      })
+  }
+
+  fetch() {
     this.userService.getAllTeachers()
       .subscribe((teachers: User[]) => {
         this.teachers = teachers;
