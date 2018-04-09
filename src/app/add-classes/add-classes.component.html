@@ -12,42 +12,6 @@
 <main>
   <form [formGroup]="form" (submit)="submit(form.value)">
     <div class="section">
-      <h5>Enrolled Classes</h5>
-      <table class="centered striped highlight responsive-table">
-        <thead>
-          <th></th>
-          <th>Timeslot</th>
-          <th>Teacher</th>
-        </thead>
-        <tbody>
-          <tr *ngIf="!enrolledClasses">
-            <td colspan="3">
-              <div class="preloader-wrapper active">
-                <div class="spinner-layer spinner-yellow-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr *ngFor="let class of enrolledClasses; let i = index">
-            <td>
-              &nbsp;
-            </td>
-            <td>{{class.timeSlot}}</td>
-            <td>{{class.teacher.firstName + ' ' + class.teacher.lastName}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="section">
       <h5 class="title">Enrollable Classes</h5>
       <table class="centered striped highlight responsive-table">
         <thead>
@@ -79,7 +43,7 @@
               <label for="{{i}}"></label>
             </td>
             <td>{{classes[i].timeSlot}}</td>
-            <td>{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</td>
+            <td><a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a></td>
           </tr>
         </tbody>
       </table>
@@ -88,10 +52,4 @@
       <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
     </div>
   </form>
-<<<<<<< HEAD
-
-  {{form.value | json}}
-
-=======
->>>>>>> 297d202c8af526c8ce66e72aaf7bad91041d2e34
 </main>
