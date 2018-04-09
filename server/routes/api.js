@@ -43,9 +43,10 @@ router.post('/upload', upload.single('avatar'), function (req, res, next) {
   console.log(req.files);
 })
 
-router.get('/login/:username/:password', function(req,res,next){
+router.post('/login', function(req,res,next){
   User.authenticate(req.body.username, req.body.password, function(err,user){
     if(err) return next(err);
+    console.log(user);
     res.json(user);
   })
 })
@@ -135,7 +136,7 @@ router.post('/user', function(req, res, next) {
 });
 
 /* UPDATE User */
-router.put('/user/username', function(req, res, next) {
+router.put('/user/:username', function(req, res, next) {
   User.findOneAndUpdate({username: req.params.username}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

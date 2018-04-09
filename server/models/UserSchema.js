@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
 	password: String,
 	email: String,
 	skypeID: String,
-	
+
 	userType: String,
 	schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
 

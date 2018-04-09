@@ -14,8 +14,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
   providers: [ClassService]
 })
 export class AddClassesComponent implements OnInit {
-  classes = [];
-  enrolledClasses = [];
+  classes = null;
+  enrolledClasses = null;
   form: FormGroup;
 
   constructor(
@@ -50,9 +50,17 @@ export class AddClassesComponent implements OnInit {
 
         this.enrolledClasses = enrolledClasses;
         this.form.setControl('availableClasses', this.buildCheckboxes());
-
       });
 
+  }
+
+  isCheckboxDisabled() {
+    let arr = this.form.value.availableClasses.find((selected) => {
+      return selected == true;
+    })
+
+    if(typeof arr === 'undefined') return true; //if no classes are checked
+    else return false; //if there is atleast one that is checked
   }
 
 

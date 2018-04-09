@@ -33,4 +33,12 @@ export class EditProfileComponent implements OnInit {
 
     return form;
   }
+
+  editProfile(form){
+    console.log(form);
+    this.userService.editProfile(form, this.loggedUser.username)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
 }
