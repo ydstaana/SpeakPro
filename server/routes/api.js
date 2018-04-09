@@ -119,8 +119,18 @@ router.post('/login', function (req, res, next) {
   }
 });*/
 
-// CREATE USER ACCOUNT
-router.post('/user', function (req, res, next) {
+
+/*-------------------------USERS-------------------------*/
+router.get('/user', function(req, res, next) {
+  User.find({}, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* SAVE User */
+router.post('/user', function(req, res, next) {
+  req.body.newUser = true;
   User.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -178,18 +188,20 @@ router.get('/class', (req, res, next) => {
 
 //GET ALL AVAILABLE CLASSES
 router.get('/class/available', (req, res, next) => {
-  Schedule.find({ available: true })
-    .populate('teacher', 'firstName lastName')
-    .exec(function (err, schedule) {
-      if (err) return next(err);
-      console.log(schedule);
-      res.json(schedule);
-    });;
+  Schedule.find({available : true})
+  .populate('teacher', 'firstName lastName')
+  .exec(function(err,   schedule){
+    if(err) return next(err);
+    console.log(schedule);
+    res.json(schedule);
+  });;
 });
 
 //GET ALL CLASSES OF A SINGLE TEACHER
 router.get('/class/teacher/:id', (req, res, next) => {
-  Schedule.find({ teacher: req.params.id }, function (err, users) {
+  Schedule.find({teacher : req.params.id})
+  .populate('student')
+  .exec(function(err, users){
     if (err) return next(err);
     res.json(users);
   });
@@ -220,17 +232,16 @@ router.get('/class/student/:id', (req, res, next) => {
 // req.body = { ["5ac74931b97ffd3f681e67f6"]}
 router.post("/class/student/:id", function (req, res) {
   User.findById(req.params.id)
-    .exec(function (err, user) {
-      console.log(req.body);
-      for (var i in req.body) {
-        user.schedule.push(req.body[i]);
-        Schedule.findByIdAndUpdate(req.body[i], { student: req.params.id })
-          .exec(function (err, sched) {
-            console.log(sched);
-          })
-      }
-      user.save();
-
+  .exec(function(err, user){
+    console.log(req.body);
+    for(var i in req.body){
+      user.schedule.push(req.body[i]);
+      Schedule.findByIdAndUpdate(req.body[i], {student : req.params.id, available: false})
+      .exec(function(err, sched){
+        console.log(sched);
+      })
+    }
+    user.save();
     })
 });
 
@@ -253,6 +264,7 @@ router.post('/class', function (req, res, next) {
     res.json(post);
   });
 });
+
 
 // CLOSE A CLASS
 router.delete('/class/:id', function (req, res, next) {
