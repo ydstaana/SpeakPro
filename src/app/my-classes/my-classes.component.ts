@@ -48,10 +48,23 @@ export class MyClassesComponent implements OnInit {
       .subscribe(response => {
         const prompt = confirm('Are you sure you want to open this class?');
         if (prompt === true) {
+          alert('Successfully opened a class');
           this.classes = null;
           this.getClasses(this.teacher._id);
-          alert('Successfully added a class');
         }
       })
+  }
+
+  closeClass(classId) {
+    const prompt = confirm('Are you sure you want to close this class?');
+    if (prompt === true) {
+      this.classService.closeClass(classId)
+        .subscribe(response => {
+          alert('Successfully closed a class');
+          this.classes = null;
+          this.getClasses(this.teacher._id);
+        })
+    }
+
   }
 }
