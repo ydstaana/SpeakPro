@@ -9,13 +9,11 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 
 
 @Component({
-  selector: 'app-add-classes',
-  templateUrl: './add-classes.component.html',
-  styleUrls: ['./add-classes.component.css'],
-  providers: [ClassService]
+  selector: 'app-drop-classes',
+  templateUrl: './drop-classes.component.html',
+  styleUrls: ['./drop-classes.component.css']
 })
-export class AddClassesComponent implements OnInit {
-  classes = null;
+export class DropClassesComponent implements OnInit {
   enrolledClasses = null;
   form: FormGroup;
 
@@ -29,7 +27,7 @@ export class AddClassesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEnrollableClasses();
+    this.getEnrolledClasses();
   }
 
   compare(otherArray) {
@@ -40,24 +38,17 @@ export class AddClassesComponent implements OnInit {
     }
   }
 
-  getEnrollableClasses() {
-    let availableClasses: any, enrolledClasses: any;
-    forkJoin([this.classService.getAvailableClasses(), this.userService.getEnrolledClass()])
+  getEnrolledClasses() {
+    this.userService.getEnrolledClass()
       .subscribe(response => {
-        availableClasses = response[0];
-        enrolledClasses = response[1];
-
-        if (enrolledClasses.length > 0) this.classes = availableClasses.filter(this.compare(enrolledClasses));
-        else this.classes = availableClasses;
-
-        this.enrolledClasses = enrolledClasses;
-        this.form.setControl('availableClasses', this.buildCheckboxes());
+        this.enrolledClasses = response;
+        this.form.setControl('enrolledClasses', this.buildCheckboxes());
       });
 
   }
 
   isCheckboxDisabled() {
-    let arr = this.form.value.availableClasses.find((selected) => {
+    let arr = this.form.value.enrolledClasses.find((selected) => {
       return selected == true;
     })
 
@@ -68,17 +59,17 @@ export class AddClassesComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      availableClasses: this.fb.array([
+      enrolledClasses: this.fb.array([
       ])
     });
   }
 
-  get availableClasses() {
-    return this.form.get('availableClasses');
+  get enrolledClassesFormArray() {
+    return this.form.get('enrolledClasses');
   };
 
   buildCheckboxes() {
-    const arr = this.classes.map(item => {
+    const arr = this.enrolledClasses.map(item => {
       return this.fb.control(false);
     });
 
@@ -86,30 +77,25 @@ export class AddClassesComponent implements OnInit {
   }
 
   submit(form) {
-    const msg = confirm('Are you sure you want to enroll this?');
+    const msg = confirm('Are you sure you want to drop these?');
     if (msg === true) {
       let selectedClasses = [];
 
-      form.availableClasses
+      form.enrolledClasses
         .forEach((selected, index) => {
           if (selected) {
-            selectedClasses.push(this.classes[index]._id, );
+            selectedClasses.push(this.enrolledClasses[index]._id, );
           }
         });
 
-      this.classService.addClass(selectedClasses)
-        .subscribe(res => {
-          this.getEnrollableClasses();
+      this.classService.dropClasses(selectedClasses)
+        .subscribe(response => {
+          console.log(response);
+          alert('You have successfully drop these classes');
         });
     }
   }
 
-  getEnrolledClass(userId: String) {
-    this.userService.getEnrolledClass()
-      .subscribe((response) => {
-        console.log(response);
-      })
-  }
 
   viewTeacher(teacherId) {
     this.router.navigate(['dashboard', 'teachers', teacherId]);

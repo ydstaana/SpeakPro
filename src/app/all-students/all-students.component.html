@@ -1,0 +1,39 @@
+<main>
+  <div class="section">
+    <h5>All Students</h5>
+    <table class="centered striped highlight responsive-table">
+      <thead>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Skype ID</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="!students">
+          <td colspan="4">
+            <div class="preloader-wrapper active">
+              <div class="spinner-layer spinner-yellow-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngFor="let student of students; let i = index">
+          <td>{{student.firstName}} {{student.lastName}}</td>
+          <td>{{student.username}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.skypeID}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>

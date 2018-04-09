@@ -1,0 +1,15 @@
+th {
+  text-align: center;
+}
+
+.submit-btn-container {
+  margin-top: 20px;
+}
+
+.section {
+  margin-bottom: 10px;
+}
+
+.section .title {
+  margin-top: 0px;
+}

@@ -12,7 +12,7 @@
 
 <main>
 <div class = "row">
-	<sideNav></sideNav>
+	<!-- <sideNav></sideNav> -->
 	<div class = "container">
 	<style>
 		.active {
@@ -20,8 +20,8 @@
 		}
 	</style>
     <div>
-      <div *ngFor="let product of products;let i=index" 
-            (click)="click($event)" 
+      <div *ngFor="let product of products;let i=index"
+            (click)="click($event)"
             [ngClass]="{active:i==selectedIndex}">  //<----[ngClass]
 
               {{i}}-{{product}}
@@ -166,7 +166,7 @@
                 <td  class="s2 cell" title="Add Class"></td>
             </tr>
 
-            
+
 
         </tbody>
 		</table>
