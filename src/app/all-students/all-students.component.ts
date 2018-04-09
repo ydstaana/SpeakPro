@@ -13,7 +13,7 @@ export class AllStudentsComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getAllUsers()
+    this.userService.getAllStudents()
       .subscribe((users: User[]) => {
         this.students = users;
       });

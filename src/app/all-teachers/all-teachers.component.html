@@ -1,6 +1,6 @@
 <main>
   <div class="section">
-    <h5>All Students</h5>
+    <h5>All Teachers</h5>
     <table class="centered striped highlight responsive-table">
       <thead>
         <th>Full Name</th>
@@ -9,7 +9,7 @@
         <th>Skype ID</th>
       </thead>
       <tbody>
-        <tr *ngIf="!students">
+        <tr *ngIf="!teachers">
           <td colspan="4">
             <div class="preloader-wrapper active">
               <div class="spinner-layer spinner-yellow-only">
@@ -26,11 +26,11 @@
             </div>
           </td>
         </tr>
-        <tr *ngFor="let student of students; let i = index">
-          <td>{{student.firstName}} {{student.lastName}}</td>
-          <td>{{student.username}}</td>
-          <td>{{student.email}}</td>
-          <td>{{student.skypeID}}</td>
+        <tr *ngFor="let teacher of teachers; let i = index">
+          <td>{{teacher.firstName}} {{teacher.lastName}}</td>
+          <td>{{teacher.username}}</td>
+          <td>{{teacher.email}}</td>
+          <td>{{teacher.skypeID}}</td>
         </tr>
       </tbody>
     </table>

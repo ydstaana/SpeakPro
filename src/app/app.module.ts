@@ -7,7 +7,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 import { ClassService } from '../service/class.service';
-import { UserService } from  '../service/user.service';
+import { UserService } from '../service/user.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AllStudentsComponent } from './all-students/all-students.component';
+import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 
 
 
@@ -36,6 +37,7 @@ import { AllStudentsComponent } from './all-students/all-students.component';
     SidebarComponent,
     EditProfileComponent,
     AllStudentsComponent,
+    AllTeachersComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { AllStudentsComponent } from './all-students/all-students.component';
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
           { path: 'all-students', component: AllStudentsComponent },
+          { path: 'all-teachers', component: AllTeachersComponent },
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },

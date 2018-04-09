@@ -37,5 +37,15 @@ export class UserService {
     return this.http.get('http://localhost:3000/api/user')
       .pipe();
   }
+
+  getAllStudents(){
+    return this.http.get('http://localhost:3000/api/students')
+      .pipe();
+  }
+
+  getAllTeachers(){
+    return this.http.get('http://localhost:3000/api/teachers')
+      .pipe();
+  }
 }
 
