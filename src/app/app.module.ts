@@ -11,8 +11,6 @@ import { UserService } from  '../service/user.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { TeacherApplicationComponent } from './teacher-application/teacher-application.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { MenuComponent } from './menu/menu.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { FooterComponent } from './footer/footer.component';
@@ -22,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.component';
 
 
 
@@ -30,8 +27,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
   declarations: [
     AppComponent,
     HomepageComponent,
-    TeacherApplicationComponent,
-    RegistrationComponent,
     MenuComponent,
     StudentProfileComponent,
     FooterComponent,
@@ -39,7 +34,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     DashboardComponent,
     SidebarComponent,
     EditProfileComponent,
-    SimpleFormGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +45,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
-      { path: 'register', component: RegistrationComponent },
       { path: 'student-profile', component: StudentProfileComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
@@ -59,7 +52,6 @@ import { SimpleFormGroupComponent } from './simple-form-group/simple-form-group.
           { path: 'add-classes', component: AddClassesComponent },
         ]
       },
-      {path: 'form-group', component: SimpleFormGroupComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]),
 
