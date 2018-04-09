@@ -15,6 +15,7 @@ mongoose.connect('mongodb://root:root@ds121599.mlab.com:21599/speakpro')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 var api = require('./server/routes/api');
 /**
@@ -25,9 +26,6 @@ app.set('port', port);
 
 //SET ROUTE FOR API
 app.use('/api', api);
-
-
-
 
 /**
  * Create HTTP server.

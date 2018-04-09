@@ -8,7 +8,7 @@ var SchedSchema = new mongoose.Schema({
 	},
 	available : Boolean
 });
-
+	
 var Sched = mongoose.model('Sched', SchedSchema);
 
 module.exports =Sched;

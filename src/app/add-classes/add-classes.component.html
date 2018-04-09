@@ -9,19 +9,83 @@
     <a class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
   </div>
 </div>
-
 <main>
-	<sideNav></sideNav>
-	<table>
-		<thead>
-			<td>Timeslot</td>
-			<td>Teacher</td>
-			<td>Action</td>
-		</thead>
-	</table>
-	<tbody>
-		<!-- INSERT TABLE OF AVAILABLE CLASSES -->
-
-	</tbody>
-
+  <form [formGroup]="form" (submit)="submit(form.value)">
+    <div class="section">
+      <h5>Enrolled Classes</h5>
+      <table class="centered striped highlight responsive-table">
+        <thead>
+          <th></th>
+          <th>Timeslot</th>
+          <th>Teacher</th>
+        </thead>
+        <tbody>
+          <tr *ngIf="!enrolledClasses">
+            <td colspan="3">
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-yellow-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngFor="let class of enrolledClasses; let i = index">
+            <td>
+              &nbsp;
+            </td>
+            <td>{{class.timeSlot}}</td>
+            <td>{{class.teacher.firstName + ' ' + class.teacher.lastName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="section">
+      <h5 class="title">Enrollable Classes</h5>
+      <table class="centered striped highlight responsive-table">
+        <thead>
+          <th></th>
+          <th>Timeslot</th>
+          <th>Teacher</th>
+        </thead>
+        <tbody>
+          <tr *ngIf="!classes">
+            <td colspan="3">
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-yellow-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngFor="let class of availableClasses.controls; let i = index">
+            <td>
+              <input type="checkbox" id="{{i}}" [formControl]="class">
+              <label for="{{i}}"></label>
+            </td>
+            <td>{{classes[i].timeSlot}}</td>
+            <td><a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="submit-btn-container center">
+      <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
+    </div>
+  </form>
 </main>
