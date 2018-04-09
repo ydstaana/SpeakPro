@@ -34,5 +34,10 @@ export class ClassService {
       .pipe();
   }
 
+  // deleteClass(classes: String[]){
+  //   const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+  //   return this.http.post<String[]>(`http://localhost:3000/api/class/student/${userId}/drop`, classes)
+  //     .pipe();
+  // }
 
 }

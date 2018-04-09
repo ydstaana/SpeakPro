@@ -13,7 +13,8 @@ var UserSchema = new mongoose.Schema({
 	userType: String,
 	schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
 
-	newUser: Boolean
+	newUser: Boolean,
+  active: Boolean
 });
 
 
@@ -27,6 +28,11 @@ UserSchema.statics.authenticate = function (username, password, callback) {
         return callback(err)
       } else if (!user) {
         var err = new Error('User not found.');
+        err.status = 401;
+        return callback(err);
+      }
+      else if(user.active == false){ //User is banned/deactivated
+        var err = new Error("User's account is not active");
         err.status = 401;
         return callback(err);
       }
