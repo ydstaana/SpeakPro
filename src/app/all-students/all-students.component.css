@@ -1,3 +1,7 @@
 th{
   text-align: center;
 }
+
+.btn {
+  min-width: 151px;
+}

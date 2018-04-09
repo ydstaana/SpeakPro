@@ -7,4 +7,5 @@ export class User {
   skypeID: String;
   userType: String;
   newUser: Boolean;
+  active: Boolean
 }

@@ -52,5 +52,10 @@ export class UserService {
     return this.http.get(`http://localhost:3000/api/user/${userId}`)
       .pipe();
   }
+
+  suspendUser(userId) {
+    return this.http.post(`http://localhost:3000/api/admin/${userId}`, {})
+      .pipe();
+  }
 }
 
