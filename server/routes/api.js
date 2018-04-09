@@ -129,6 +129,7 @@ router.get('/user', function(req, res, next) {
 
 /* SAVE User */
 router.post('/user', function(req, res, next) {
+  req.body.newUser = true;
   User.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -192,7 +193,7 @@ router.get('/class', (req, res, next) => {
 router.get('/class/available', (req, res, next) => {
   Schedule.find({available : true})
   .populate('teacher', 'firstName lastName')
-  .exec(function(err, schedule){
+  .exec(function(err,   schedule){
     if(err) return next(err);
     console.log(schedule);
     res.json(schedule);
@@ -201,7 +202,9 @@ router.get('/class/available', (req, res, next) => {
 
 //GET ALL CLASSES OF A SINGLE TEACHER
 router.get('/class/teacher/:id', (req, res, next) => {
-  Schedule.find({teacher : req.params.id}, function(err, users){
+  Schedule.find({teacher : req.params.id})
+  .populate('student')
+  .exec(function(err, users){
     if (err) return next(err);
     res.json(users);
   });
@@ -242,7 +245,7 @@ router.post("/class/student/:id", function (req, res){
     console.log(req.body);
     for(var i in req.body){
       user.schedule.push(req.body[i]);
-      Schedule.findByIdAndUpdate(req.body[i], {student : req.params.id})
+      Schedule.findByIdAndUpdate(req.body[i], {student : req.params.id, available: false})
       .exec(function(err, sched){
         console.log(sched);
       })
@@ -283,7 +286,7 @@ router.post('/class', function(req, res, next) {
   });
 });
 
-//DELETE A CLASS (DROP CLASS)
+//DELETE A CLASS (CLOSE CLASS)
 router.delete('/class/:id', function(req, res, next) {
   Schedule.findByIdAndRemove(req.params.id, function (err, post) {
     if (err) return next(err);
