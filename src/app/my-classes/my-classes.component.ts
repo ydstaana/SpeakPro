@@ -38,6 +38,7 @@ export class MyClassesComponent implements OnInit {
   getClasses(teacherId) {
     this.classService.getAllClassesByTeacher(teacherId)
       .subscribe((response: any) => {
+        console.log(response);
         this.classes = response;
       })
   }
