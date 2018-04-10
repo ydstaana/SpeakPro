@@ -1,11 +1,17 @@
+/** PAGE HEADER **/
+
 .section .title {
   margin-top: 0px;
   margin-bottom: 15px;
 }
 
-.card-content{
+/** CARD STYLES **/
+
+.card-content {
   padding: 0px;
 }
+
+/** TABLE STYLES **/
 
 table {
   width: 100%;
@@ -20,14 +26,13 @@ th {
   width: 10%;
 }
 
-
 /* CHECKBOX STYLES */
-[type="checkbox"]:checked + label:before{
+
+[type="checkbox"]:checked+label:before {
   border-right: 2px solid #2196F3;
   border-bottom: 2px solid #2196F3;
 }
 
-
-.btn{
+.btn {
   background-color: #2196F3;
 }
