@@ -13,3 +13,13 @@ th {
 .section .title {
   margin-top: 0px;
 }
+
+
+table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.td-1{
+  width: 10%;
+}
