@@ -43,12 +43,9 @@ router.post('/upload', upload.single('avatar'), function (req, res, next) {
 });
 
 router.post('/login', function(req,res,next){
-  User.authenticate(req.body.username, req.body.password, function(err,user){
-    if(err) return next(err);
-    console.log(user);
-    res.json(user);
-  })
+ 
 });
+
 /*router.get('/login/:username/:password', function(req, res, next) {
   User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err);
@@ -196,7 +193,7 @@ router.get('/class/available', (req, res, next) => {
     if(err) return next(err);
     console.log(schedule);
     res.json(schedule);
-  });
+  });;
 });
 
 //GET ALL CLASSES OF A SINGLE TEACHER
@@ -222,16 +219,13 @@ router.get('/class/teacher/:id/available', (req, res, next) => {
 
 //GET ENROLLED CLASSES OF A SINGLE STUDENT (VIEW SCHEDULE OF STUDENT)
 router.get('/class/student/:id', (req, res, next) => {
-User.findById(req.params.id)
-.populate('schedule')
-.exec(function(err, user){
-  if(err) return next(err);
-  res.json(user.schedule);
+  User.findById(req.params.id)
+  .populate('schedule')
+  .exec(function(err, user){
+    if(err) return next(err);
+    res.json(user.schedule);
   });
 });
-
-// NOT YET TESTED !!!!!!!!!!!!!!!!
-
 
 //ADD CLASSES TO A SINGLE STUDENT
 /*
@@ -264,15 +258,10 @@ router.post("/class/student/:id/drop", function (req, res){
     console.log(req.body);
     for(var i in req.body){
       user.schedule.pop(req.body[i]);
-      Schedule.findByIdAndUpdate(req.body[i], {student : null, available: true})
-      .exec(function(err, sched){
-        console.log(sched);
-      })
     }
     user.save();
   })
 });
-/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 //GET STUDENT ENROLLED IN A CLASS
 router.get('/class/:id/student', (req, res, next) => {

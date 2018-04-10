@@ -18,6 +18,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 var api = require('./server/routes/api');
+
+var adminAuthRoutes = require('./server/routes/endpoints/admin/_auth/routes');
+var adminUserRoutes = require('./server/routes/endpoints/admin/_user/routes');
+var adminAdminRoutes = require('./server/routes/endpoints/admin/_admin/routes');
+var adminStudentRoutes = require('./server/routes/endpoints/admin/_student/routes');
+var adminTeacherRoutes = require('./server/routes/endpoints/admin/_teacher/routes');
+var adminClassesRoutes = require('./server/routes/endpoints/admin/_class/routes');
 /**
  * Get port from environment and store in Express.
  */
@@ -25,8 +32,25 @@ const port = process.env.PORT || '3000';
 app.set('port', port);
 
 //SET ROUTE FOR API
-app.use('/api', api);
+app.use(adminAuthRoutes);
+app.use(adminUserRoutes);
+app.use(adminAdminRoutes);
+app.use(adminStudentRoutes);
+app.use(adminTeacherRoutes);
+app.use(adminClassesRoutes);
 
+
+
+app.use(function(req, res, next) {
+//set headers to allow cross origin request.
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
+module.exports.app = app;
 /**
  * Create HTTP server.
  */
