@@ -1,49 +1,54 @@
-<h4>Edit Profile</h4>
-<div class="row" *ngIf="form">
-  <form class="col s12" [formGroup]="form" (submit)="editProfile(form.value)">
-    <!-- First Name & Last Name -->
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="teacher-first-name" type="text" formControlName="firstName">
-        <label for="teacher-first-name">First Name</label>
-      </div>
-      <div class="input-field col s6">
-        <input id="teacher-last-name" type="text" formControlName="lastName">
-        <label for="teacher-last-name">Last Name</label>
-      </div>
-    </div>
+<main>
+  <div class="section">
+    <h5 class="title">Edit Profile</h5>
+    <div class="card" *ngIf="form">
+      <div class="card-content">
+        <form [formGroup]="form" (submit)="editProfile(form.value)">
+          <!-- First Name & Last Name -->
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="teacher-first-name" type="text" formControlName="firstName">
+              <label for="teacher-first-name" class="active">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="teacher-last-name" type="text" formControlName="lastName">
+              <label for="teacher-last-name" class="active">Last Name</label>
+            </div>
+          </div>
 
-    <!-- Username & Password -->
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="teacher-username" type="text" formControlName="username">
-        <label for="teacher-username">Username</label>
-      </div>
-      <div class="input-field col s6">
-        <input id="teacher-password" type="password" formControlName="password" placeholder="********">
-        <label for="teacher-password">Password</label>
-      </div>
-    </div>
+          <!-- Username & Password -->
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="teacher-username" type="text" formControlName="username">
+              <label for="teacher-username" class="active">Username</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="teacher-password" type="password" formControlName="password" placeholder="********">
+              <label for="teacher-password" class="active">Password</label>
+            </div>
+          </div>
 
-    <!-- Email & Skype ID -->
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="teacher-email" type="text" formControlName="email">
-        <label for="teacher-email">Email Address</label>
-      </div>
-      <div class="input-field col s6">
-        <input id="teacher-skype-id" type="text" formControlName="skypeID">
-        <label for="teacher-skype-id">Skype ID</label>
+          <!-- Email & Skype ID -->
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="teacher-email" type="text" formControlName="email">
+              <label for="teacher-email" class="active">Email Address</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="teacher-skype-id" type="text" formControlName="skypeID">
+              <label for="teacher-skype-id" class="active">Skype ID</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 center">
+              <button type="submit" class="btn blue lighten-2 waves-effect waves-light">
+                Update
+              </button>
+            </div>
+          </div>
+          <!-- <p>Form value: {{ form.value | json }}</p> -->
+        </form>
       </div>
     </div>
-
-    <div class="row container">
-      <div class="col s12 center">
-        <button type="submit" class="btn waves-effect waves-light">
-          Update
-        </button>
-      </div>
-    </div>
-    <p>Form value: {{ form.value | json }}</p>
-  </form>
-</div>
+  </div>
+</main>
