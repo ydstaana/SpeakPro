@@ -1,59 +1,92 @@
 <main>
   <div class="section">
+    <h5 class="title" *ngIf="teacher">My Classes</h5>
     <form [formGroup]="form" (submit)="openClass(form.value)">
-      <div class="row">
-        <div class="col s6">
-          <h5 *ngIf="teacher">My Classes</h5>
-        </div>
-        <div class="col s3">
-          <select materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeSlot">
-            <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot">{{timeslot}}</option>
-          </select>
-        </div>
-        <div class="col s3">
-          <button class="btn waves-effect waves-light" type="submit">Open a Class</button>
+      <div class="add-class card z-index-1">
+        <div class="card-content">
+          <div class="row">
+            <div class="col s3">
+              <label for="dropdown">Choose Timeslot</label>
+              <select name="dropdown" materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeSlot">
+                <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot">{{timeslot}}</option>
+              </select>
+            </div>
+            <div class="col s3">
+              <label for="date">Choose a Date</label>
+              <input id="date" name="date" formControlName="date" materialize="pickadate" [materializeParams]="[{format: 'dd/mm/yyyy'}]"
+                type="text" />
+            </div>
+            <div class="col s3">
+              <label for="teacher-id">Teacher ID</label>
+              <input id="teacher-id" name="teacher-id" value="{{teacher._id}}" materialize [materializeParams]="[{format: 'dd/mm/yyyy'}]"
+                type="text" [disabled]="teacher" />
+            </div>
+            <div class="col s2">
+              <label for="max-students">Number of Students</label>
+              <input id="max-students" name="max-students" value="1" materialize [materializeParams]="[{format: 'dd/mm/yyyy'}]" type="text"
+                [disabled]="true" />
+            </div>
+            <div class="col s1 centered-container">
+              <button class="btn-floating yellow darken-1" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
+                <i class="material-icons">add</i>
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     </form>
-    <table class="centered striped highlight responsive-table">
-      <thead>
-        <th>#</th>
-        <th>Timeslot</th>
-        <th>Status</th>
-        <th>Student</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr *ngIf="!classes">
-          <td colspan="5">
-            <div class="preloader-wrapper active">
-              <div class="spinner-layer spinner-yellow-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
+    <div class="table card">
+      <div class="card-content">
+        <table class="centered striped highlight responsive-table">
+          <colgroup>
+            <col class="td-1">
+            <col>
+            <col>
+            <col>
+          </colgroup>
+          <thead>
+            <th>#</th>
+            <th>Timeslot</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Student</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngIf="!classes">
+              <td colspan="6">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr *ngFor="let class of classes; let i = index">
-          <td>{{i+1}}</td>
-          <td>{{class.timeSlot}}</td>
-          <td *ngIf="class.available">Open</td>
-          <td *ngIf="!class.available">Closed</td>
-          <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
-          <td *ngIf="!class.student">n/a</td>
-          <td>
-            <button class="btn waves-effect waves-light" (click)="closeClass(class._id)">Delete Class</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              </td>
+            </tr>
+            <tr *ngFor="let class of classes; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{class.timeSlot}}</td>
+              <td>Tue, April 10, 2018</td>
+              <td *ngIf="class.available">Open</td>
+              <td *ngIf="!class.available">Closed</td>
+              <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
+              <td *ngIf="!class.student">n/a</td>
+              <td>
+                <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class._id)">Delete Class</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 </main>

@@ -63,7 +63,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
           { path: 'teacher/my-classes', component: MyClassesComponent },
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
-          { path: 'checkout', component: CheckoutComponent}
+          { path: 'checkout', component: CheckoutComponent},
           { path: 'drop-classes', component: DropClassesComponent },
           { path: 'teachers/:id', component: ClassesByTeacherComponent },
           { path: 'all-students', component: AllStudentsComponent },

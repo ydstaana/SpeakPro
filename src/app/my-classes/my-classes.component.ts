@@ -2,7 +2,6 @@ import { ClassService } from './../../service/class.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Sched } from '../../model/sched';
-import { ClassService } from '../../service/class.service';
 import { User } from '../../model/user';
 
 @Component({
@@ -29,6 +28,7 @@ export class MyClassesComponent implements OnInit {
   createForm() {
     this.form = this.fb.group({
       timeSlot: ['7:00 AM - 8:00 AM', Validators.required],
+      date: ['01/01/2018'],
       teacher: [this.teacher._id],
       student: [null],
       available: [true]
