@@ -1,47 +1,50 @@
 <main>
   <div class="section">
-    <h5>All Teachers</h5>
-    <table class="centered striped highlight responsive-table">
-      <thead>
-        <th>Full Name</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Skype ID</th>
-      </thead>
-      <tbody>
-        <tr *ngIf="!teachers">
-          <td colspan="4">
-            <div class="preloader-wrapper active">
-              <div class="spinner-layer spinner-yellow-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
+    <h5 class="title">All Teachers</h5>
+    <div class="card">
+      <div class="card-content">
+        <table class="centered striped highlight responsive-table">
+          <thead>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Skype ID</th>
+          </thead>
+          <tbody>
+            <tr *ngIf="!teachers">
+              <td colspan="5">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr *ngFor="let teacher of teachers; let i = index">
-          <td>{{teacher.firstName}} {{teacher.lastName}}</td>
-          <td>{{teacher.username}}</td>
-          <td>{{teacher.email}}</td>
-          <td>{{teacher.skypeID}}</td>
-          <td>
-            <a class="waves-effect waves-light red lighten-1 btn" (click)="suspendUser(teacher._id)" *ngIf="teacher.active">
-              Suspend
-            </a>
-            <a class="waves-effect waves-light red darken-2 btn disabled" *ngIf="!teacher.active">
-              Suspended
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              </td>
+            </tr>
+            <tr *ngFor="let teacher of teachers; let i = index">
+              <td>{{teacher.firstName}} {{teacher.lastName}}</td>
+              <td>{{teacher.username}}</td>
+              <td>{{teacher.email}}</td>
+              <td>{{teacher.skypeID}}</td>
+              <td>
+                <a class="waves-effect waves-light red lighten-1 btn" (click)="suspendUser(teacher._id)" *ngIf="teacher.active">
+                  Suspend
+                </a>
+                <a class="waves-effect waves-light red darken-2 btn disabled" *ngIf="!teacher.active">
+                  Suspended
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
 </main>
