@@ -14,14 +14,22 @@
     <div class="section">
       <h5 class="title">Enrollable Classes</h5>
       <table class="centered striped highlight responsive-table">
+        <colgroup>
+          <col class="td-1">
+          <col>
+          <col>
+          <col>
+        </colgroup>
         <thead>
           <th></th>
-          <th>Timeslot</th>
+          <th>Time</th>
+          <th>Date</th>
           <th>Teacher</th>
+          <th>Status</th>
         </thead>
         <tbody>
           <tr *ngIf="!classes">
-            <td colspan="3">
+            <td colspan="5">
               <div class="preloader-wrapper active">
                 <div class="spinner-layer spinner-yellow-only">
                   <div class="circle-clipper left">
@@ -43,7 +51,12 @@
               <label for="{{i}}"></label>
             </td>
             <td>{{classes[i].timeSlot}}</td>
-            <td><a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a></td>
+            <td>Tue, April 2, 2018</td>
+            <td>
+              <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
+            </td>
+            <td *ngIf="classes[i].available">Open</td>
+            <td *ngIf="!classes[i].available">Closed</td>
           </tr>
         </tbody>
       </table>
