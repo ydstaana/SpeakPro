@@ -1,3 +1,56 @@
-th{
+/** PAGE HEADER **/
+
+.row .col.s6 {
+  padding-left: 0px;
+}
+
+.row .col {
+  height: 100%;
+}
+
+.row .col.centered-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section .title {
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+/** CARD STYLES **/
+
+.table.card>.card-content {
+  padding: 0px;
+}
+
+.add-class.card>.card-content {
+  padding: 14px 15px 15px 10px;
+}
+
+.add-class.card>.card-content>.row {
+  margin-bottom: 0px;
+  height: 68px !important;
+}
+/** TABLE STYLES **/
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
   text-align: center;
+}
+
+.td-1 {
+  width: 5%;
+}
+
+/* CHECKBOX STYLES */
+
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid #2196F3;
+  border-bottom: 2px solid #2196F3;
 }
