@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
+const jwt    = require('jsonwebtoken');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 
@@ -23,11 +23,11 @@ router.get('/', (req, res) => {
 */
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
   }
 })
 
@@ -42,13 +42,10 @@ router.post('/upload', upload.single('avatar'), function (req, res, next) {
   console.log(req.file);
 });
 
-router.post('/login', function (req, res, next) {
-  User.authenticate(req.body.username, req.body.password, function (err, user) {
-    if (err) return next(err);
-    console.log(user);
-    res.json(user);
-  })
+router.post('/login', function(req,res,next){
+ 
 });
+
 /*router.get('/login/:username/:password', function(req, res, next) {
   User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err);
@@ -118,7 +115,6 @@ router.post('/login', function (req, res, next) {
   }
 });*/
 
-
 /*-------------------------USERS-------------------------*/
 router.get('/user', function(req, res, next) {
   User.find({}, function (err, post) {
@@ -136,54 +132,54 @@ router.post('/user', function(req, res, next) {
   });
 });
 
-// GET ALL USERS
-router.get('/user', function (req, res, next) {
-  User.find({}, function (err, post) {
+/* UPDATE User */
+router.put('/user/:username', function(req, res, next) {
+  User.findOneAndUpdate({username: req.params.username}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-// GET USER BY ID
-router.get('/user/:id', function (req, res, next) {
+/*GET SINGLE USER*/
+router.get('/user/:id', function(req, res, next) {
   User.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-// UPDATE USER BY USERNAME
-router.put('/user/:username', function (req, res, next) {
-  User.findOneAndUpdate({ username: req.params.username }, req.body, function (err, post) {
+
+/*BAN A SINGLE USER*/
+router.post('/admin/:id', function(req, res, next) {
+  User.findByIdAndUpdate(req.params.id,{active : false}) 
+  .exec(function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-// GET ALL STUDENTS
+
+/*-------------------------STUDENTS-------------------------*/
 router.get('/students', (req, res, next) => {
-  User.find({ userType: "STUDENT" }, function (err, users) {
+  User.find({userType: "STUDENT"}, function(err, users){
     if (err) return next(err);
     res.json(users);
   });
 });
 
-// GET ALL TEACHERS
+/*-------------------------TEACHERS-------------------------*/
 router.get('/teachers', (req, res, next) => {
-<<<<<<< HEAD
   User.find({userType: "TEACHER"}, function(err, users){
-=======
-  User.find({ userType: "TEACHER" }, function (err, users) {
->>>>>>> ad72611db5d549a85a82e897a3417530b5f2c6fe
     if (err) return next(err);
     res.json(users);
   });
 });
 
 
+/*-------------------------CLASSES-------------------------*/
 //GET ALL CLASSES
 router.get('/class', (req, res, next) => {
-  Schedule.find({}, function (err, users) {
+  Schedule.find({}, function(err, users){
     if (err) return next(err);
     res.json(users);
   });
@@ -197,7 +193,7 @@ router.get('/class/available', (req, res, next) => {
     if(err) return next(err);
     console.log(schedule);
     res.json(schedule);
-  });
+  });;
 });
 
 //GET ALL CLASSES OF A SINGLE TEACHER
@@ -212,28 +208,24 @@ router.get('/class/teacher/:id', (req, res, next) => {
 
 //GET AVAILABLE CLASSES OF A SINGLE TEACHER
 router.get('/class/teacher/:id/available', (req, res, next) => {
-  Schedule.find({ available: true, teacher: req.params.id })
-    .populate('teacher', 'firstName')
-    .exec(function (err, schedule) {
-      if (err) return next(err);
-      res.json(schedule);
-    });
+  Schedule.find({available: true, teacher : req.params.id})
+  .populate('teacher', 'firstName')
+  .exec(function(err, schedule){
+    if(err) return next(err);
+    res.json(schedule);
+  });
 });
 
 
 //GET ENROLLED CLASSES OF A SINGLE STUDENT (VIEW SCHEDULE OF STUDENT)
 router.get('/class/student/:id', (req, res, next) => {
-<<<<<<< HEAD
-User.findById(req.params.id)
-.populate('schedule')
-.exec(function(err, user){
-  if(err) return next(err);
-  res.json(user.schedule);
+  User.findById(req.params.id)
+  .populate('schedule')
+  .exec(function(err, user){
+    if(err) return next(err);
+    res.json(user.schedule);
   });
 });
-
-// NOT YET TESTED !!!!!!!!!!!!!!!!
-
 
 //ADD CLASSES TO A SINGLE STUDENT
 /*
@@ -244,19 +236,6 @@ User.findById(req.params.id)
     }
 */
 router.post("/class/student/:id", function (req, res){
-=======
-  User.findById(req.params.id)
-    .populate('schedule')
-    .exec(function (err, user) {
-      if (err) return next(err);
-      res.json(user.schedule);
-    });
-});
-
-//ENROLL CLASSES TO A STUDENT
-// req.body = { ["5ac74931b97ffd3f681e67f6"]}
-router.post("/class/student/:id", function (req, res) {
->>>>>>> ad72611db5d549a85a82e897a3417530b5f2c6fe
   User.findById(req.params.id)
   .exec(function(err, user){
     console.log(req.body);
@@ -268,26 +247,21 @@ router.post("/class/student/:id", function (req, res) {
       })
     }
     user.save();
-    })
+
+  })
 });
 
-//DROP CLASSES OF A STUDENT
-router.post("/class/student/:id/drop", function (req, res) {
+//DROP A CLASS OF A SINGLE STUDENT
+router.post("/class/student/:id/drop", function (req, res){
   User.findById(req.params.id)
-<<<<<<< HEAD
   .exec(function(err, user){
     console.log(req.body);
     for(var i in req.body){
       user.schedule.pop(req.body[i]);
-      Schedule.findByIdAndUpdate(req.body[i], {student : null, available: true})
-      .exec(function(err, sched){
-        console.log(sched);
-      })
     }
     user.save();
   })
 });
-/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 //GET STUDENT ENROLLED IN A CLASS
 router.get('/class/:id/student', (req, res, next) => {
@@ -297,26 +271,17 @@ router.get('/class/:id/student', (req, res, next) => {
     if(err) return next(err);
     res.json(sched.student);
   });
-=======
-    .exec(function (err, user) {
-      console.log(req.body);
-      for (var i in req.body) {
-        user.schedule.pop(req.body[i]);
-      }
-      user.save();
-    })
->>>>>>> ad72611db5d549a85a82e897a3417530b5f2c6fe
 });
 
-// OPEN A CLASS
-router.post('/class', function (req, res, next) {
+
+//CREATE A NEW CLASS (OPEN CLASS)
+router.post('/class', function(req, res, next) {
   Schedule.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-<<<<<<< HEAD
 //DELETE A CLASS (CLOSE CLASS)
 router.delete('/class/:id', function(req, res, next) {
   Schedule.findById(req.params.id)
@@ -324,34 +289,8 @@ router.delete('/class/:id', function(req, res, next) {
   .exec(function(err, sched){
     if(err) return next(err);
     res.json(sched); //removed
-=======
-
-// CLOSE A CLASS
-router.delete('/class/:id', function (req, res, next) {
-  Schedule.findByIdAndRemove(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
->>>>>>> ad72611db5d549a85a82e897a3417530b5f2c6fe
   });
 });
 
-//GET STUDENT ENROLLED IN A CLASS
-router.get('/class/:id/student', (req, res, next) => {
-  Schedule.findById(req.params.id)
-    .populate('student')
-    .exec(function (err, sched) {
-      if (err) return next(err);
-      res.json(sched.student);
-    });
-});
-
-// BAN A USER
-router.post('/admin/:id', function (req, res, next) {
-  User.findByIdAndUpdate(req.params.id, { active: false })
-    .exec(function (err, post) {
-      if (err) return next(err);
-      res.json(post);
-    });
-});
 
 module.exports = router;
