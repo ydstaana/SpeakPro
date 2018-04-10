@@ -11,7 +11,8 @@ module.exports = function(req, res, next){
 		}
 	})
 	.exec(function(err, user){
-		if (err) res.status(500).json({
+		if (err) 
+			res.status(500).json({
 			code : 500,
 			message : err
 		});
