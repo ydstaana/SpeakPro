@@ -38,7 +38,8 @@ export class HomepageComponent implements OnInit {
       email: ['', Validators.required],
       skypeID: ['', Validators.required],
       userType: [userType],
-      newUser: [true]
+      newUser: [true],
+      active: [true]
     });
 
     return form;

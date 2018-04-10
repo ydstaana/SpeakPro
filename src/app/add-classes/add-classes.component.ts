@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
@@ -10,8 +11,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 @Component({
   selector: 'app-add-classes',
   templateUrl: './add-classes.component.html',
-  styleUrls: ['./add-classes.component.css'],
-  providers: [ClassService]
+  styleUrls: ['./add-classes.component.css']
 })
 export class AddClassesComponent implements OnInit {
   classes = null;
@@ -21,7 +21,8 @@ export class AddClassesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private classService: ClassService,
-    private userService: UserService) {
+    private userService: UserService,
+    private router: Router) {
 
     this.createForm();
   }
@@ -59,7 +60,7 @@ export class AddClassesComponent implements OnInit {
       return selected == true;
     })
 
-    if(typeof arr === 'undefined') return true; //if no classes are checked
+    if (typeof arr === 'undefined') return true; //if no classes are checked
     else return false; //if there is atleast one that is checked
   }
 
@@ -86,19 +87,17 @@ export class AddClassesComponent implements OnInit {
   submit(form) {
     const msg = confirm('Are you sure you want to enroll this?');
     if (msg === true) {
-      let selectedClasses = [];
+      this.bindSelected(form)
+        .then((selected) => {
+          this.classService.setCart(selected);
+          this.router.navigate(['dashboard/checkout']);
+        })
 
-      form.availableClasses
-        .forEach((selected, index) => {
-          if (selected) {
-            selectedClasses.push(this.classes[index]._id, );
-          }
-        });
 
-      this.classService.addClass(selectedClasses)
-        .subscribe(res => {
-          this.getEnrollableClasses();
-        });
+      // this.classService.addClass(selectedClasses)
+      //   .subscribe(res => {
+      //     this.getEnrollableClasses();
+      //   });
     }
   }
 
@@ -109,15 +108,27 @@ export class AddClassesComponent implements OnInit {
       })
   }
 
-  /*deleteArray(){
-    this.classService.deleteClass(this.classString)
-    .subscribe(
-      data => {
-        console.log("Success");
-      },
-      err => console.log(err)
-    );
-  }*/
+  viewTeacher(teacherId) {
+    this.router.navigate(['dashboard', 'teachers', teacherId]);
+  }
+
+  bindSelected(form) {
+    return new Promise((resolve, reject) => {
+      let selectedClasses = [];
+      form.availableClasses
+        .forEach((selected, index) => {
+          if (selected) {
+            selectedClasses.push(this.classes[index]);
+          }
+        });
+
+      resolve(selectedClasses);
+    });
+
+
+  }
+
+
 
 
 }

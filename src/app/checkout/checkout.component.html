@@ -1,0 +1,68 @@
+<h5 class="title">Checkout</h5>
+<div class="row">
+  <div class="col s5">
+    <div class="card">
+      {{shoppingCart}}
+      <div class="card-content">
+        <ul *ngIf="cart">
+          <li *ngFor="let item of cart">
+            {{item.timeSlot}} ({{item.teacher.firstName}} {{item.teacher.lastName}}) - $2.00
+          </li>
+        </ul>
+
+      </div>
+      <div class="card-action">
+        <p>Total: $10.00</p>
+      </div>
+    </div>
+  </div>
+  <div class="col s7">
+    <div class="card">
+      <div class="card-tabs">
+        <ul class="tabs tabs-fixed-width" materialize="tabs">
+          <li class="tab">
+            <a href="#credit-card" class="active">Credit Card</a>
+          </li>
+          <li class="tab">
+            <a href="#pera-padala">Pera Padala</a>
+          </li>
+          <li class="tab">
+            <a href="#globe-smart">Globe/Smart</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-content grey lighten-4">
+        <div id="credit-card">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="card-number" type="text">
+              <label for="card-number">Card Number</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Month" id="expiry-month" type="text">
+              <label for="expiry-month">Expiry Date</label>
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="Year" id="expiry-year" type="text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="security-code" type="text">
+              <label for="security-code">Security Code</label>
+            </div>
+          </div>
+          <div class="center row">
+            <div class="col s12">
+              <button class="waves-effect waves-light btn" (click)="checkout()">Checkout</button>
+            </div>
+          </div>
+        </div>
+        <div id="pera-padala">Test 2</div>
+        <div id="globe-smart">Test 3</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,12 @@ var User = require('../../../../../../models/UserSchema.js');
 
 module.exports = function(req, res, next){
 	User.findById(req.params.id)
-	.populate('schedule')
+	.populate({
+		path: 'schedule',
+		populate :{
+			path:'teacher'
+		}
+	})
 	.exec(function(err, user){
 		if (err) res.status(500).json({
 			code : 500,
