@@ -1,25 +1,38 @@
-th {
-  text-align: center;
-}
-
-.submit-btn-container {
-  margin-top: 20px;
-}
-
-.section {
-  margin-bottom: 10px;
-}
+/** PAGE HEADER **/
 
 .section .title {
   margin-top: 0px;
+  margin-bottom: 15px;
 }
 
+/** CARD STYLES **/
 
-table{
+.card-content {
+  padding: 0px;
+}
+
+/** TABLE STYLES **/
+
+table {
   width: 100%;
   table-layout: fixed;
 }
 
-.td-1{
+th {
+  text-align: center;
+}
+
+.td-1 {
   width: 10%;
+}
+
+/* CHECKBOX STYLES */
+
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid #2196F3;
+  border-bottom: 2px solid #2196F3;
+}
+
+.btn {
+  background-color: #2196F3;
 }

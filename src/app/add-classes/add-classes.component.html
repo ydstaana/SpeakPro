@@ -13,53 +13,57 @@
   <form [formGroup]="form" (submit)="submit(form.value)">
     <div class="section">
       <h5 class="title">Enrollable Classes</h5>
-      <table class="centered striped highlight responsive-table">
-        <colgroup>
-          <col class="td-1">
-          <col>
-          <col>
-          <col>
-        </colgroup>
-        <thead>
-          <th></th>
-          <th>Time</th>
-          <th>Date</th>
-          <th>Teacher</th>
-          <th>Status</th>
-        </thead>
-        <tbody>
-          <tr *ngIf="!classes">
-            <td colspan="5">
-              <div class="preloader-wrapper active">
-                <div class="spinner-layer spinner-yellow-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
+      <div class="card">
+        <div class="card-content">
+          <table class="centered striped highlight responsive-table">
+            <colgroup>
+              <col class="td-1">
+              <col>
+              <col>
+              <col>
+            </colgroup>
+            <thead>
+              <th></th>
+              <th>Time</th>
+              <th>Date</th>
+              <th>Teacher</th>
+              <th>Status</th>
+            </thead>
+            <tbody>
+              <tr *ngIf="!classes">
+                <td colspan="5">
+                  <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-yellow-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="gap-patch">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="gap-patch">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr *ngFor="let class of availableClasses.controls; let i = index">
-            <td>
-              <input type="checkbox" id="{{i}}" [formControl]="class">
-              <label for="{{i}}"></label>
-            </td>
-            <td>{{classes[i].timeSlot}}</td>
-            <td>Tue, April 2, 2018</td>
-            <td>
-              <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
-            </td>
-            <td *ngIf="classes[i].available">Open</td>
-            <td *ngIf="!classes[i].available">Closed</td>
-          </tr>
-        </tbody>
-      </table>
+                </td>
+              </tr>
+              <tr *ngFor="let class of availableClasses.controls; let i = index">
+                <td>
+                  <input type="checkbox" id="{{i}}" [formControl]="class">
+                  <label for="{{i}}"></label>
+                </td>
+                <td>{{classes[i].timeSlot}}</td>
+                <td>Tue, April 2, 2018</td>
+                <td>
+                  <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
+                </td>
+                <td *ngIf="classes[i].available">Open</td>
+                <td *ngIf="!classes[i].available">Closed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="submit-btn-container center">
       <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
