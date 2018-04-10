@@ -1,52 +1,55 @@
 <main>
   <div class="section">
-    <h5>All Students</h5>
-    <table class="centered striped highlight responsive-table">
-      <thead>
-        <th>Full Name</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Skype ID</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr *ngIf="!students">
-          <td colspan="4">
-            <div class="preloader-wrapper active">
-              <div class="spinner-layer spinner-yellow-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
+    <h5 class="title">All Students</h5>
+    <div class="card">
+      <div class="card-content">
+        <table class="centered striped highlight responsive-table">
+          <thead>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Skype ID</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngIf="!students">
+              <td colspan="5">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr *ngFor="let student of students">
-          <td>{{student.firstName}} {{student.lastName}}</td>
-          <td>{{student.username}}</td>
-          <td>{{student.email}}</td>
-          <td>{{student.skypeID}}</td>
-          <td>
-            <a class="waves-effect waves-light red lighten-1 btn" (click)="suspendUser(student._id)" *ngIf="student.active">
-              Suspend
-            </a>
-            <a class="waves-effect waves-light red darken-2 btn disabled" *ngIf="!student.active">
-              Suspended
-            </a>
-            <!-- <a class="waves-effect waves-light green lighten-1 btn" (click)="banAStudent(student._id)" *ngIf="!student.active">
-              Unsuspend
-            </a> -->
-          </td>
-        </tr>
+              </td>
+            </tr>
+            <tr *ngFor="let student of students">
+              <td>{{student.firstName}} {{student.lastName}}</td>
+              <td>{{student.username}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.skypeID}}</td>
+              <td>
+                <a class="waves-effect waves-light red lighten-1 btn" (click)="suspendUser(student._id)" *ngIf="student.active">
+                  Suspend
+                </a>
+                <a class="waves-effect waves-light red darken-2 btn disabled" *ngIf="!student.active">
+                  Suspended
+                </a>
+                <!-- <a class="waves-effect waves-light green lighten-1 btn" (click)="banAStudent(student._id)" *ngIf="!student.active">
+                      Unsuspend
+                    </a> -->
+              </td>
+            </tr>
 
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
 </main>
