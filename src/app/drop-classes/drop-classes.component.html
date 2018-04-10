@@ -12,8 +12,8 @@
 <main>
   <form [formGroup]="form" (submit)="submit(form.value)">
     <div class="section">
-      <h5 class="title">Enrollable Classes</h5>
-      <div class="card">
+      <h5 class="title">Drop Classes</h5>
+      <div class="card ">
         <div class="card-content">
           <table class="centered striped highlight responsive-table">
             <colgroup>
@@ -30,7 +30,7 @@
               <th>Status</th>
             </thead>
             <tbody>
-              <tr *ngIf="!classes">
+              <tr *ngIf="!enrolledClasses">
                 <td colspan="5">
                   <div class="preloader-wrapper active">
                     <div class="spinner-layer spinner-yellow-only">
@@ -47,18 +47,18 @@
                   </div>
                 </td>
               </tr>
-              <tr *ngFor="let class of availableClasses.controls; let i = index">
+              <tr *ngFor="let class of enrolledClassesFormArray.controls; let i = index">
                 <td>
                   <input type="checkbox" id="{{i}}" [formControl]="class">
                   <label for="{{i}}"></label>
                 </td>
-                <td>{{classes[i].timeSlot}}</td>
-                <td>Tue, April 2, 2018</td>
+                <td>{{enrolledClasses[i].timeSlot}}</td>
+                <td>Tue, April 10, 2018</td>
                 <td>
-                  <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
+                  <a (click)="viewTeacher(class.teacher._id)">{{enrolledClasses[i].teacher.firstName + ' ' + enrolledClasses[i].teacher.lastName}}</a>
                 </td>
-                <td *ngIf="classes[i].available">Open</td>
-                <td *ngIf="!classes[i].available">Closed</td>
+                <td *ngIf="class.available">Open</td>
+                <td *ngIf="!class.available">Enrolled</td>
               </tr>
             </tbody>
           </table>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="submit-btn-container center">
-      <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
+      <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Drop</button>
     </div>
   </form>
 </main>

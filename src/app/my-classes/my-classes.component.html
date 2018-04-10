@@ -1,0 +1,59 @@
+<main>
+  <div class="section">
+    <form [formGroup]="form" (submit)="openClass(form.value)">
+      <div class="row">
+        <div class="col s6">
+          <h5 *ngIf="teacher">My Classes</h5>
+        </div>
+        <div class="col s3">
+          <select materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeSlot">
+            <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot">{{timeslot}}</option>
+          </select>
+        </div>
+        <div class="col s3">
+          <button class="btn waves-effect waves-light" type="submit">Open a Class</button>
+        </div>
+      </div>
+    </form>
+    <table class="centered striped highlight responsive-table">
+      <thead>
+        <th>#</th>
+        <th>Timeslot</th>
+        <th>Status</th>
+        <th>Student</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngIf="!classes">
+          <td colspan="5">
+            <div class="preloader-wrapper active">
+              <div class="spinner-layer spinner-yellow-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngFor="let class of classes; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{class.timeSlot}}</td>
+          <td *ngIf="class.available">Open</td>
+          <td *ngIf="!class.available">Closed</td>
+          <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
+          <td *ngIf="!class.student">n/a</td>
+          <td>
+            <button class="btn waves-effect waves-light" (click)="closeClass(class._id)">Delete Class</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>

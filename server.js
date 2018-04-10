@@ -17,8 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
-var api = require('./server/routes/api');
-
 var adminAuthRoutes = require('./server/routes/endpoints/admin/_auth/routes');
 var adminUserRoutes = require('./server/routes/endpoints/admin/_user/routes');
 var adminAdminRoutes = require('./server/routes/endpoints/admin/_admin/routes');
