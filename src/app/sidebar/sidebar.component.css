@@ -6,6 +6,6 @@ li.active {
   background-color: #fdd835
 }
 
-.side-nav.fixed{
+.side-nav{
   top: 64px;
 }

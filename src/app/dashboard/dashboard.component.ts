@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  showSidebar: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -20,7 +21,11 @@ export class DashboardComponent implements OnInit {
 
   greetings() {
     const user = JSON.parse(localStorage.getItem('loggedUser'));
-    return `Hello ${user.firstName} ${user.lastName}!`;
+    return `${user.username}`;
   }
 
+
+  toggleSidebar() {
+    this.showSidebar = this.showSidebar ? false : true;
+  }
 }

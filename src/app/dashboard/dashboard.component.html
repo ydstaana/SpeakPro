@@ -1,21 +1,36 @@
-<nav class="blue lighten-2 z-depth-0">
-  <div class="nav-wrapper container">
-    <img class="logo" src="assets/images/SpeakPRO.png">
-    <ul class="right hide-on-med-and-down">
-      <li>
-        <a>{{greetings()}}</a>
-      </li>
-      <li>
-        <a class="btn yellow lighten-5 darken-1" (click)="logout()">Logout</a>
-      </li>
-    </ul>
-    <a href="#" data-target="slide-out" class="button-collapse">
-      <i class="material-icons">menu</i>
-    </a>
-  </div>
-</nav>
+<div class="navbar-fixed">
+  <nav class="blue lighten-2 z-depth-0">
+    <div class="nav-wrapper">
+      <ul>
+        <li>
+          <a materialize="sideNav" [materializeParams]="[{edge:'left', preventScrolling: false, draggable: false}]"
+              data-activates="slide-out" (click)="toggleSidebar()">
+            <i class="material-icons">menu</i>
+          </a>
+        </li>
+      </ul>
+      <img class="logo" src="assets/images/SpeakPRO.png">
+      <ul class="right hide-on-med-and-down">
+        <li class="logged-user">{{greetings()}}</li>
+        <li>
+          <a>
+            <i class="material-icons">notifications_none</i>
+          </a>
+        </li>
+        <li>
+          <a>
+            <i class="material-icons">more_vert</i>
+          </a>
+        </li>
+      </ul>
+      <a href="#" data-target="slide-out" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
 <app-sidebar> </app-sidebar>
 
-<main class="dashboard-content">
+<main class="dashboard-content container" [ngClass]="{'sidebar-toggled': showSidebar}">
   <router-outlet></router-outlet>
 </main>

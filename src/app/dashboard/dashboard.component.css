@@ -3,8 +3,14 @@
   padding: 0.5px 0px;
 }
 
-.dashboard-content{
+.sidebar-toggled{
   margin-left: 300px;
-  padding: 1.5%;
+  padding: 0 3%;
   width: calc(100% - 300px);
 }
+
+.logged-user{
+  font-weight: bold;
+  padding: 0 20px;
+}
+
