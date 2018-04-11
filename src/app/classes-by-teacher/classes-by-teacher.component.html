@@ -1,37 +1,56 @@
 <main>
   <div class="section">
-    <h5 *ngIf="teacher">All Classes of {{teacher.firstName}} {{teacher.lastName}}</h5>
-    <table class="centered highlight responsive-table">
-      <thead>
-        <th>Timeslot</th>
-        <th>Status</th>
-      </thead>
-      <tbody>
-        <tr *ngIf="!classes">
-          <td colspan="4">
-            <div class="preloader-wrapper active">
-              <div class="spinner-layer spinner-yellow-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
+    <h5>
+      <span *ngIf="teacher">All Classes of {{teacher.firstName}} {{teacher.lastName}}</span>
+      <span *ngIf="!teacher">&nbsp;</span>
+    </h5>
+    <div class="card">
+      <div class="card-content">
+        <table class="centered highlight responsive-table">
+          <thead>
+            <th>#</th>
+            <th>Timeslot</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Student</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngIf="!classes">
+              <td colspan="5">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="gap-patch">
-                  <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr *ngFor="let class of classes; let i = index">
-            <td>{{class.timeSlot}}</td>
-            <td *ngIf="class.available">Open</td>
-            <td *ngIf="!class.available">Closed</td>
-
-        </tr>
-      </tbody>
-    </table>
+              </td>
+            </tr>
+            <tr *ngFor="let class of classes; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{class.timeSlot}}</td>
+              <td>Tue, April 10, 2018</td>
+              <td *ngIf="class.available">Open</td>
+              <td *ngIf="!class.available">Closed</td>
+              <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
+              <td *ngIf="!class.student">n/a</td>
+            </tr>
+            <tr class="empty-table" *ngIf="classes && classes.length === 0">
+              <td colspan="5">
+                No classes available
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 </main>

@@ -47,6 +47,11 @@
                   </div>
                 </td>
               </tr>
+              <tr class="empty-table" *ngIf="enrolledClasses && enrolledClasses.length === 0">
+                <td colspan="5">
+                  No classes available
+                </td>
+              </tr>
               <tr *ngFor="let class of enrolledClassesFormArray.controls; let i = index">
                 <td>
                   <input type="checkbox" id="{{i}}" [formControl]="class">

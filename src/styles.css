@@ -28,6 +28,10 @@ tr:last-child {
   border-bottom: 0px;
 }
 
+.empty-table{
+  height: 67px;
+}
+
 .td-1 {
   width: 10%;
 }
