@@ -33,20 +33,6 @@
   margin-bottom: 0px;
   height: 68px !important;
 }
-/** TABLE STYLES **/
-
-table {
-  width: 100%;
-  table-layout: fixed;
-}
-
-th {
-  text-align: center;
-}
-
-.td-1 {
-  width: 5%;
-}
 
 /* CHECKBOX STYLES */
 
