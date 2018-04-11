@@ -3,8 +3,8 @@
     <div class="nav-wrapper">
       <ul>
         <li>
-          <a materialize="sideNav" [materializeParams]="[{edge:'left', preventScrolling: false, draggable: false}]"
-              data-activates="slide-out" (click)="toggleSidebar()">
+          <a materialize="sideNav" [materializeParams]="[{edge:'left', preventScrolling: false, draggable: false}]" data-activates="slide-out"
+            (click)="toggleSidebar()">
             <i class="material-icons">menu</i>
           </a>
         </li>
@@ -18,9 +18,18 @@
           </a>
         </li>
         <li>
-          <a>
+          <a materialize="dropdown" data-activates='navbar-dropdown'>
             <i class="material-icons">more_vert</i>
           </a>
+          <ul id='navbar-dropdown' class='dropdown-content'>
+            <li>
+              <a routerLink="/dashboard/edit-profile">Edit Profile</a>
+            </li>
+            <li class="divider"></li>
+            <li (click)="logout()">
+              <a>Logout</a>
+            </li>
+          </ul>
         </li>
       </ul>
       <a href="#" data-target="slide-out" class="button-collapse">
