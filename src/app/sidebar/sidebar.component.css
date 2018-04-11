@@ -9,3 +9,7 @@ li.active {
 .side-nav{
   top: 64px;
 }
+
+.side-nav > li > a > i.material-icons{
+  margin-right: 10px;
+}
