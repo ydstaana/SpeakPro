@@ -40,7 +40,9 @@ UserSchema.statics.authenticate = function (username, password, callback) {
         if (result === true) {
           return callback(null, user);
         } else {
-          return callback();
+          var err = new Error('Incorrect username/password');
+          err.status = 401;
+          return callback(err);
         }
       })
     });
@@ -49,13 +51,20 @@ UserSchema.statics.authenticate = function (username, password, callback) {
 //hashing a password before saving it to the database
 UserSchema.pre('save', function (next) {
   var user = this;
-  bcrypt.hash(user.password, 10, function (err, hash){
-    if (err) {
-      return next(err);
-    }
-    user.password = hash;
+  if(user.password != "" || user.password != undefined){
+    console.log(user.password);
+    bcrypt.hash(user.password, 10, function (err, hash){
+      if (err) {
+        return next(err);
+      }
+      user.password = hash;
+      next();
+    })
+  }
+  else{
     next();
-  })
+  }
+  
 });
 
 
