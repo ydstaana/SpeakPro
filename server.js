@@ -37,6 +37,7 @@ app.use(adminStudentRoutes);
 app.use(adminTeacherRoutes);
 app.use(adminClassesRoutes);
 
+app.get('/uploads', express.static(path.join(__dirname, './uploads')))
 
 
 app.use(function(req, res, next) {
