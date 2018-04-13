@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Sched } from '../model/sched';
 
@@ -8,7 +9,7 @@ export class ClassService {
   private cart: any = undefined;
 
   constructor(private http: HttpClient) {
-
+    
   }
 
   setCart(cart){
@@ -20,19 +21,26 @@ export class ClassService {
   }
 
   getAvailableClasses() {
-    return this.http.get<Sched[]>('http://localhost:3000/classes/available')
-      .pipe();
+    var token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.get('http://localhost:3000/classes/available', httpOptions).pipe();
+    
   }
 
   addClass(classes: String[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
     return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes)
       .pipe();
   }
 
   dropClasses(dropClasses: String[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
     return this.http.request('post', `http://localhost:3000/classes/student/${userId}/drop`, { body: dropClasses })
       .pipe();
