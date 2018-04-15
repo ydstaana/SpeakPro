@@ -20,12 +20,17 @@
       <a class="black-text" routerLink="/dashboard/all-teachers">
         <i class="material-icons">school</i>All Teachers</a>
     </li>
+    <li routerLinkActive="active" *ngIf="isStudent()">
+      <a class="black-text" routerLink="/dashboard/download-materials">Materials and Modules
+        <i class="material-icons">library_books</i>
+      </a>
+    </li>
     <li routerLinkActive="active" *ngIf="isTeacher() || isAdmin()">
       <a class="black-text" routerLink="/dashboard/teacher/my-classes">
         <i class="material-icons">event</i>My Classes</a>
     </li>
-    <li routerLinkActive="active" *ngIf="isStudent()">
-      <a class="black-text" routerLink="/dashboard/download-materials">Materials and Modules
+    <li routerLinkActive="active" *ngIf="isTeacher() || isAdmin()">
+      <a class="black-text" routerLink="/dashboard/teacher/my-materials">Materials and Modules
         <i class="material-icons">library_books</i>
       </a>
     </li>
