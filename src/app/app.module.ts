@@ -16,7 +16,7 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -26,6 +26,7 @@ import { ClassesByTeacherComponent } from './classes-by-teacher/classes-by-teach
 import { DropClassesComponent } from './drop-classes/drop-classes.component';
 import { MyClassesComponent } from './my-classes/my-classes.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AppInterceptor } from './app.interceptor';
 
 
 
@@ -63,7 +64,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
           { path: 'teacher/my-classes', component: MyClassesComponent },
           { path: 'edit-profile', component: EditProfileComponent },
           { path: 'add-classes', component: AddClassesComponent },
-          { path: 'checkout', component: CheckoutComponent},
+          { path: 'checkout', component: CheckoutComponent },
           { path: 'drop-classes', component: DropClassesComponent },
           { path: 'teachers/:id', component: ClassesByTeacherComponent },
           { path: 'all-students', component: AllStudentsComponent },
@@ -77,6 +78,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
   providers: [
     ClassService,
     UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
