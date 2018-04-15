@@ -1,3 +1,4 @@
+import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ import { DropClassesComponent } from './drop-classes/drop-classes.component';
 import { MyClassesComponent } from './my-classes/my-classes.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AppInterceptor } from './app.interceptor';
+import { StudentGuard } from './student.guard';
 
 
 
@@ -61,14 +63,19 @@ import { AppInterceptor } from './app.interceptor';
       { path: 'student-profile', component: StudentProfileComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
-          { path: 'teacher/my-classes', component: MyClassesComponent },
           { path: 'edit-profile', component: EditProfileComponent },
-          { path: 'add-classes', component: AddClassesComponent },
-          { path: 'checkout', component: CheckoutComponent },
-          { path: 'drop-classes', component: DropClassesComponent },
+          { path: 'my-schedule', component: MyClassesComponent, canActivate: [StudentGuard] },
+          { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard] },
+          { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard] },
+          { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard] },
+
+
+
           { path: 'teachers/:id', component: ClassesByTeacherComponent },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
+
+          { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard] },
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -78,6 +85,8 @@ import { AppInterceptor } from './app.interceptor';
   providers: [
     ClassService,
     UserService,
+    TeacherGuard,
+    StudentGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
