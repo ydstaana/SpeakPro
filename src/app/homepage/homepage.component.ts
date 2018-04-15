@@ -64,18 +64,27 @@ export class HomepageComponent implements OnInit {
       );
   }
 
-  login(credentials) {
+login(credentials) {
     this.userService.login(credentials)
       .subscribe((response: any) => {
         if (response) {
-          const { password, ...loggedUser } = response;
-          window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+          const { token, ...loggedUser } = response;
+         
+          window.localStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard/add-classes']);
+          this.tokenTry();
         }
         else{
           alert('Error. Please try again.');
         }
+
+
       });
   }
+
+tokenTry(){
+  var loggedUser = this.userService.getDecodedAccessToken(window.localStorage.getItem('token'));
+  window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+}
 
 }

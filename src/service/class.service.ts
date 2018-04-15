@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Sched } from '../model/sched';
 
@@ -11,28 +12,28 @@ export class ClassService {
 
   }
 
-  setCart(cart){
+  setCart(cart) {
     this.cart = cart;
   }
 
-  getCart(){
+  getCart() {
     return this.cart;
   }
 
   getAvailableClasses() {
-    return this.http.get<Sched[]>('http://localhost:3000/classes/available')
-      .pipe();
+    return this.http.get('http://localhost:3000/classes/available').pipe();
+
   }
 
   addClass(classes: String[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
     return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes)
       .pipe();
   }
 
   dropClasses(dropClasses: String[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
     return this.http.request('post', `http://localhost:3000/classes/student/${userId}/drop`, { body: dropClasses })
       .pipe();

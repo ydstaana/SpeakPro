@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as jwt_decode from "jwt-decode";
 import { User } from '../model/user';
 import { Sched } from '../model/sched';
 
@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getEnrolledClass() {
-    const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
     return this.http.get(`http://localhost:3000/classes/student/${userId}`)
       .pipe();
   }
@@ -31,6 +31,15 @@ export class UserService {
   login(credentials) {
     return this.http.post(`http://localhost:3000/users/login`, { username: credentials.username, password: credentials.password, })
       .pipe();
+  }
+
+  getDecodedAccessToken(token: string) {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
   }
 
   getAllUsers() {
