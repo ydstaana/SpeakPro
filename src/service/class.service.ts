@@ -9,27 +9,20 @@ export class ClassService {
   private cart: any = undefined;
 
   constructor(private http: HttpClient) {
-    
+
   }
 
-  setCart(cart){
+  setCart(cart) {
     this.cart = cart;
   }
 
-  getCart(){
+  getCart() {
     return this.cart;
   }
 
   getAvailableClasses() {
-    var token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.get('http://localhost:3000/classes/available', httpOptions).pipe();
-    
+    return this.http.get('http://localhost:3000/classes/available').pipe();
+
   }
 
   addClass(classes: String[]) {
