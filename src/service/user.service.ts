@@ -18,13 +18,13 @@ export class UserService {
   }
 
   editProfile(formValue: User, username: String) {
-    return this.http.put<User>(`http://localhost:3000/users/${username}`, formValue)
+    return this.http.put<User>(`http://localhost:3000/users/${username}`, formValue, { headers: this.getHeaders() })
       .pipe();
   }
 
   getEnrolledClass() {
     const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
-    return this.http.get(`http://localhost:3000/classes/student/${userId}`)
+    return this.http.get(`http://localhost:3000/classes/student/${userId}`, { headers: this.getHeaders() })
       .pipe();
   }
 
@@ -34,37 +34,42 @@ export class UserService {
   }
 
   getDecodedAccessToken(token: string) {
-    try{
-        return jwt_decode(token);
+    try {
+      return jwt_decode(token);
     }
-    catch(Error){
-        return null;
+    catch (Error) {
+      return null;
     }
   }
 
   getAllUsers() {
-    return this.http.get('http://localhost:3000/users')
+    return this.http.get('http://localhost:3000/users', { headers: this.getHeaders() })
       .pipe();
   }
 
   getAllStudents() {
-    return this.http.get('http://localhost:3000/students')
+    return this.http.get('http://localhost:3000/students', { headers: this.getHeaders() })
       .pipe();
   }
 
   getAllTeachers() {
-    return this.http.get('http://localhost:3000/teachers')
+    return this.http.get('http://localhost:3000/teachers', { headers: this.getHeaders() })
       .pipe();
   }
 
   getUserById(userId) {
-    return this.http.get(`http://localhost:3000/users/${userId}`)
+    return this.http.get(`http://localhost:3000/users/${userId}`, { headers: this.getHeaders() })
       .pipe();
   }
 
   suspendUser(userId) {
-    return this.http.post(`http://localhost:3000/admin/${userId}`, {})
+    return this.http.post(`http://localhost:3000/admin/${userId}`, {}, { headers: this.getHeaders() })
       .pipe();
+  }
+
+  getHeaders() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({ 'Authorization': token });
   }
 }
 
