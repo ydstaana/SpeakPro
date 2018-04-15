@@ -30,6 +30,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AppInterceptor } from './app.interceptor';
 import { StudentGuard } from './student.guard';
 import { SessionGuard } from './session.guard';
+import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 
 
 
@@ -50,6 +51,7 @@ import { SessionGuard } from './session.guard';
     DropClassesComponent,
     MyClassesComponent,
     CheckoutComponent,
+    MyScheduleComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ import { SessionGuard } from './session.guard';
       {
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent, canActivate: [SessionGuard] },
-          { path: 'my-schedule', component: MyClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'my-schedule', component: MyScheduleComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard, SessionGuard] },
