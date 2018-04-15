@@ -1,7 +1,7 @@
 import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, CanActivate } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -29,6 +29,7 @@ import { MyClassesComponent } from './my-classes/my-classes.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AppInterceptor } from './app.interceptor';
 import { StudentGuard } from './student.guard';
+import { SessionGuard } from './session.guard';
 
 
 
@@ -63,19 +64,19 @@ import { StudentGuard } from './student.guard';
       { path: 'student-profile', component: StudentProfileComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
-          { path: 'edit-profile', component: EditProfileComponent },
-          { path: 'my-schedule', component: MyClassesComponent, canActivate: [StudentGuard] },
-          { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard] },
-          { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard] },
-          { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard] },
+          { path: 'edit-profile', component: EditProfileComponent, canActivate: [SessionGuard] },
+          { path: 'my-schedule', component: MyClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard, SessionGuard] },
 
 
 
-          { path: 'teachers/:id', component: ClassesByTeacherComponent },
+          { path: 'teachers/:id', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
 
-          { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard] },
+          { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -87,6 +88,7 @@ import { StudentGuard } from './student.guard';
     UserService,
     TeacherGuard,
     StudentGuard,
+    SessionGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
