@@ -8,7 +8,7 @@ export class TeacherGuard implements CanActivate {
 
   canActivate(): boolean {
     const user = JSON.parse(localStorage.getItem('loggedUser'));
-    if (user.userType === 'TEACHER') return true;
+    if (user.userType === 'TEACHER' || user.userType === 'ADMIN') return true;
     this.router.navigate(['/dashboard/my-schedule']);
     return false;
   }
