@@ -67,6 +67,16 @@ export class UserService {
       .pipe();
   }
 
+  getAvailableMaterials() {
+    return this.http.get('http://localhost:3000/uploads', { headers: this.getHeaders() })
+      .pipe();
+  }
+
+  downloadFile(filename) {
+    return this.http.get(`http://localhost:3000/download/${filename}`, { headers: this.getHeaders() })
+      .pipe();
+  }
+
   getHeaders() {
     const token = localStorage.getItem('token');
     return new HttpHeaders({ 'Authorization': token });

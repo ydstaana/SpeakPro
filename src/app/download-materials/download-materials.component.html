@@ -1,0 +1,53 @@
+<main>
+  <div class="section">
+    <h5 class="title">Available Materials</h5>
+    <div class="card">
+      <div class="card-content">
+        <table class="centered highlight responsive-table">
+          <thead>
+            <th>Filename</th>
+            <th>Author</th>
+            <th>Upload Date</th>
+            <th>Modified Date</th>
+            <th>File Size</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngIf="!files">
+              <td colspan="6">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-yellow-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr class="empty-table" *ngIf="files && files.length === 0">
+              <td colspan="6">
+                No materials available
+              </td>
+            </tr>
+            <tr *ngFor="let file of files; let i = index">
+              <td class="word-wrap">{{file}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td (click)="download(file)">
+                <a><i class="material-icons">file_download</i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
