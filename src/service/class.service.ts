@@ -45,12 +45,12 @@ export class ClassService {
   }
 
   openClass(newClass) {
-    return this.http.post('http://localhost:3000/classes', newClass)
+    return this.http.request('post', 'http://localhost:3000/classes', { body: newClass, headers: this.getHeaders() })
       .pipe();
   }
 
   closeClass(classId) {
-    return this.http.request('delete', `http://localhost:3000/classes/${classId}`)
+    return this.http.request('delete', `http://localhost:3000/classes/${classId}`, { headers: this.getHeaders() })
       .pipe();
   }
 

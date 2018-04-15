@@ -21,7 +21,7 @@ export class MyClassesComponent implements OnInit {
 
   ngOnInit() {
     this.teacher = JSON.parse(localStorage.getItem('loggedUser'));
-    this.getClasses(this.teacher._id);
+    this.getClasses(this.teacher.id);
     this.createForm();
   }
 
@@ -29,7 +29,7 @@ export class MyClassesComponent implements OnInit {
     this.form = this.fb.group({
       timeSlot: ['7:00 AM - 8:00 AM', Validators.required],
       date: ['01/01/2018'],
-      teacher: [this.teacher._id],
+      teacher: [this.teacher.id],
       student: [null],
       available: [true]
     });
@@ -51,7 +51,7 @@ export class MyClassesComponent implements OnInit {
         if (prompt === true) {
           alert('Successfully opened a class');
           this.classes = null;
-          this.getClasses(this.teacher._id);
+          this.getClasses(this.teacher.id);
         }
       })
   }
@@ -63,7 +63,7 @@ export class MyClassesComponent implements OnInit {
         .subscribe(response => {
           alert('Successfully closed a class');
           this.classes = null;
-          this.getClasses(this.teacher._id);
+          this.getClasses(this.teacher.id);
         })
     }
 
