@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
+var cors = require('cors')
 const jwt = require('jsonwebtoken');
 
 var secret = "speakpro"
 
-router.use(function(req, res, next) {
-//set headers to allow cross origin request.
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, My-Header");
-    next();
-});
-
+router.use(cors());
 
 /* GET api listing. */
 router.get('/', (req, res) => {
