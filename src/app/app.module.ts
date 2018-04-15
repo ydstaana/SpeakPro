@@ -87,7 +87,6 @@ import { StudentGuard } from './student.guard';
     UserService,
     TeacherGuard,
     StudentGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
