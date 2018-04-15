@@ -32,6 +32,7 @@ import { StudentGuard } from './student.guard';
 import { SessionGuard } from './session.guard';
 import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
+import { MyMaterialsComponent } from './my-materials/my-materials.component';
 
 
 
@@ -54,6 +55,7 @@ import { DownloadMaterialsComponent } from './download-materials/download-materi
     CheckoutComponent,
     MyScheduleComponent,
     DownloadMaterialsComponent,
+    MyMaterialsComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +84,7 @@ import { DownloadMaterialsComponent } from './download-materials/download-materi
           { path: 'all-teachers', component: AllTeachersComponent },
 
           { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
+          { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard] }
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
