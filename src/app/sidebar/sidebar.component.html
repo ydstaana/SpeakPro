@@ -24,8 +24,8 @@
       <a class="black-text" routerLink="/dashboard/teacher/my-classes">
         <i class="material-icons">event</i>My Classes</a>
     </li>
-    <li routerLinkActive="active">
-      <a class="black-text">Materials and Modules
+    <li routerLinkActive="active" *ngIf="isStudent()">
+      <a class="black-text" routerLink="/dashboard/download-materials">Materials and Modules
         <i class="material-icons">library_books</i>
       </a>
     </li>

@@ -31,6 +31,7 @@ import { AppInterceptor } from './app.interceptor';
 import { StudentGuard } from './student.guard';
 import { SessionGuard } from './session.guard';
 import { MyScheduleComponent } from './my-schedule/my-schedule.component';
+import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
 
 
 
@@ -52,6 +53,7 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
     MyClassesComponent,
     CheckoutComponent,
     MyScheduleComponent,
+    DownloadMaterialsComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,7 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
           { path: 'my-schedule', component: MyScheduleComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'download-materials', component: DownloadMaterialsComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard, SessionGuard] },
 
 
