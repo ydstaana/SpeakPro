@@ -1,25 +1,33 @@
 <nav>
   <ul id="slide-out" class="side-nav grey lighten-3">
-    <li routerLinkActive="active">
-      <a class="black-text"><i class="material-icons">event_note</i> My Schedule</a>
+    <li routerLinkActive="active" *ngIf="isStudent()">
+      <a class="black-text" routerLink="/dashboard/my-schedule">
+        <i class="material-icons">event_note</i> My Schedule</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="isStudent()">
+      <a class="black-text" routerLink="/dashboard/add-classes">
+        <i class="material-icons">event_available</i> Enroll Classes</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="isStudent()">
+      <a class="black-text" routerLink="/dashboard/drop-classes">
+        <i class="material-icons">event_busy</i> Drop Classes</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="isAdmin()">
+      <a class="black-text" routerLink="/dashboard/all-students">
+        <i class="material-icons">local_library</i>All Students</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="isAdmin()">
+      <a class="black-text" routerLink="/dashboard/all-teachers">
+        <i class="material-icons">school</i>All Teachers</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="isTeacher() || isAdmin()">
+      <a class="black-text" routerLink="/dashboard/teacher/my-classes">
+        <i class="material-icons">event</i>My Classes</a>
     </li>
     <li routerLinkActive="active">
-      <a class="black-text" routerLink="/dashboard/add-classes"><i class="material-icons">event_available</i> Enroll Classes</a>
-    </li>
-    <li routerLinkActive="active">
-      <a class="black-text" routerLink="/dashboard/drop-classes"><i class="material-icons">event_busy</i> Drop Classes</a>
-    </li>
-    <li routerLinkActive="active">
-      <a class="black-text" routerLink="/dashboard/all-students"><i class="material-icons">local_library</i>All Students</a>
-    </li>
-    <li routerLinkActive="active">
-      <a class="black-text" routerLink="/dashboard/all-teachers"><i class="material-icons">school</i>All Teachers</a>
-    </li>
-    <li routerLinkActive="active">
-      <a class="black-text" routerLink="/dashboard/teacher/my-classes"><i class="material-icons">event</i>My Classes</a>
-    </li>
-    <li routerLinkActive="active">
-      <a class="black-text">Materials and Modules <i class="material-icons">library_books</i> </a>
+      <a class="black-text">Materials and Modules
+        <i class="material-icons">library_books</i>
+      </a>
     </li>
   </ul>
 </nav>
