@@ -14,7 +14,7 @@ const open_class = require('./_v/_v1/open_class');
 const close_class = require('./_v/_v1/close_class');
 
 router.get('/classes', core.verifyToken, get_all_classes);
-router.get('/classes/available', core.verifyToken, get_all_available_classes);
+router.get('/classes/availaxble', core.verifyToken, get_all_available_classes);
 router.get('/classes/teacher/:id', core.verifyToken, get_teachers_classes);
 router.get('/classes/teacher/:id/available', core.verifyToken, get_teachers_available_classes);
 router.get('/classes/student/:id', core.verifyToken, get_classes_of_student);
