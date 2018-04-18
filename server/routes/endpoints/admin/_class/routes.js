@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const core = require('../../services/core');
 
 const get_all_classes = require('./_v/_v1/get_all_classes');
 const get_all_available_classes = require('./_v/_v1/get_all_available_classes');
@@ -12,16 +13,16 @@ const get_student_in_class = require('./_v/_v1/get_student_in_class');
 const open_class = require('./_v/_v1/open_class');
 const close_class = require('./_v/_v1/close_class');
 
-router.get('/classes', get_all_classes);
-router.get('/classes/available', get_all_available_classes);
-router.get('/classes/teacher/:id', get_teachers_classes);
-router.get('/classes/teacher/:id/available', get_teachers_available_classes);
-router.get('/classes/student/:id', get_classes_of_student);
-router.get('/classes/:id/student', get_student_in_class);
-router.post('/classes/student/:id' ,add_class);
-router.post('/classes/student/:id/drop', drop_class);
-router.post('/classes', open_class);
-router.delete('/classes/:id', close_class);
+router.get('/classes', core.verifyToken, get_all_classes);
+router.get('/classes/available', core.verifyToken, get_all_available_classes);
+router.get('/classes/teacher/:id', core.verifyToken, get_teachers_classes);
+router.get('/classes/teacher/:id/available', core.verifyToken, get_teachers_available_classes);
+router.get('/classes/student/:id', core.verifyToken, get_classes_of_student);
+router.get('/classes/:id/student', core.verifyToken, get_student_in_class);
+router.post('/classes/student/:id' , core.verifyToken, add_class);
+router.post('/classes/student/:id/drop', core.verifyToken, drop_class);
+router.post('/classes', core.verifyToken, open_class);
+router.delete('/classes/:id', core.verifyToken, close_class);
 
 
 module.exports = router;

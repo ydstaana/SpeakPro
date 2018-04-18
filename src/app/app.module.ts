@@ -1,6 +1,7 @@
+import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, CanActivate } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from 'angular2-materialize';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -27,6 +28,11 @@ import { DropClassesComponent } from './drop-classes/drop-classes.component';
 import { MyClassesComponent } from './my-classes/my-classes.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AppInterceptor } from './app.interceptor';
+import { StudentGuard } from './student.guard';
+import { SessionGuard } from './session.guard';
+import { MyScheduleComponent } from './my-schedule/my-schedule.component';
+import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
+import { MyMaterialsComponent } from './my-materials/my-materials.component';
 
 
 
@@ -47,6 +53,9 @@ import { AppInterceptor } from './app.interceptor';
     DropClassesComponent,
     MyClassesComponent,
     CheckoutComponent,
+    MyScheduleComponent,
+    DownloadMaterialsComponent,
+    MyMaterialsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,14 +70,21 @@ import { AppInterceptor } from './app.interceptor';
       { path: 'student-profile', component: StudentProfileComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
-          { path: 'teacher/my-classes', component: MyClassesComponent },
-          { path: 'edit-profile', component: EditProfileComponent },
-          { path: 'add-classes', component: AddClassesComponent },
-          { path: 'checkout', component: CheckoutComponent },
-          { path: 'drop-classes', component: DropClassesComponent },
-          { path: 'teachers/:id', component: ClassesByTeacherComponent },
+          { path: 'edit-profile', component: EditProfileComponent, canActivate: [SessionGuard] },
+          { path: 'my-schedule', component: MyScheduleComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'add-classes', component: AddClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'download-materials', component: DownloadMaterialsComponent, canActivate: [StudentGuard, SessionGuard] },
+          { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard, SessionGuard] },
+
+
+
+          { path: 'teachers/:id', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
+
+          { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
+          { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard] }
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -78,7 +94,9 @@ import { AppInterceptor } from './app.interceptor';
   providers: [
     ClassService,
     UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+    TeacherGuard,
+    StudentGuard,
+    SessionGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

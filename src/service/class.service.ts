@@ -21,36 +21,36 @@ export class ClassService {
   }
 
   getAvailableClasses() {
-    return this.http.get('http://localhost:3000/classes/available').pipe();
+    return this.http.get('http://localhost:3000/classes/available', { headers: this.getHeaders() }).pipe();
 
   }
 
   addClass(classes: String[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
-    return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes)
+    return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
       .pipe();
   }
 
   dropClasses(dropClasses: String[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
-    return this.http.request('post', `http://localhost:3000/classes/student/${userId}/drop`, { body: dropClasses })
+    return this.http.request('post', `http://localhost:3000/classes/student/${userId}/drop`, { body: dropClasses, headers: this.getHeaders() })
       .pipe();
   }
 
   getAllClassesByTeacher(teacherId) {
-    return this.http.get(`http://localhost:3000/classes/teacher/${teacherId}`)
+    return this.http.get(`http://localhost:3000/classes/teacher/${teacherId}`, { headers: this.getHeaders() })
       .pipe();
   }
 
   openClass(newClass) {
-    return this.http.post('http://localhost:3000/classes', newClass)
+    return this.http.request('post', 'http://localhost:3000/classes', { body: newClass, headers: this.getHeaders() })
       .pipe();
   }
 
   closeClass(classId) {
-    return this.http.request('delete', `http://localhost:3000/classes/${classId}`)
+    return this.http.request('delete', `http://localhost:3000/classes/${classId}`, { headers: this.getHeaders() })
       .pipe();
   }
 
@@ -60,4 +60,8 @@ export class ClassService {
   //     .pipe();
   // }
 
+  getHeaders() {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({ 'Authorization': token });
+  }
 }

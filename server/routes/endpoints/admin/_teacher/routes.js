@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 
-
+const core = require('../../services/core');
 const get_all_teachers = require('./_v/_v1/get_all_teachers');
 const download = require('./_v/_v1/download');
 const upload_files = require('./_v/_v1/upload_files');
@@ -20,7 +20,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-router.post('/upload', upload.array('avatar',12), function (req, res, next) {
+router.post('/upload', upload.array('avatar', 12), core.verifyToken, function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   res.json(req.files);
@@ -28,10 +28,10 @@ router.post('/upload', upload.array('avatar',12), function (req, res, next) {
 });
 
 
-router.get('/teachers', get_all_teachers);
-router.get('/download/:filename', download);
-router.get('/uploads', view_files);
-router.post('/uploads', upload_files);
+router.get('/teachers', core.verifyToken, get_all_teachers);
+router.get('/download/:filename', core.verifyToken, download);
+router.get('/uploads', core.verifyToken, view_files);
+router.post('/uploads', core.verifyToken, upload_files);
 
 
 module.exports = router;
