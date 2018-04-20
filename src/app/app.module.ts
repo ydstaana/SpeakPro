@@ -33,7 +33,8 @@ import { SessionGuard } from './session.guard';
 import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
 import { MyMaterialsComponent } from './my-materials/my-materials.component';
-
+import { UploadService } from '../service/upload.service';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { MyMaterialsComponent } from './my-materials/my-materials.component';
     HttpModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RoundProgressModule,
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
       { path: 'student-profile', component: StudentProfileComponent },
@@ -94,6 +96,7 @@ import { MyMaterialsComponent } from './my-materials/my-materials.component';
   providers: [
     ClassService,
     UserService,
+    UploadService,
     TeacherGuard,
     StudentGuard,
     SessionGuard,
