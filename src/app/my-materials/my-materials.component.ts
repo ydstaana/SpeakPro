@@ -69,8 +69,8 @@ export class MyMaterialsComponent implements OnInit {
 
   /* Fetches uploaded materials */
   getAvailableMaterials() {
-    this.userService.getAvailableMaterials()
-      .subscribe((response: any[]) => this.availableFiles = response);
+    this.userService.getAvailableMaterialsById(this.loggedUser.id)
+      .subscribe((response: any) => this.availableFiles = response.data);
   }
 
 
