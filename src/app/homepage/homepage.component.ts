@@ -69,7 +69,7 @@ login(credentials) {
       .subscribe((response: any) => {
         if (response) {
           const { token, ...loggedUser } = response;
-         
+          console.log(response);
           window.localStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard/add-classes']);
           this.tokenTry();

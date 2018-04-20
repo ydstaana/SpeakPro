@@ -11,7 +11,8 @@ var UserSchema = new mongoose.Schema({
 	skypeID: String,
 
 	userType: String,
-	schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
+  schedule: [{type: mongoose.Schema.ObjectId, ref: 'Sched', default: []}],
+	classCodes: [{type: Number, default: []}],
 
 	newUser: Boolean,
   active: Boolean
