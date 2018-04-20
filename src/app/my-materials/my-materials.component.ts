@@ -4,6 +4,7 @@ import { UserService } from '../../service/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
 import { toast } from 'angular2-materialize';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-my-materials',
@@ -79,7 +80,7 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress[index] = Math.round(100 * event.loaded / event.total);
     }
     else if (event.type === HttpEventType.Response) {
-      toast(`You have successfully uploaded. ${filename}`, 2000)
+      toast(`You have successfully uploaded ${filename}`, 2000)
     }
   }
 
@@ -96,5 +97,8 @@ export class MyMaterialsComponent implements OnInit {
     this.uploadMaterials(selectedFiles, selectedFiles.length); //Calls the upload function
   }
 
-
+  download(fileName) {
+    this.userService.downloadFile(fileName)
+      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+  }
 }

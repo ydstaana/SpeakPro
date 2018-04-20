@@ -73,8 +73,8 @@ export class UserService {
   }
 
   downloadFile(filename) {
-    return this.http.get(`http://localhost:3000/download/${filename}`, { headers: this.getHeaders() })
-      .pipe();
+    const httpOptions = {headers: this.getHeaders(), responseType: 'blob' as 'blob' }
+    return this.http.get(`http://localhost:3000/download/${filename}`, httpOptions)
   }
 
   getHeaders() {
