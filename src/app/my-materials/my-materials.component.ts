@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-my-materials',
@@ -61,7 +62,7 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress.push(0); //Sets the progress of the selected file to zero
 
       this.fileUploadSub = this.uploadService.uploadMaterials(formData)
-        .subscribe(event => this.handleProgress(event, i));
+        .subscribe(event => this.handleProgress(event, i, this.uploadQueue[i].name));
     }
   }
 
@@ -73,9 +74,12 @@ export class MyMaterialsComponent implements OnInit {
 
 
   /* Handles File Upload Progress*/
-  handleProgress(event, index) {
+  handleProgress(event, index, filename) {
     if (event.type === HttpEventType.UploadProgress) {
       this.uploadQueueProgress[index] = Math.round(100 * event.loaded / event.total);
+    }
+    else if (event.type === HttpEventType.Response) {
+      toast(`You have successfully uploaded. ${filename}`, 2000)
     }
   }
 
