@@ -68,7 +68,7 @@ export class UserService {
   }
 
   getAvailableMaterials() {
-    return this.http.get('http://localhost:3000/uploads', { headers: this.getHeaders() })
+    return this.http.get('http://localhost:3000/files', { headers: this.getHeaders() })
       .pipe();
   }
 
