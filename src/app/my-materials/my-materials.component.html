@@ -58,7 +58,7 @@
               <td class="td-center" *ngIf="uploadQueueProgress[i] != 100">
                 <round-progress [current]="uploadQueueProgress[i]" [max]="100" [radius]="20" [color]="'#64B5F6'" [clockwise]="false"></round-progress>
               </td>
-              <td (click)="download(file)" *ngIf="uploadQueueProgress[i] == 100">
+              <td (click)="download(item.name)" *ngIf="uploadQueueProgress[i] == 100">
                 <a class="btn-floating yellow darken-1">
                   <i class="material-icons">file_download</i>
                 </a>
@@ -72,7 +72,7 @@
               <td>{{file.author.firstName}} {{file.author.lastName}}</td>
               <td>{{file.uploadDate | date: 'MMM dd, yyyy HH:mm:ss'}}</td>
               <td>{{uploadService.formatBytes(file.fileSize)}}</td>
-              <td (click)="download(file)">
+              <td (click)="download(file.fileName)">
                 <a class="btn-floating yellow darken-1">
                   <i class="material-icons">file_download</i>
                 </a>
