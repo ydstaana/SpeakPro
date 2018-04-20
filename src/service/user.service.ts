@@ -72,6 +72,12 @@ export class UserService {
       .pipe();
   }
 
+  getAvailableMaterialsById(id) {
+    return this.http.get(`http://localhost:3000/files/${id}`, { headers: this.getHeaders() })
+      .pipe();
+  }
+
+
   downloadFile(filename) {
     const httpOptions = {headers: this.getHeaders(), responseType: 'blob' as 'blob' }
     return this.http.get(`http://localhost:3000/download/${filename}`, httpOptions)
