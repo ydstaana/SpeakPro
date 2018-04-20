@@ -11,6 +11,7 @@ var SchedSchema = new mongoose.Schema({
 		ref: 'User',
 		default : null
 	},
+	code:Number,
 	available : Boolean
 });
 
