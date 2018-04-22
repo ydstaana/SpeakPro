@@ -16,3 +16,29 @@
   text-align: left;
   word-wrap: break-word;
 }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filename-col {
+  width: 30%;
+}
+
+.download-col{
+  width: 10%;
+}
+
+
+#inputFiles{
+  display: none;
+}
+
+
+
+.td-center{
+  display: flex;
+  justify-content: center;
+}
