@@ -6,7 +6,7 @@ const router = express.Router();
 const core = require('../../services/core');
 const get_all_teachers = require('./_v/_v1/get_all_teachers');
 const download = require('./_v/_v1/download');
-const upload_files = require('./_v/_v1/upload_files');
+const upload_files = require('./_v/_v2/upload_files');
 const view_files = require('./_v/_v1/view_uploaded_files');
 
 /*var storage = multer.diskStorage({
