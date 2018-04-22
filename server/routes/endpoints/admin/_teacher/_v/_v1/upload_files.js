@@ -20,7 +20,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
-const fileUpload = pify(upload.array('files_field')); //Promisify upload
+const fileUpload = pify(upload.array('selectedFiles')); //Promisify upload
 
 var uploadFile = async function (req, res) {
   try {
@@ -35,11 +35,15 @@ var uploadFile = async function (req, res) {
    			fileSize: item.size
    		}
    		File.create(newFile, function(err, file){
-   			console.log(file);
+        console.log(file)
    		})
-   	}
+     }
+     res.status(200).json({
+      code: 200,
+      message: 'Successfully uploaded the file'
+    });
   } catch(err) {
-    // An error occurred when uploading 
+    // An error occurred when uploading
     return
   }
 }
