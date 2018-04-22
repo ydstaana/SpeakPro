@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 
 var FileSchema = new mongoose.Schema({
 	fileName : String,
+	displayName:String,
 	author: {
 		type : mongoose.Schema.Types.ObjectId,
 		ref: 'User'
