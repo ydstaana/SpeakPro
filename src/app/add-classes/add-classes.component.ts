@@ -6,6 +6,7 @@ import { Sched } from './../../model/sched';
 import { ClassService } from '../../service/class.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { User } from '../../model/user';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AddClassesComponent implements OnInit {
   classes = null;
   enrolledClasses = null;
   form: FormGroup;
+  student : User;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +31,7 @@ export class AddClassesComponent implements OnInit {
 
   ngOnInit() {
     this.getEnrollableClasses();
+    this.student = JSON.parse(localStorage.getItem('loggedUser'));
   }
 
   compare(otherArray) {
@@ -43,14 +46,21 @@ export class AddClassesComponent implements OnInit {
     let availableClasses: any, enrolledClasses: any;
     forkJoin([this.classService.getAvailableClasses(), this.userService.getEnrolledClass()])
       .subscribe(response => {
+        console.log(response)
         availableClasses = response[0];
         enrolledClasses = response[1];
 
         if (enrolledClasses.length > 0) this.classes = availableClasses.filter(this.compare(enrolledClasses));
         else this.classes = availableClasses;
 
+        
+
+        var conflictClasses = this.classes.filter(myClass => this.student.classCodes.includes(myClass.code))
+        //SET DIFFERENCE OF AVAILABLE CLASSES AND CONFLICT CLASSES 
+        this.classes = this.classes.filter(currClass => conflictClasses.find(sched => sched.code == currClass.code) == undefined);
         this.enrolledClasses = enrolledClasses;
         this.form.setControl('availableClasses', this.buildCheckboxes());
+
       });
 
   }
@@ -87,6 +97,7 @@ export class AddClassesComponent implements OnInit {
   submit(form) {
     const msg = confirm('Are you sure you want to enroll this?');
     if (msg === true) {
+      console.log(form)
       this.bindSelected(form)
         .then((selected) => {
           this.classService.setCart(selected);
