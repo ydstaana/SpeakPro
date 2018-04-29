@@ -16,11 +16,13 @@ export class CheckoutComponent implements OnInit {
   month :any;
   year :any;
   cvc :any;
+  price = 0.00;
 
   constructor(private classService: ClassService, private checkoutService: CheckoutService,private router: Router) { }
 
   ngOnInit() {
     this.cart = this.classService.getCart();
+    this.price = this.cart.length * 6.00;
   }
 
   ngAfterViewInit() {
@@ -29,8 +31,7 @@ export class CheckoutComponent implements OnInit {
 
   on2COready(){
     TCO.loadPubKey('sandbox', function() {
-      console.log("ADA")
-        //TCO.requestToken(successCallback, errorCallback, args);
+
     });​
   }
 
@@ -42,11 +43,13 @@ export class CheckoutComponent implements OnInit {
     var args = {
       sellerId: "901378548",
       publishableKey: "CF3531E4-3895-4E14-8110-3662393C7B6C",
-      ccNo: "4000000000000002",
+      ccNo: this.cardNumber,
       cvv: this.cvc,
       expMonth: this.month,
       expYear: this.year
     };
+
+
     
     TCO.requestToken(data => {
       var params = {
