@@ -23,6 +23,7 @@ var adminAdminRoutes = require('./server/routes/endpoints/admin/_admin/routes');
 var adminStudentRoutes = require('./server/routes/endpoints/admin/_student/routes');
 var adminTeacherRoutes = require('./server/routes/endpoints/admin/_teacher/routes');
 var adminClassesRoutes = require('./server/routes/endpoints/admin/_class/routes');
+var adminFileRoutes = require('./server/routes/endpoints/admin/_file/routes');
 var baseRoutes = require('./server/routes/endpoints/base_routes');
 /**
  * Get port from environment and store in Express.
@@ -46,6 +47,7 @@ app.use(adminAdminRoutes);
 app.use(adminStudentRoutes);
 app.use(adminTeacherRoutes);
 app.use(adminClassesRoutes);
+app.use(adminFileRoutes);
 
 app.get('/uploads', express.static(path.join(__dirname, './uploads')))
 

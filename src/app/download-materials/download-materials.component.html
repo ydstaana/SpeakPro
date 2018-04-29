@@ -36,11 +36,11 @@
               </td>
             </tr>
             <tr *ngFor="let file of files; let i = index">
-              <td class="word-wrap">{{file}}</td>
+              <td class="word-wrap">{{file.fileName}}</td>
+              <td>{{file.author.firstName}} {{file.author.lastName}}</td>
+              <td>{{file.uploadDate | date: 'MMM dd, yyyy HH:mm:ss'}}</td>
               <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{formatBytes(file.fileSize)}}</td>
               <td (click)="download(file)">
                 <a><i class="material-icons">file_download</i></a>
               </td>
