@@ -6,13 +6,13 @@
       <div class="card-content">
         <ul *ngIf="cart">
           <li *ngFor="let item of cart">
-            {{item.timeSlot}} ({{item.teacher.firstName}} {{item.teacher.lastName}}) - $2.00
+            {{item.timeSlot}} ({{item.teacher.firstName}} {{item.teacher.lastName}}) - $6.00
           </li>
         </ul>
 
       </div>
       <div class="card-action">
-        <p>Total: $10.00</p>
+        <p>Total: ${{price}}.00</p>
       </div>
     </div>
   </div>
