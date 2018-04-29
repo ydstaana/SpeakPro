@@ -35,23 +35,23 @@
         <div id="credit-card">
           <div class="row">
             <div class="input-field col s12">
-              <input id="card-number" type="text">
+              <input id="card-number" type="text" autocomplete="off" required [(ngModel)]="cardNumber">
               <label for="card-number">Card Number</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input placeholder="Month" id="expiry-month" type="text">
-              <label for="expiry-month">Expiry Date</label>
+              <input placeholder="Month" id="expiry-month" type="text" [(ngModel)]="month">
+              <label for="expiry-month">Expiry Date (MM/YYYY)</label>
             </div>
             <div class="input-field col s6">
-              <input placeholder="Year" id="expiry-year" type="text">
+              <input placeholder="Year" id="expiry-year" type="text" [(ngModel)]="year">
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="security-code" type="text">
-              <label for="security-code">Security Code</label>
+              <input id="security-code" type="text" value="" autocomplete="off" required [(ngModel)]="cvc">
+              <label for="security-code">CVC</label>
             </div>
           </div>
           <div class="center row">
