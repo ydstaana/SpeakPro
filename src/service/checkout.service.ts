@@ -7,7 +7,7 @@ export class CheckoutService {
   constructor(private http: HttpClient) { }
 
   checkoutClasses(data){
-  	return this.http.post(`http://localhost:3000/checkout`, data, { headers: this.getHeaders() })
+  	return this.http.post('http://localhost:3000/checkout',data, {headers: this.getHeaders()})
       .pipe();
   }
 
