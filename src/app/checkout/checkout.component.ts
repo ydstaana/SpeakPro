@@ -1,32 +1,75 @@
 import { ClassService } from './../../service/class.service';
+import { CheckoutService } from './../../service/checkout.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Sched } from '../../model/sched';
+
+
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
+
 export class CheckoutComponent implements OnInit {
   cart: any = null;
+  cardNumber :any;
+  month :any;
+  year :any;
+  cvc :any;
 
-  constructor(private classService: ClassService) { }
+  constructor(private classService: ClassService, private checkoutService: CheckoutService) { }
 
   ngOnInit() {
     this.cart = this.classService.getCart();
-    console.log(this.cart)
+  }
 
+  ngAfterViewInit() {
+    this.on2COready();
+  }
+
+  on2COready(){
+    TCO.loadPubKey('sandbox', function() {
+      console.log("ADA")
+        //TCO.requestToken(successCallback, errorCallback, args);
+    });​
   }
 
   checkout() {
     let arr = this.cart.map((selected) => {
       return selected._id;
     })
-    this.classService.addClass(arr)
+    /*this.classService.addClass(arr)
       .subscribe(res => {
         console.log(res);
         alert('You have successfully enrolled these classes');
-      })
+      })*/
+    var args = {
+      sellerId: "901378548",
+      publishableKey: "CF3531E4-3895-4E14-8110-3662393C7B6C",
+      ccNo: "4000000000000002",
+      cvv: this.cvc,
+      expMonth: this.month,
+      expYear: this.year
+    };
+    
+    TCO.requestToken(data => {
+      var params = {
+        tcoToken : data.response.token.token
+      }
+      console.log(params);
+
+      console.log(this.checkoutService.getHeaders());
+      this.checkoutService.checkoutClasses(params);
+     
+    }, err => {
+      if (err.errorCode === 200) {
+        // This error code indicates that the ajax call failed. We recommend that you retry the token request.
+      } else {
+        alert(err.errorMsg);
+      }
+    }, args);
+   
   }
 
 }
