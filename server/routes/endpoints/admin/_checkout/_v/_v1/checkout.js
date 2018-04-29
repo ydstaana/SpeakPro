@@ -9,6 +9,7 @@ var tco = new Twocheckout({
 
 
 module.exports = function(req, res, next){
+	console.log("am i called");
 	console.log(req.body);
 	var params = {
 	    "merchantOrderId": "123",

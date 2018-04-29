@@ -2,8 +2,7 @@ import { ClassService } from './../../service/class.service';
 import { CheckoutService } from './../../service/checkout.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Sched } from '../../model/sched';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -18,7 +17,7 @@ export class CheckoutComponent implements OnInit {
   year :any;
   cvc :any;
 
-  constructor(private classService: ClassService, private checkoutService: CheckoutService) { }
+  constructor(private classService: ClassService, private checkoutService: CheckoutService,private router: Router) { }
 
   ngOnInit() {
     this.cart = this.classService.getCart();
@@ -39,11 +38,7 @@ export class CheckoutComponent implements OnInit {
     let arr = this.cart.map((selected) => {
       return selected._id;
     })
-    /*this.classService.addClass(arr)
-      .subscribe(res => {
-        console.log(res);
-        alert('You have successfully enrolled these classes');
-      })*/
+    
     var args = {
       sellerId: "901378548",
       publishableKey: "CF3531E4-3895-4E14-8110-3662393C7B6C",
@@ -59,8 +54,15 @@ export class CheckoutComponent implements OnInit {
       }
       console.log(params);
 
-      console.log(this.checkoutService.getHeaders());
-      this.checkoutService.checkoutClasses(params);
+      this.checkoutService.checkoutClasses(params).subscribe(res => {
+        this.classService.addClass(arr)
+        .subscribe(res => {
+          console.log(res);
+          alert('You have successfully enrolled these classes');
+          this.router.navigate(['/add-classes']);
+
+        })
+      });
      
     }, err => {
       if (err.errorCode === 200) {
