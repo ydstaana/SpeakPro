@@ -9,8 +9,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ClassService } from '../service/class.service';
 import { UserService } from '../service/user.service';
-import { CheckoutService } from '../service/checkout.service';
-
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MenuComponent } from './menu/menu.component';
@@ -97,7 +95,6 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
   providers: [
     ClassService,
     UserService,
-    CheckoutService,
     TeacherGuard,
     StudentGuard,
     SessionGuard,
