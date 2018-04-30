@@ -43,17 +43,18 @@ export class CheckoutComponent implements OnInit {
     var args = {
       sellerId: "901378548",
       publishableKey: "CF3531E4-3895-4E14-8110-3662393C7B6C",
-      ccNo: this.cardNumber,
+      ccNo: "4000000000000002",
       cvv: this.cvc,
       expMonth: this.month,
       expYear: this.year
     };
 
-
+    console.log(args);
     
     TCO.requestToken(data => {
       var params = {
-        tcoToken : data.response.token.token
+        tcoToken : data.response.token.token,
+        total: this.price
       }
       console.log(params);
 

@@ -15,7 +15,7 @@ module.exports = function(req, res, next){
 	    "merchantOrderId": "123",
 	    "token": req.body.tcoToken,
 	    "currency": "USD",
-	    "total": "10.00",
+	    "total": req.body.total,
 	    "billingAddr": {
 	        "name": "Joe Flagster",
 	        "addrLine1": "123 Main Street",
@@ -31,11 +31,13 @@ module.exports = function(req, res, next){
 	tco.checkout.authorize(params, function (error, data) {
 		console.log("i was called");
 	    if (error) {
+	    	console.log(error.message)
 	        res.status(300).json({
 				code: 300,
 				message : error.message
 			});
 	    } else {
+	    	console.log(data);
 	        res.send(data);
 	    }
 	});
