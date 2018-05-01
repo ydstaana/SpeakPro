@@ -12,7 +12,7 @@
 
       </div>
       <div class="card-action">
-        <p>Total: ${{price}}.00</p>
+        <p>Total: ${{totalPrice}}</p>
       </div>
     </div>
   </div>
@@ -32,36 +32,57 @@
         </ul>
       </div>
       <div class="card-content grey lighten-4">
-        <div id="credit-card">
+        <form id="credit-card" [formGroup]="creditCardForm">
           <div class="row">
             <div class="input-field col s12">
-              <input id="card-number" type="text" autocomplete="off" required [(ngModel)]="cardNumber">
+              <input id="card-number" type="text" formControlName="ccNo">
               <label for="card-number">Card Number</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input placeholder="Month" id="expiry-month" type="text" [(ngModel)]="month">
+              <input placeholder="Month" id="expiry-month" type="text" formControlName="expMonth">
               <label for="expiry-month">Expiry Date (MM/YYYY)</label>
             </div>
             <div class="input-field col s6">
-              <input placeholder="Year" id="expiry-year" type="text" [(ngModel)]="year">
+              <input placeholder="Year" id="expiry-year" type="text" formControlName="expYear">
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="security-code" type="text" value="" autocomplete="off" required [(ngModel)]="cvc">
-              <label for="security-code">CVC</label>
+              <input id="security-code" type="text" formControlName="cvv">
+              <label for="security-code">CVV</label>
             </div>
           </div>
           <div class="center row">
             <div class="col s12">
-              <button class="waves-effect waves-light btn" (click)="checkout()">Checkout</button>
+              <button class="waves-effect waves-light btn" (click)="checkout(creditCardForm.value)">Checkout</button>
             </div>
           </div>
-        </div>
+          {{creditCardForm.value | json}}
+        </form>
         <div id="pera-padala">Test 2</div>
         <div id="globe-smart">Test 3</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="checkout-confirmation" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="confirmationModal">
+  <div class="modal-content">
+    <div class="preloader-wrapper active">
+      <div class="spinner-layer spinner-yellow-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>

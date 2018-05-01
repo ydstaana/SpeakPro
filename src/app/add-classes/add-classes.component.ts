@@ -58,6 +58,7 @@ export class AddClassesComponent implements OnInit {
         var conflictClasses = this.classes.filter(myClass => this.student.classCodes.includes(myClass.code))
         //SET DIFFERENCE OF AVAILABLE CLASSES AND CONFLICT CLASSES 
         this.classes = this.classes.filter(currClass => conflictClasses.find(sched => sched.code == currClass.code) == undefined);
+        console.log(this.classes);
         this.enrolledClasses = enrolledClasses;
         this.form.setControl('availableClasses', this.buildCheckboxes());
 
@@ -129,6 +130,7 @@ export class AddClassesComponent implements OnInit {
       form.availableClasses
         .forEach((selected, index) => {
           if (selected) {
+            console.log(this.classes[index]);
             selectedClasses.push(this.classes[index]);
           }
         });
