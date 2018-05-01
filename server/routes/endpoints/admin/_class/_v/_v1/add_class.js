@@ -8,7 +8,8 @@ module.exports = function(req, res, next){
 	.exec(function(err, user){
 		console.log(req.body);
 		for(var i in req.body){
-			user.schedule.push(req.body[i]);
+			user.schedule.push(req.body[i]._id);
+			user.classCodes.push(req.body[i].code);
 			Schedule.findByIdAndUpdate(req.body[i], {student : req.params.id, available: false})
 		}
 		user.save(function(err){

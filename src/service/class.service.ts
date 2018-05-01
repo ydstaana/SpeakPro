@@ -25,10 +25,10 @@ export class ClassService {
 
   }
 
-  addClass(classes: String[]) {
+  addClass(classes: Sched[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
-    return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
+    return this.http.post<Sched[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
       .pipe();
   }
 
