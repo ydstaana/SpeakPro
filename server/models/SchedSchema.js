@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
 
 var SchedSchema = new mongoose.Schema({
-	timeSlot : String,
+  timeSlot : String,
+  day: String,
 	teacher: {
 		type : mongoose.Schema.Types.ObjectId,
 		ref: 'User'
@@ -18,13 +19,13 @@ var SchedSchema = new mongoose.Schema({
 //This function drops all students from the class being deleted before deleting itself
 SchedSchema.pre('remove', function(next) {
     this.update(
-        { schedule : this._id}, 
+        { schedule : this._id},
         { $pull: { schedule: this._id } },
-        { multi: true })  //if reference exists in multiple documents 
+        { multi: true })  //if reference exists in multiple documents
     .exec();
     next();
 });
-	
+
 var Sched = mongoose.model('Sched', SchedSchema);
 
 module.exports =Sched;
