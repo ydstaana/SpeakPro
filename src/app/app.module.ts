@@ -1,3 +1,4 @@
+import { TimeslotService } from './../service/timeslot.service';
 import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -33,6 +34,7 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
 import { MyMaterialsComponent } from './my-materials/my-materials.component';
 import { UploadService } from '../service/upload.service';
+import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
@@ -98,6 +100,8 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     TeacherGuard,
     StudentGuard,
     SessionGuard,
+    TimeslotService,
+    AuthService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

@@ -49,9 +49,10 @@ export class ClassService {
       .pipe();
   }
 
-  closeClass(classId) {
-    return this.http.request('delete', `http://localhost:3000/classes/${classId}`, { headers: this.getHeaders() })
-      .pipe();
+  closeClass(selectedClass) {
+    console.log(selectedClass);
+    return this.http.request('delete', `http://localhost:3000/classes/${selectedClass._id}`,
+      { headers: this.getHeaders(), body: { teacher: selectedClass.teacher, code: selectedClass.code } }).pipe();
   }
 
   // deleteClass(classes: String[]){
