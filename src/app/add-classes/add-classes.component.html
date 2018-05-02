@@ -25,7 +25,7 @@
             <thead>
               <th></th>
               <th>Time</th>
-              <th>Date</th>
+              <th>Day</th>
               <th>Teacher</th>
               <th>Status</th>
             </thead>
@@ -58,7 +58,7 @@
                   <label for="{{i}}"></label>
                 </td>
                 <td>{{classes[i].timeSlot}}</td>
-                <td>Tue, April 2, 2018</td>
+                <td>{{classes[i].day}}</td>
                 <td>
                   <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
                 </td>
