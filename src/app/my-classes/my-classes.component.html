@@ -7,24 +7,23 @@
           <div class="row">
             <div class="col s3">
               <label for="dropdown">Choose Timeslot</label>
-              <select name="dropdown" materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="code">
-                <option *ngFor="let sched of scheds; let i = index" [value]="sched.code">{{sched.time}}</option>
+              <select name="dropdown" materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeslot">
+                <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot.code + '~' + timeslot.time">{{timeslot.time}}</option>
               </select>
             </div>
             <div class="col s3">
-              <label for="date">Choose a Date</label>
-              <input id="date" name="date" formControlName="date" materialize="pickadate" [materializeParams]="[{format: 'dd/mm/yyyy'}]"
-                type="text" />
+              <label for="date">Choose a Day</label>
+              <select name="dropdown" materialize="material_select" [materializeSelectOptions]="days" formControlName="day">
+                <option *ngFor="let day of days; let i = index" [value]="day.code + '~' + day.day">{{day.day}}</option>
+              </select>
             </div>
             <div class="col s3">
               <label for="teacher-id">Teacher ID</label>
-              <input id="teacher-id" name="teacher-id" value="{{teacher._id}}" materialize [materializeParams]="[{format: 'dd/mm/yyyy'}]"
-                type="text" [disabled]="teacher" />
+              <input id="teacher-id" name="teacher-id" value="{{teacherId}}" materialize type="text" [disabled]="teacherId"/>
             </div>
             <div class="col s2">
               <label for="max-students">Number of Students</label>
-              <input id="max-students" name="max-students" value="1" materialize [materializeParams]="[{format: 'dd/mm/yyyy'}]" type="text"
-                [disabled]="true" />
+              <input id="max-students" name="max-students" value="1" materialize type="text" [disabled]="true"/>
             </div>
             <div class="col s1 centered-container">
               <button class="btn-floating yellow darken-1" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
@@ -48,7 +47,7 @@
           <thead>
             <th>#</th>
             <th>Timeslot</th>
-            <th>Date</th>
+            <th>Day</th>
             <th>Status</th>
             <th>Student</th>
             <th></th>
@@ -79,13 +78,13 @@
             <tr *ngFor="let class of classes; let i = index">
               <td>{{i+1}}</td>
               <td>{{class.timeSlot}}</td>
-              <td>Tue, April 10, 2018</td>
+              <td>{{class.day}}</td>
               <td *ngIf="class.available">Open</td>
               <td *ngIf="!class.available">Closed</td>
               <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
               <td *ngIf="!class.student">n/a</td>
               <td>
-                <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class._id)">Delete Class</button>
+                <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class)">Delete Class</button>
               </td>
             </tr>
           </tbody>

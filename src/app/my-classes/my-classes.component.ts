@@ -1,8 +1,11 @@
+import { AuthService } from './../../service/auth.service';
+import { TimeslotService } from './../../service/timeslot.service';
 import { ClassService } from './../../service/class.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Sched } from '../../model/sched';
 import { User } from '../../model/user';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-my-classes',
@@ -10,90 +13,119 @@ import { User } from '../../model/user';
   styleUrls: ['./my-classes.component.css']
 })
 export class MyClassesComponent implements OnInit {
-  shit = [1,2,3];
-  form: FormGroup;
   classes: Sched[];
-  teacher: User;
-  timeslots = ['7:00 AM - 8:00 AM', '8:00 AM - 9:00 AM', '9:00 AM - 10:00 AM', '10:00 AM - 11:00 AM',
-    '11:00 AM - 12:00 PM', '12:00 PM - 1:00 PM', '1:00 PM - 2:00 PM', '2:00 PM - 3:00 PM',
-    '3:00 PM - 4:00 PM', '4:00 PM - 5:00 PM', '5:00 PM - 6:00 PM', '6:00 PM - 7:00 PM']
+  form: FormGroup;
+  private teacherId: any;
+  timeslots: any[];
+  days: any[];
 
-  scheds = [
-    {time : "7:00 AM - 8:00 AM", code:1},
-    {time : "8:00 AM - 9:00 AM", code:2},
-    {time : "9:00 AM - 10:00 AM", code:3},
-    {time : "10:00 AM - 11:00 AM", code:4},
-    {time : "11:00 AM - 12:00 PM", code:5},
-    {time : "12:00 PM - 1:00 PM", code:6},
-    {time : "1:00 PM - 2:00 PM", code:7},
-    {time : "2:00 PM - 3:00 PM", code:8},
-    {time : "3:00 PM - 4:00 PM", code:9},
-    {time : "4:00 PM - 5:00 PM", code:10},
-    {time : "5:00 PM - 6:00 PM", code:11},
-    {time : "6:00 PM - 7:00 PM", code:12},
-  ]
-
-  constructor(private classService: ClassService, private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private classService: ClassService,
+    private timeslotService: TimeslotService) {
+  }
 
   ngOnInit() {
-    this.teacher = JSON.parse(localStorage.getItem('loggedUser'));
-    this.getClasses(this.teacher.id);
+    //Get dropdown items
+    this.timeslots = this.timeslotService.getAllTimeslots();
+    this.days = this.timeslotService.getAllDays();
+
+    //Get teacher id
+    this.teacherId = this.auth.getUserId();
+
+    //Get classes by teacher id
+    this.getClasses(this.teacherId);
+
+    //Create form
     this.createForm();
-    console.log(this.teacher);
   }
 
   createForm() {
     this.form = this.fb.group({
-      timeSlot: ['7:00 AM - 8:00 AM'],
-      date: ['01/01/2018'],
-      teacher: [this.teacher.id],
-      student: [null],
-      code: [1],
-      available: [true]
+      timeslot: ['1~7:00 AM - 8:00 AM'], //Timeslot values: 1-17
+      day: ['0~Monday'], //Day values: 1-5
+      teacher: [this.teacherId],
     });
   }
 
 
+
+
   getClasses(teacherId) {
+    this.classes = null;
     this.classService.getAllClassesByTeacher(teacherId)
       .subscribe((response: any) => {
-        console.log(response);
-        this.classes = response;
-      })
+        if (response.success !== false) this.classes = response;
+        else {
+          this.classes = null;
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 
   openClass(form) {
-    var selectedClass = this.scheds.find(sched => sched.code == form.code);
-    if(this.teacher.classCodes.includes(selectedClass.code)){
-      alert('You already have a class on this timeslot');
-    }else{
-      form.timeSlot = selectedClass.time;
-      
-      //update local teacher's class codes
-      this.teacher.classCodes.push(parseInt(form.code));
+    const timeslot = form.timeslot.split('~')[1];
+    const timeslotCode = form.timeslot.split('~')[0];
+    const day = form.day.split('~')[1];
+    const dayCode = form.day.split('~')[0];
+    const code = parseInt(timeslotCode) + (17 * parseInt(dayCode)); //curr_timeslot + (max_timeslot + curr_day)
 
-      this.classService.openClass(form)
-      .subscribe(response => {
-        const prompt = confirm('Are you sure you want to open this class?');
-        if (prompt === true) {
-          alert('Successfully opened a class');
-          this.classes = null;
-          this.getClasses(this.teacher.id);
+
+    const newClass = {
+      timeSlot: timeslot,
+      day: day,
+      code: code,
+      teacher: form.teacher,
+      student: null,
+      available: true
+    };
+
+    console.log(newClass);
+
+
+    //Get user credentials first from the server
+    this.auth.getUserCreds()
+      .subscribe((response: any) => {
+        if (response.success !== false) { //If token is invalid or not yet expired
+          const teacher = response; //response is teacher when token is valid
+
+          //Check if teacher already has a class on the selected timeslot
+          if (teacher.classCodes.includes(code)) {
+            toast('You already have a class on this timeslot.', 2000);
+          }
+          else {
+            //If there is no conflict, the teacher can open the class
+            const prompt = confirm('Are you sure you want to create this class?');
+            if (prompt === true) {
+              this.classService.openClass(newClass)
+                .subscribe((response: any) => {
+
+                  //If token is invalid or not yet expired
+                  if (response.success !== false) {
+                    toast('You have successfully created a class.', 2000);
+                    this.getClasses(this.teacherId);
+                  }
+                  else {
+                    toast('Something went wrong. Please try logging in again.', 2000);
+                  }
+                });
+            }
+          }
         }
-      })
-    }
-
-    
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 
-  closeClass(classId) {
-    const prompt = confirm('Are you sure you want to close this class?');
+  closeClass(selectedClass) {
+    const prompt = confirm('Are you sure you want to delete this class?');
     if (prompt === true) {
-      this.classService.closeClass(classId)
+      this.classService.closeClass(selectedClass)
         .subscribe(response => {
-          alert('Successfully closed a class');
-          this.classes = null;
-          this.getClasses(this.teacher.id);
+          toast('You have successfully deleted a class.', 2000);
+          this.getClasses(this.teacherId);
         })
     }
 
