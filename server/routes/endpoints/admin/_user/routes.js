@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/users', core.verifyToken, get_all_users);
-router.get('/users/:id', core.verifyToken, get_single_user);
+router.get('/users/:username', core.verifyToken, get_single_user);
 router.post('/users', create_user);
 router.put('/users/:username', core.verifyToken, update_user);
 
