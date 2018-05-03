@@ -60,7 +60,7 @@
                 <td>{{classes[i].timeSlot}}</td>
                 <td>{{classes[i].day}}</td>
                 <td>
-                  <a (click)="viewTeacher(classes[i].teacher._id)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
+                  <a (click)="viewTeacher(classes[i].teacher.username)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
                 </td>
                 <td *ngIf="classes[i].available">Open</td>
                 <td *ngIf="!classes[i].available">Closed</td>

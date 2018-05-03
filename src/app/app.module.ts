@@ -82,7 +82,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
 
-          { path: 'teachers/:id', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
+          { path: 'teachers/:username', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
 
