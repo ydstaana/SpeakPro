@@ -6,6 +6,7 @@ import { Sched } from './../../model/sched';
 import { ClassService } from '../../service/class.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { toast } from 'angular2-materialize';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
   styleUrls: ['./drop-classes.component.css']
 })
 export class DropClassesComponent implements OnInit {
-  enrolledClasses = null;
+  enrolledClasses: any[];
   form: FormGroup;
 
   constructor(
@@ -39,28 +40,36 @@ export class DropClassesComponent implements OnInit {
   }
 
   getEnrolledClasses() {
+    this.enrolledClasses = null;
     this.userService.getEnrolledClass()
-      .subscribe(response => {
-        this.enrolledClasses = response;
-        this.form.setControl('enrolledClasses', this.buildCheckboxes());
+      .subscribe((response: any) => {
+        // //If token is valid and not yet expired
+        if (response.success !== false) {
+          this.enrolledClasses = response;
+          this.form.setControl('enrolledClasses', this.buildCheckboxes());
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
       });
-
   }
 
-  isCheckboxDisabled() {
-    let arr = this.form.value.enrolledClasses.find((selected) => {
+  isSelectedClassesEmpty() {
+    const selectedClasses = this.form.value.enrolledClasses.find((selected) => {
       return selected == true;
-    })
+    });
 
-    if (typeof arr === 'undefined') return true; //if no classes are checked
-    else return false; //if there is atleast one that is checked
+    if (typeof selectedClasses === 'undefined') {
+      return true; //if there are no classes selected
+    }
+
+    return false; //if there is at least one class selected
   }
 
 
   createForm() {
     this.form = this.fb.group({
-      enrolledClasses: this.fb.array([
-      ])
+      enrolledClasses: this.fb.array([])
     });
   }
 
@@ -81,17 +90,22 @@ export class DropClassesComponent implements OnInit {
     if (msg === true) {
       let selectedClasses = [];
 
-      form.enrolledClasses
-        .forEach((selected, index) => {
-          if (selected) {
-            selectedClasses.push(this.enrolledClasses[index]._id, );
-          }
-        });
+      form.enrolledClasses.forEach((selected, index) => {
+        if (selected) {
+          selectedClasses.push(this.enrolledClasses[index]._id);
+        }
+      });
 
       this.classService.dropClasses(selectedClasses)
-        .subscribe(response => {
-          console.log(response);
-          alert('You have successfully drop these classes');
+        .subscribe((response: any) => {
+          //If token is valid and not yet expired
+          if (response.success !== false) {
+            toast('You have successfully drop classes', 2000);
+            this.getEnrolledClasses();
+          }
+          else {
+            toast('Something went wrong. Please try logging in again.', 2000);
+          }
         });
     }
   }
@@ -100,8 +114,5 @@ export class DropClassesComponent implements OnInit {
   viewTeacher(teacherId) {
     this.router.navigate(['dashboard', 'teachers', teacherId]);
   }
-
-
-
 
 }
