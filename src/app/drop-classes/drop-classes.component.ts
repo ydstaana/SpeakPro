@@ -111,8 +111,8 @@ export class DropClassesComponent implements OnInit {
   }
 
 
-  viewTeacher(teacherId) {
-    this.router.navigate(['dashboard', 'teachers', teacherId]);
+  viewTeacher(username) {
+    this.router.navigate(['dashboard', 'teachers', username]);
   }
 
 }

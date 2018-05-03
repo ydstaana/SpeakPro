@@ -44,6 +44,11 @@ export class ClassService {
       .pipe();
   }
 
+  getAllClassesOfTeacherByUsername(username) {
+    return this.http.get(`http://localhost:3000/classes/teachers/${username}`, { headers: this.getHeaders() })
+      .pipe();
+  }
+
   openClass(newClass) {
     return this.http.request('post', 'http://localhost:3000/classes', { body: newClass, headers: this.getHeaders() })
       .pipe();
@@ -55,11 +60,6 @@ export class ClassService {
       { headers: this.getHeaders(), body: { teacher: selectedClass.teacher, code: selectedClass.code, student: selectedClass.student } }).pipe();
   }
 
-  // deleteClass(classes: String[]){
-  //   const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
-  //   return this.http.post<String[]>(`http://localhost:3000/api/class/student/${userId}/drop`, classes)
-  //     .pipe();
-  // }
 
   getHeaders() {
     const token = localStorage.getItem('token');

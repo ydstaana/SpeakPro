@@ -53,10 +53,10 @@ export class AddClassesComponent implements OnInit {
         if (enrolledClasses.length > 0) this.classes = availableClasses.filter(this.compare(enrolledClasses));
         else this.classes = availableClasses;
 
-        
+
 
         var conflictClasses = this.classes.filter(myClass => this.student.classCodes.includes(myClass.code))
-        //SET DIFFERENCE OF AVAILABLE CLASSES AND CONFLICT CLASSES 
+        //SET DIFFERENCE OF AVAILABLE CLASSES AND CONFLICT CLASSES
         this.classes = this.classes.filter(currClass => conflictClasses.find(sched => sched.code == currClass.code) == undefined);
         console.log(this.classes);
         this.enrolledClasses = enrolledClasses;
@@ -120,8 +120,8 @@ export class AddClassesComponent implements OnInit {
       })
   }
 
-  viewTeacher(teacherId) {
-    this.router.navigate(['dashboard', 'teachers', teacherId]);
+  viewTeacher(username) {
+    this.router.navigate(['dashboard', 'teachers', username]);
   }
 
   bindSelected(form) {
