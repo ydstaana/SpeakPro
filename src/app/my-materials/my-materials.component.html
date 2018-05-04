@@ -53,12 +53,12 @@
             <tr *ngFor="let item of uploadQueue; let i = index">
               <td class="ellipsis" materialize="tooltip" [attr.data-tooltip]="item.name" data-position="right" data-delay="50">{{item.name}}</td>
               <td>{{loggedUser.firstName}} {{loggedUser.lastName}}</td>
-              <td>{{item.uploadDate | date: 'MMM dd, yyyy HH:mm:ss'}}</td>
+              <td>{{item.uploadDate | date: 'MMM dd, yyyy h:mm:ss a z'}}</td>
               <td>{{uploadService.formatBytes(item.size)}}</td>
               <td class="td-center" *ngIf="uploadQueueProgress[i] != 100">
                 <round-progress [current]="uploadQueueProgress[i]" [max]="100" [radius]="20" [color]="'#64B5F6'" [clockwise]="false"></round-progress>
               </td>
-              <td (click)="download(item.name)" *ngIf="uploadQueueProgress[i] == 100">
+              <td (click)="download(item.fileName)" *ngIf="uploadQueueProgress[i] == 100">
                 <a class="btn-floating yellow darken-1">
                   <i class="material-icons">file_download</i>
                 </a>
@@ -68,9 +68,9 @@
 
 
             <tr *ngFor="let file of availableFiles; let i = index">
-              <td class="ellipsis" materialize="tooltip" [attr.data-tooltip]="file.fileName" data-position="right" data-delay="50">{{file.fileName}}</td>
+              <td class="ellipsis" materialize="tooltip" [attr.data-tooltip]="file.displayName" data-position="right" data-delay="50">{{file.displayName}}</td>
               <td>{{file.author.firstName}} {{file.author.lastName}}</td>
-              <td>{{file.uploadDate | date: 'MMM dd, yyyy HH:mm:ss'}}</td>
+              <td>{{file.uploadDate | date: 'MMM dd, yyyy h:mm:ss a z'}}</td>
               <td>{{uploadService.formatBytes(file.fileSize)}}</td>
               <td (click)="download(file.fileName)">
                 <a class="btn-floating yellow darken-1">
