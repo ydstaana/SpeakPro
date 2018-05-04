@@ -9,7 +9,8 @@ import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-my-materials',
   templateUrl: './my-materials.component.html',
-  styleUrls: ['./my-materials.component.css']
+  styleUrls: ['./my-materials.component.css'],
+  providers: [UploadService]
 })
 export class MyMaterialsComponent implements OnInit {
   private availableFiles: any[];
