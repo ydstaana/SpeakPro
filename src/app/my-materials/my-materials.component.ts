@@ -70,6 +70,7 @@ export class MyMaterialsComponent implements OnInit {
 
   /* Fetches uploaded materials */
   getAvailableMaterials() {
+    this.availableFiles = null;
     this.userService.getAvailableMaterialsById(this.loggedUser.id)
       .subscribe((response: any) => this.availableFiles = response.data);
   }
@@ -81,6 +82,8 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress[index] = Math.round(100 * event.loaded / event.total);
     }
     else if (event.type === HttpEventType.Response) {
+      this.uploadQueue = [];
+      this.getAvailableMaterials();
       toast(`You have successfully uploaded ${filename}`, 2000)
     }
   }
