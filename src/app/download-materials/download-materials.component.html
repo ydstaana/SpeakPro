@@ -4,17 +4,23 @@
     <div class="card">
       <div class="card-content">
         <table class="centered highlight responsive-table">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col class="download-col">
+          </colgroup>
           <thead>
             <th>Filename</th>
             <th>Author</th>
-            <th>Upload Date</th>
             <th>Modified Date</th>
             <th>File Size</th>
             <th></th>
           </thead>
           <tbody>
             <tr *ngIf="!files">
-              <td colspan="6">
+              <td colspan="5">
                 <div class="preloader-wrapper active">
                   <div class="spinner-layer spinner-yellow-only">
                     <div class="circle-clipper left">
@@ -31,18 +37,19 @@
               </td>
             </tr>
             <tr class="empty-table" *ngIf="files && files.length === 0">
-              <td colspan="6">
+              <td colspan="5">
                 No materials available
               </td>
             </tr>
             <tr *ngFor="let file of files; let i = index">
-              <td class="word-wrap">{{file.fileName}}</td>
+              <td class="ellipsis" materialize="tooltip" [attr.data-tooltip]="file.displayName" data-position="right" data-delay="50">{{file.displayName}}</td>
               <td>{{file.author.firstName}} {{file.author.lastName}}</td>
-              <td>{{file.uploadDate | date: 'MMM dd, yyyy HH:mm:ss'}}</td>
-              <td></td>
-              <td>{{formatBytes(file.fileSize)}}</td>
-              <td (click)="download(file)">
-                <a><i class="material-icons">file_download</i></a>
+              <td>{{file.uploadDate | date: 'MMM dd, yyyy h:mm:ss a z'}}</td>
+              <td>{{uploadService.formatBytes(file.fileSize)}}</td>
+              <td (click)="download(file.fileName)">
+                <a class="btn-floating yellow darken-1">
+                  <i class="material-icons">file_download</i>
+                </a>
               </td>
             </tr>
           </tbody>
