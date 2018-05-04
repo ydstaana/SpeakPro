@@ -1,46 +1,54 @@
-var mongoose = require('mongoose');
 const multer = require('multer');
 const moment = require('moment')
+const mongoose = require('mongoose');
 const pify = require('pify')
-var Schedule = require('../../../../../../models/SchedSchema.js');
-var File = require('../../../../../../models/FileSchema.js');
-var User = require('../../../../../../models/UserSchema.js');
 
-var currentDate = moment().format("DD-MM-YYYY");
+const File = require('../../../../../../models/FileSchema.js');
+const Schedule = require('../../../../../../models/SchedSchema.js');
+const User = require('../../../../../../models/UserSchema.js');
 
-var storage = multer.diskStorage({
+
+
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null,  file.originalname + "_" + currentDate);
+    const currentDate = moment().format("DD-MM-YYYY");
+    cb(null, `${currentDate}_${file.originalname}`);
   }
-})
+});
 
-var upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
+const fileUpload = pify(upload.array('selectedFiles')); //Promisify upload
 
-const fileUpload = pify(upload.array('files_field')); //Promisify upload
-
-var uploadFile = async function (req, res) {
+const uploadFile = async function (req, res) {
   try {
-    await fileUpload(req, res)
+    await fileUpload(req, res);
     // Everything went fine
-    for(item of req.files){
-      console.log(item);
-      var newFile = {
-        fileName : item.filename,
+    for (item of req.files) {
+      const newFile = {
+        fileName: item.filename,
         displayName: item.originalname,
         author: req.body.user, //change this to the appropriate field in req.body from frontend
-        uploadDate : moment().format('l'),
+        uploadDate: moment().format(),
         fileSize: item.size
       }
-      File.create(newFile, function(err, file){
-        console.log(file);
+      File.create(newFile, function (err, file) {
+        if (!err) {
+          res.status(200).json({
+            code: 200,
+            message: 'Successfully uploaded the file'
+          });
+        }
+        else throw err;
       })
     }
-  } catch(err) {
-    // An error occurred when uploading 
-    return
+  } catch (err) {
+    res.status(500).json({
+      code: 500,
+      message: err
+    });
   }
 }
 
