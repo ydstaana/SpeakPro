@@ -36,6 +36,7 @@ import { MyMaterialsComponent } from './my-materials/my-materials.component';
 import { UploadService } from '../service/upload.service';
 import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     MyScheduleComponent,
     DownloadMaterialsComponent,
     MyMaterialsComponent,
+    LostPasswordComponent,
   ],
   imports: [
     BrowserModule,
