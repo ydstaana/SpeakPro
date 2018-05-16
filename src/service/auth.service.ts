@@ -10,6 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+
   getUserCreds() {
     const user = this.decodeAccessToken(this.getUserToken());
     return this.http.get(`http://localhost:3000/users/${user.username}`, { headers: this.getHeaders() })
@@ -24,7 +25,6 @@ export class AuthService {
   decodeAccessToken(token: string) {
     try { return jwt_decode(token); }
     catch (e) {
-      toast('Something went wrong. Please try logging in again.', 2000);
       return null;
     }
   }

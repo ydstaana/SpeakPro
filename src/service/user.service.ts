@@ -33,15 +33,6 @@ export class UserService {
       .pipe();
   }
 
-  getDecodedAccessToken(token: string) {
-    try {
-      return jwt_decode(token);
-    }
-    catch (Error) {
-      return null;
-    }
-  }
-
   getAllUsers() {
     return this.http.get('http://localhost:3000/users', { headers: this.getHeaders() })
       .pipe();

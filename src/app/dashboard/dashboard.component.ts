@@ -1,3 +1,4 @@
+import { AuthService } from './../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   showSidebar: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
   }
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   greetings() {
-    const user = JSON.parse(localStorage.getItem('loggedUser'));
+    const user = this.auth.decodeAccessToken(localStorage.getItem('token'));
     return `${user.username}`;
   }
 
