@@ -5,26 +5,27 @@
       <div class="add-class card z-index-1">
         <div class="card-content">
           <div class="row">
-            <div class="col s3">
+            <div class="col s5">
               <label for="dropdown">Choose Timeslot</label>
               <select name="dropdown" materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeslot">
                 <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot.code + '~' + timeslot.time">{{timeslot.time}}</option>
               </select>
             </div>
-            <div class="col s3">
+            <div class="col s5">
               <label for="date">Choose a Day</label>
               <select name="dropdown" materialize="material_select" [materializeSelectOptions]="days" formControlName="day">
                 <option *ngFor="let day of days; let i = index" [value]="day.code + '~' + day.day">{{day.day}}</option>
               </select>
             </div>
-            <div class="col s3">
+            <div class="col s1"></div>
+            <!-- <div class="col s3">
               <label for="teacher-id">Teacher ID</label>
               <input id="teacher-id" name="teacher-id" value="{{teacherId}}" materialize type="text" [disabled]="teacherId"/>
             </div>
             <div class="col s2">
               <label for="max-students">Number of Students</label>
               <input id="max-students" name="max-students" value="1" materialize type="text" [disabled]="true"/>
-            </div>
+            </div> -->
             <div class="col s1 centered-container">
               <button class="btn-floating yellow darken-1" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
                 <i class="material-icons">add</i>
