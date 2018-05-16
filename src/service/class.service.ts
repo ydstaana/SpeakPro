@@ -6,7 +6,7 @@ import { Sched } from '../model/sched';
 
 @Injectable()
 export class ClassService {
-  private cart: any = undefined;
+  private cart: any = [];
 
   constructor(private http: HttpClient) {
 

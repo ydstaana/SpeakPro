@@ -26,6 +26,7 @@ export class CheckoutComponent implements OnInit {
     this.confirmationModal = new EventEmitter<string | MaterializeAction>();
     this.creditCardForm = this.createCCForm();
     this.totalPrice = (this.cart.length * 6.00);
+    console.log(this.cart);
   }
 
   ngOnInit() { }
@@ -39,22 +40,18 @@ export class CheckoutComponent implements OnInit {
     return this.fb.group({
       sellerId: ['901378548'],
       publishableKey: ['CF3531E4-3895-4E14-8110-3662393C7B6C'],
-      ccNo: ['', Validators.required],
-      cvv: ['', Validators.required],
-      expMonth: ['', Validators.required],
-      expYear: ['', Validators.required],
+      ccNo: ['4000000000000002', Validators.required],
+      cvv: ['', [Validators.required, Validators.pattern(/^[0-9]{3,4}$/)]],
+      expMonth: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(/^[0-9]{2}$/)]],
+      expYear: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(/^[0-9]{4}$/)]],
     });
   }
 
   checkout(credentials) {
-    const selectedClasses = this.cart.map((selected) => {
-      return selected;
-    })
-    
-    credentials.ccNo = "4000000000000002";
+
 
     console.log(credentials);
-    
+
 
     TCO.requestToken((res) => {
       const data = { tcoToken: res.response.token.token, total: this.totalPrice };
@@ -62,7 +59,7 @@ export class CheckoutComponent implements OnInit {
       this.openModal();
       console.log(data);
       forkJoin([this.paymentService.checkout(data),
-      this.classService.addClass(selectedClasses)])
+      this.classService.addClass(this.cart)])
         .subscribe((res) => {
           this.closeModal();
           toast('You have successfully enrolled these classes', 2000)
