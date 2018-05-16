@@ -2,6 +2,7 @@ import { UploadService } from './../../service/upload.service';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import * as FileSaver from 'file-saver';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-download-materials',
@@ -20,13 +21,27 @@ export class DownloadMaterialsComponent implements OnInit {
 
   getAvailableMaterials() {
     this.userService.getAvailableMaterials()
-      .subscribe((response: any[]) => this.files = response);
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.files = response
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 
 
   download(fileName) {
     this.userService.downloadFile(fileName)
-      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          FileSaver.saveAs(response, fileName)
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 
   formatBytes(bytes) {
