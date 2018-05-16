@@ -50,7 +50,8 @@ export class AddClassesComponent implements OnInit {
           this.form.setControl('availableClasses', this.buildCheckboxes(this.classes));
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -164,7 +165,8 @@ export class AddClassesComponent implements OnInit {
             }
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         });
     }

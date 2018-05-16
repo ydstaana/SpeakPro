@@ -6,6 +6,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UserService } from '../../service/user.service';
 import { Sched } from '../../model/sched';
 import { toast } from 'angular2-materialize';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ClassesByTeacherComponent implements OnInit {
   private teacher: User;
   private classes: Sched[];
 
-  constructor(private route: ActivatedRoute, private router: Router, private classService: ClassService, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private classService: ClassService, private userService: UserService, private auth: AuthService) { }
 
   ngOnInit() {
     this.route.params
@@ -36,7 +37,8 @@ export class ClassesByTeacherComponent implements OnInit {
           this.classes = response[1];
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       })
   }

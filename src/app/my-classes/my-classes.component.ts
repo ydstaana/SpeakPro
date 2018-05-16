@@ -59,7 +59,8 @@ export class MyClassesComponent implements OnInit {
         if (response.success !== false) this.classes = response;
         else {
           this.classes = null;
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -107,14 +108,16 @@ export class MyClassesComponent implements OnInit {
                     this.getClasses(this.teacherId);
                   }
                   else {
-                    toast('Something went wrong. Please try logging in again.', 2000);
+                    alert('Your session has expired. Please login again to continue.')
+                    this.auth.logout();
                   }
                 });
             }
           }
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -129,7 +132,8 @@ export class MyClassesComponent implements OnInit {
             this.getClasses(this.teacherId);
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         })
     }

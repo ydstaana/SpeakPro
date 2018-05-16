@@ -1,3 +1,4 @@
+import { AuthService } from './../../service/auth.service';
 import { UploadService } from './../../service/upload.service';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ import { toast } from 'angular2-materialize';
 export class DownloadMaterialsComponent implements OnInit {
   files: any[];
 
-  constructor(private userService: UserService, private uploadService: UploadService) { }
+  constructor(private userService: UserService, private uploadService: UploadService, private auth: AuthService) { }
 
   ngOnInit() {
     this.getAvailableMaterials();
@@ -26,7 +27,8 @@ export class DownloadMaterialsComponent implements OnInit {
           this.files = response
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -39,7 +41,8 @@ export class DownloadMaterialsComponent implements OnInit {
           FileSaver.saveAs(response, fileName)
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
