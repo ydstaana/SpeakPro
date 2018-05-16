@@ -1,37 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 
 #sidenav-overlay {
-  display: none;
+    display: none;
 }
 
 body {
-  overflow: visible !important;
-  width: auto !important;
+    overflow: visible !important;
+    width: auto !important;
 }
 
 /** TABLE STYLES **/
 
 table {
-  width: 100%;
-  table-layout: fixed;
+    width: 100%;
+    table-layout: fixed;
 }
 
 thead>th {
-  text-align: center;
+    text-align: center;
 }
 
 tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 tr:last-child {
-  border-bottom: 0px;
+    border-bottom: 0px;
 }
 
-.empty-table{
-  height: 67px;
+.empty-table {
+    height: 67px;
 }
 
 .td-1 {
-  width: 10%;
+    width: 10%;
+}
+
+.indicator {
+    background-color: #64B5F6 !important;
 }
