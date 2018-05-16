@@ -1,0 +1,45 @@
+.modal-content {
+    text-align: center;
+}
+
+h6 {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.item-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+}
+
+.item-description {
+    color: gray;
+    font-size: 0.85em;
+}
+
+.order-summary {
+    padding-top: 15px;
+    padding-bottom: 0px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+
+.tabs .tab a{
+  color: #64B5F6;
+}
+
+.tabs.tabs-fixed-width .indicator{
+  background-color: #64B5F6 !important;
+}

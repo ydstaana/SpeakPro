@@ -93,10 +93,8 @@ export class HomepageComponent implements OnInit {
       .subscribe((response: any) => {
         if (response) {
           const { token, ...loggedUser } = response;
-
           this.loginModal.emit({ action: "modal", params: ['close'] });
           this.loginForm.reset();
-
           window.localStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard/add-classes']);
           this.tokenTry();

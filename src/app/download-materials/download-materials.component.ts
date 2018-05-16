@@ -1,15 +1,18 @@
+import { UploadService } from './../../service/upload.service';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-download-materials',
   templateUrl: './download-materials.component.html',
-  styleUrls: ['./download-materials.component.css']
+  styleUrls: ['./download-materials.component.css'],
+  providers: [UploadService]
 })
 export class DownloadMaterialsComponent implements OnInit {
   files: any[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private uploadService: UploadService) { }
 
   ngOnInit() {
     this.getAvailableMaterials();
@@ -21,13 +24,9 @@ export class DownloadMaterialsComponent implements OnInit {
   }
 
 
-  download(filename) {
-    this.userService.downloadFile(filename)
-      .subscribe((response) => {
-        // const blob = new Blob([response]);
-        // const url = window.URL.createObjectURL(blob);
-        // window.open(url);
-      });
+  download(fileName) {
+    this.userService.downloadFile(fileName)
+      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
   }
 
   formatBytes(bytes) {

@@ -7,6 +7,8 @@ var File = require('../../../../../../models/FileSchema.js');
 var User = require('../../../../../../models/UserSchema.js');
 
 
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
@@ -23,6 +25,7 @@ const fileUpload = pify(upload.array('selectedFiles')); //Promisify upload
 var uploadFile = async function (req, res) {
   try {
     await fileUpload(req, res)
+    console.log(Date.now());
     // Everything went fine
    	for(item of req.files){
    		var newFile = {

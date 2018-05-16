@@ -4,6 +4,7 @@ var File = require('../../../../../../models/FileSchema.js');
 module.exports = function (req, res, next) {
   File.find({ author: req.params.id })
     .populate('author', 'firstName lastName')
+    .sort({ fileName: 1 })
     .exec((err, files) => {
       if (err) {
         res.status(500).json({

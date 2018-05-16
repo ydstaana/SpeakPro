@@ -57,8 +57,8 @@ export class UserService {
       .pipe();
   }
 
-  getUserById(userId) {
-    return this.http.get(`http://localhost:3000/users/${userId}`, { headers: this.getHeaders() })
+  getUserByUsername(username) {
+    return this.http.get(`http://localhost:3000/users/${username}`, { headers: this.getHeaders() })
       .pipe();
   }
 

@@ -2,17 +2,23 @@
 <div class="row">
   <div class="col s5">
     <div class="card">
-      {{shoppingCart}}
-      <div class="card-content">
+      <div class="order-summary card-content">
+        <h6>Order Summary</h6>
         <ul *ngIf="cart">
+          <li *ngIf="cart.length === 0">Your cart is empty</li>
           <li *ngFor="let item of cart">
-            {{item.timeSlot}} ({{item.teacher.firstName}} {{item.teacher.lastName}}) - $2.00
+            <div class="item-title">
+              <span>{{item.day}} Class</span>
+              <span>$6.00</span>
+            </div>
+            <div class="item-description">{{item.timeSlot}} • {{item.teacher.firstName}} {{item.teacher.lastName}}</div>
           </li>
         </ul>
 
       </div>
-      <div class="card-action">
-        <p>Total: $10.00</p>
+      <div class="order-total card-action">
+        <span>Order Total</span>
+        <span>${{totalPrice.toFixed(2)}}</span>
       </div>
     </div>
   </div>
@@ -23,45 +29,65 @@
           <li class="tab">
             <a href="#credit-card" class="active">Credit Card</a>
           </li>
-          <li class="tab">
+          <li class="tab disabled">
             <a href="#pera-padala">Pera Padala</a>
           </li>
-          <li class="tab">
+          <li class="tab disabled">
             <a href="#globe-smart">Globe/Smart</a>
           </li>
         </ul>
       </div>
       <div class="card-content grey lighten-4">
-        <div id="credit-card">
+        <form id="credit-card" [formGroup]="creditCardForm">
           <div class="row">
             <div class="input-field col s12">
-              <input id="card-number" type="text">
+              <input id="card-number" type="text" formControlName="ccNo">
               <label for="card-number">Card Number</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input placeholder="Month" id="expiry-month" type="text">
-              <label for="expiry-month">Expiry Date</label>
+              <input placeholder="Month" id="expiry-month" type="text" formControlName="expMonth" maxlength="2">
+              <label for="expiry-month">Expiry Date (MM/YYYY)</label>
             </div>
             <div class="input-field col s6">
-              <input placeholder="Year" id="expiry-year" type="text">
+              <input placeholder="Year" id="expiry-year" type="text" formControlName="expYear" maxlength="4">
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="security-code" type="text">
-              <label for="security-code">Security Code</label>
+              <input id="security-code" type="text" formControlName="cvv" maxlength="4">
+              <label for="security-code">CVV</label>
             </div>
           </div>
           <div class="center row">
             <div class="col s12">
-              <button class="waves-effect waves-light btn" (click)="checkout()">Checkout</button>
+              <button class="waves-effect waves-light btn" (click)="checkout(creditCardForm.value)"  [ngClass]="{'disabled': !creditCardForm.valid || cart.length === 0}">Checkout</button>
             </div>
           </div>
-        </div>
+        </form>
         <div id="pera-padala">Test 2</div>
         <div id="globe-smart">Test 3</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="checkout-confirmation" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="confirmationModal">
+  <div class="modal-content">
+    <div class="preloader-wrapper active">
+      <div class="spinner-layer spinner-yellow-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>

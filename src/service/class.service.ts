@@ -6,7 +6,7 @@ import { Sched } from '../model/sched';
 
 @Injectable()
 export class ClassService {
-  private cart: any = undefined;
+  private cart: any = [];
 
   constructor(private http: HttpClient) {
 
@@ -25,10 +25,10 @@ export class ClassService {
 
   }
 
-  addClass(classes: String[]) {
+  addClass(classes: Sched[]) {
     const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
 
-    return this.http.post<String[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
+    return this.http.post<Sched[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
       .pipe();
   }
 
@@ -44,21 +44,22 @@ export class ClassService {
       .pipe();
   }
 
+  getAllClassesOfTeacherByUsername(username) {
+    return this.http.get(`http://localhost:3000/classes/teachers/${username}`, { headers: this.getHeaders() })
+      .pipe();
+  }
+
   openClass(newClass) {
     return this.http.request('post', 'http://localhost:3000/classes', { body: newClass, headers: this.getHeaders() })
       .pipe();
   }
 
-  closeClass(classId) {
-    return this.http.request('delete', `http://localhost:3000/classes/${classId}`, { headers: this.getHeaders() })
-      .pipe();
+  closeClass(selectedClass) {
+    console.log(selectedClass);
+    return this.http.request('delete', `http://localhost:3000/classes/${selectedClass._id}`,
+      { headers: this.getHeaders(), body: { teacher: selectedClass.teacher, code: selectedClass.code, student: selectedClass.student } }).pipe();
   }
 
-  // deleteClass(classes: String[]){
-  //   const userId = JSON.parse(localStorage.getItem('loggedUser'))._id;
-  //   return this.http.post<String[]>(`http://localhost:3000/api/class/student/${userId}/drop`, classes)
-  //     .pipe();
-  // }
 
   getHeaders() {
     const token = localStorage.getItem('token');

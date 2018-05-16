@@ -6,7 +6,7 @@
         <table class="centered highlight responsive-table">
           <thead>
             <th>Time</th>
-            <th>Date</th>
+            <th>Day</th>
             <th>Teacher</th>
             <th>Status</th>
           </thead>
@@ -35,7 +35,7 @@
             </tr>
             <tr *ngFor="let class of enrolledClasses; let i = index">
               <td>{{enrolledClasses[i].timeSlot}}</td>
-              <td>Tue, April 10, 2018</td>
+              <td>{{enrolledClasses[i].day}}</td>
               <td>
                 <a (click)="viewTeacher(class.teacher._id)">{{enrolledClasses[i].teacher.firstName + ' ' + enrolledClasses[i].teacher.lastName}}</a>
               </td>
