@@ -9,7 +9,8 @@ import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-my-materials',
   templateUrl: './my-materials.component.html',
-  styleUrls: ['./my-materials.component.css']
+  styleUrls: ['./my-materials.component.css'],
+  providers: [UploadService]
 })
 export class MyMaterialsComponent implements OnInit {
   private availableFiles: any[];
@@ -69,6 +70,7 @@ export class MyMaterialsComponent implements OnInit {
 
   /* Fetches uploaded materials */
   getAvailableMaterials() {
+    this.availableFiles = null;
     this.userService.getAvailableMaterialsById(this.loggedUser.id)
       .subscribe((response: any) => this.availableFiles = response.data);
   }
@@ -80,6 +82,8 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress[index] = Math.round(100 * event.loaded / event.total);
     }
     else if (event.type === HttpEventType.Response) {
+      this.uploadQueue = [];
+      this.getAvailableMaterials();
       toast(`You have successfully uploaded ${filename}`, 2000)
     }
   }

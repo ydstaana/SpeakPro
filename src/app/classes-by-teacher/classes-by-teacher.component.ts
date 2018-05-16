@@ -5,6 +5,8 @@ import { User } from '../../model/user';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UserService } from '../../service/user.service';
 import { Sched } from '../../model/sched';
+import { toast } from 'angular2-materialize';
+
 
 @Component({
   selector: 'app-classes-by-teacher',
@@ -13,7 +15,6 @@ import { Sched } from '../../model/sched';
   providers: [ClassService, UserService]
 })
 export class ClassesByTeacherComponent implements OnInit {
-  private teacherId;
   private teacher: User;
   private classes: Sched[];
 
@@ -22,17 +23,21 @@ export class ClassesByTeacherComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-        this.teacherId = params['id'];
-        console.log(this.teacherId);
-        this.getClasses(this.teacherId);
+        this.getClasses(params['username']);
       });
   }
 
-  getClasses(teacherId) {
-    forkJoin(this.userService.getUserById(teacherId), this.classService.getAllClassesByTeacher(teacherId))
+  getClasses(username) {
+    forkJoin(this.userService.getUserByUsername(username),
+      this.classService.getAllClassesOfTeacherByUsername(username))
       .subscribe((response: any) => {
-        this.teacher = response[0];
-        this.classes = response[1];
+        if (response[0].success !== false || response[1].success !== false) {
+          this.teacher = response[0];
+          this.classes = response[1];
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
       })
   }
 

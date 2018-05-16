@@ -16,6 +16,7 @@ module.exports = function (req, res, next) {
         lastName: user.lastName,
         username: user.username,
         userType: user.userType,
+        classCodes: user.classCodes
       }
 
       var token = jwt.sign(payload, secret, {

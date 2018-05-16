@@ -8,9 +8,17 @@ module.exports = function(req, res, next){
 		code : 500,
 		message : err
 	});
-	res.status(200).json({
-		code :200,
-		message : "Successfully opened class"
-	});
+    else{
+    	User.update(
+		    { _id: req.body.teacher }, 
+		    { $push: { classCodes: req.body.code}},
+		    function(err, user){
+		    	console.log(user);
+		    	 res.json(user);
+		    }
+			);
+    }
   });
+
+  
 }

@@ -1,3 +1,4 @@
+import { TimeslotService } from './../service/timeslot.service';
 import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ClassService } from '../service/class.service';
 import { UserService } from '../service/user.service';
-
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MenuComponent } from './menu/menu.component';
@@ -34,6 +34,7 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
 import { DownloadMaterialsComponent } from './download-materials/download-materials.component';
 import { MyMaterialsComponent } from './my-materials/my-materials.component';
 import { UploadService } from '../service/upload.service';
+import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
@@ -81,7 +82,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
 
-          { path: 'teachers/:id', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
+          { path: 'teachers/:username', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
           { path: 'all-students', component: AllStudentsComponent },
           { path: 'all-teachers', component: AllTeachersComponent },
 
@@ -96,10 +97,11 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
   providers: [
     ClassService,
     UserService,
-    UploadService,
     TeacherGuard,
     StudentGuard,
     SessionGuard,
+    TimeslotService,
+    AuthService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

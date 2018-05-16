@@ -14,6 +14,7 @@ export class UploadService {
 
 
   uploadMaterials(formData) {
+    console.log(formData)
     const req = new HttpRequest('POST', `http://localhost:3000/uploads`,
       formData, { reportProgress: true, headers: this.getHeaders() });
 
