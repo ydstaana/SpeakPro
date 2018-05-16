@@ -5,6 +5,7 @@ import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
 import { toast } from 'angular2-materialize';
 import * as FileSaver from 'file-saver';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-my-materials',
@@ -21,10 +22,10 @@ export class MyMaterialsComponent implements OnInit {
   private fileUploadSub: any;
   private loggedUser: User;
 
-  constructor(private userService: UserService, private uploadService: UploadService) { }
+  constructor(private userService: UserService, private uploadService: UploadService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.loggedUser = this.auth.decodeAccessToken(localStorage.getItem('token'));
     this.getAvailableMaterials();
   }
 
