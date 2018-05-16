@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Sched } from '../model/sched';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ClassService {
   private cart: any = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
 
   }
 
@@ -26,14 +27,14 @@ export class ClassService {
   }
 
   addClass(classes: Sched[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
+    const userId = this.auth.decodeAccessToken(localStorage.getItem('token')).id;
 
     return this.http.post<Sched[]>(`http://localhost:3000/classes/student/${userId}`, classes, { headers: this.getHeaders() })
       .pipe();
   }
 
   dropClasses(dropClasses: String[]) {
-    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
+    const userId = this.auth.decodeAccessToken(localStorage.getItem('token')).id;
 
     return this.http.request('post', `http://localhost:3000/classes/student/${userId}/drop`, { body: dropClasses, headers: this.getHeaders() })
       .pipe();
