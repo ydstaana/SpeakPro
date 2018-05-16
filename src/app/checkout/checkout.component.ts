@@ -58,14 +58,25 @@ export class CheckoutComponent implements OnInit {
 
       this.openModal();
       console.log(data);
-      forkJoin([this.paymentService.checkout(data),
-      this.classService.addClass(this.cart)])
-        .subscribe((res) => {
-          this.closeModal();
-          toast('You have successfully enrolled these classes', 2000)
-          this.router.navigate(['dashboard/my-schedule']);
-        });
 
+      this.paymentService.checkout(data).subscribe(
+        response => {
+          this.classService.addClass(this.cart)
+            .subscribe((response: any) => {
+              if (response.success !== false) {
+                this.closeModal();
+                toast('You have successfully enrolled these classes', 2000)
+                this.router.navigate(['dashboard/my-schedule']);
+              }
+              else {
+                toast('Something went wrong. Please try logging in again.', 2000);
+              }
+            })
+        },
+        error => {
+          this.closeModal();
+          toast('Failed to authorize the provided credit card details. Please try again.', 2000);
+        });
     }, (err) => toast(err.errorMsg, 2000), credentials);
   }
 
