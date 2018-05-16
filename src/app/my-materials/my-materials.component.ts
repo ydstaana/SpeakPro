@@ -71,7 +71,8 @@ export class MyMaterialsComponent implements OnInit {
             this.handleProgress(event, i, this.uploadQueue[i].name)
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         });
     }
@@ -86,7 +87,8 @@ export class MyMaterialsComponent implements OnInit {
           this.availableFiles = response.data;
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -124,7 +126,8 @@ export class MyMaterialsComponent implements OnInit {
           FileSaver.saveAs(response, fileName);
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }

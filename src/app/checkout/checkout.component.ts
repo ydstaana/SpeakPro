@@ -7,6 +7,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { MaterializeAction } from 'angular2-materialize';
 import { toast } from 'angular2-materialize';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,7 +22,7 @@ export class CheckoutComponent implements OnInit {
   creditCardForm: FormGroup;
   totalPrice = 0;
 
-  constructor(private classService: ClassService, private paymentService: PaymentService, private router: Router, private fb: FormBuilder) {
+  constructor(private classService: ClassService, private paymentService: PaymentService, private router: Router, private fb: FormBuilder, private auth: AuthService) {
     this.cart = this.classService.getCart();
     this.confirmationModal = new EventEmitter<string | MaterializeAction>();
     this.creditCardForm = this.createCCForm();
@@ -69,7 +70,8 @@ export class CheckoutComponent implements OnInit {
                 this.router.navigate(['dashboard/my-schedule']);
               }
               else {
-                toast('Something went wrong. Please try logging in again.', 2000);
+                alert('Your session has expired. Please login again to continue.')
+                this.auth.logout();
               }
             })
         },

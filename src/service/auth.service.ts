@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
 import { toast } from 'angular2-materialize';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   timeslots: any[];
   days: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
   getUserCreds() {
@@ -35,6 +36,12 @@ export class AuthService {
 
   getUserToken() {
     return localStorage.getItem('token');
+  }
+
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/home']);
   }
 
 }

@@ -34,7 +34,8 @@ export class EditProfileComponent implements OnInit {
         Materialize.updateTextFields();
       }
       else {
-        toast('Something went wrong. Please try logging in again.', 2000);
+        alert('Your session has expired. Please login again to continue.')
+        this.auth.logout();
       }
     });
   }
@@ -69,7 +70,8 @@ export class EditProfileComponent implements OnInit {
             toast('Your profile has been updated', 2000);
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         }, err => console.log);
     }
