@@ -73,7 +73,14 @@ export class MyMaterialsComponent implements OnInit {
   getAvailableMaterials() {
     this.availableFiles = null;
     this.userService.getAvailableMaterialsById(this.loggedUser.id)
-      .subscribe((response: any) => this.availableFiles = response.data);
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.availableFiles = response.data;
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 
 
@@ -104,6 +111,13 @@ export class MyMaterialsComponent implements OnInit {
 
   download(fileName) {
     this.userService.downloadFile(fileName)
-      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          FileSaver.saveAs(response, fileName);
+        }
+        else {
+          toast('Something went wrong. Please try logging in again.', 2000);
+        }
+      });
   }
 }
