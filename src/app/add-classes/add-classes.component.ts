@@ -132,42 +132,41 @@ export class AddClassesComponent implements OnInit {
   }
 
   async submit(form) {
-    const msg = confirm('Are you sure you want to enroll this?');
-    if (msg === true) {
+    const selectedClasses: any = await this.bindSelected(form);
+    const conflictingTimeslots = this.findConflicts(selectedClasses);
 
-      const selectedClasses: any = await this.bindSelected(form);
-      const conflictingTimeslots = this.findConflicts(selectedClasses);
+    //Check conflicting classes on selected classes
+    if (conflictingTimeslots.length > 0) {
+      conflictingTimeslots.forEach((timeslot) => {
+        toast(`You have selected conflicting classes for ${timeslot}`, 5000)
+      });
+    }
+    else {
+      //Get user credentials from server
+      this.auth.getUserCreds()
+        .subscribe((response: any) => {
+          if (response.success !== false) { //If token is invalid or not yet expired
+            const student = response; //response is student when token is valid
+            const enrolledClasses = selectedClasses.filter(selectedClass => student.classCodes.includes(selectedClass.code));
 
-      //Check conflicting classes on selected classes
-      if (conflictingTimeslots.length > 0) {
-        conflictingTimeslots.forEach((timeslot) => {
-          toast(`You have selected conflicting classes for ${timeslot}`, 5000)
-        });
-      }
-      else {
-        //Get user credentials from server
-        this.auth.getUserCreds()
-          .subscribe((response: any) => {
-            if (response.success !== false) { //If token is invalid or not yet expired
-              const student = response; //response is student when token is valid
-              const enrolledClasses = selectedClasses.filter(selectedClass => student.classCodes.includes(selectedClass.code));
-
-              //Check if there is already an existing class on the selected timeslot/day
-              if (enrolledClasses.length > 0) {
-                enrolledClasses.forEach((enrolledClass) => {
-                  toast(`You already have a class on ${enrolledClass.day}, ${enrolledClass.timeSlot}`, 5000)
-                });
-              }
-              else { //If there are no conflicts, add the classes to cart
+            //Check if there is already an existing class on the selected timeslot/day
+            if (enrolledClasses.length > 0) {
+              enrolledClasses.forEach((enrolledClass) => {
+                toast(`You already have a class on ${enrolledClass.day}, ${enrolledClass.timeSlot}`, 5000)
+              });
+            }
+            else { //If there are no conflicts, add the classes to cart
+              const msg = confirm('Are you sure you want to enroll this?');
+              if (msg === true) {
                 this.classService.setCart(selectedClasses);
                 this.router.navigate(['dashboard/checkout']);
               }
             }
-            else {
-              toast('Something went wrong. Please try logging in again.', 2000);
-            }
-          });
-      }
+          }
+          else {
+            toast('Something went wrong. Please try logging in again.', 2000);
+          }
+        });
     }
   }
 
