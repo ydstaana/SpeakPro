@@ -65,7 +65,15 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress.push(0); //Sets the progress of the selected file to zero
 
       this.fileUploadSub = this.uploadService.uploadMaterials(formData)
-        .subscribe(event => this.handleProgress(event, i, this.uploadQueue[i].name));
+        .subscribe((event: any) => {
+          console.log(event)
+          if (event.success !== false) {
+            this.handleProgress(event, i, this.uploadQueue[i].name)
+          }
+          else {
+            toast('Something went wrong. Please try logging in again.', 2000);
+          }
+        });
     }
   }
 
