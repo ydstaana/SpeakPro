@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   createUser(user: User) {
     return this.http.post<User>('http://localhost:3000/users', user)
@@ -23,7 +24,7 @@ export class UserService {
   }
 
   getEnrolledClass() {
-    const userId = JSON.parse(localStorage.getItem('loggedUser')).id;
+    const userId = this.auth.decodeAccessToken(localStorage.getItem('token')).id;
     return this.http.get(`http://localhost:3000/classes/student/${userId}`, { headers: this.getHeaders() })
       .pipe();
   }
@@ -70,7 +71,7 @@ export class UserService {
 
 
   downloadFile(filename) {
-    const httpOptions = {headers: this.getHeaders(), responseType: 'blob' as 'blob' }
+    const httpOptions = { headers: this.getHeaders(), responseType: 'blob' as 'blob' }
     return this.http.get(`http://localhost:3000/download/${filename}`, httpOptions)
   }
 
