@@ -123,9 +123,14 @@ export class MyClassesComponent implements OnInit {
     const prompt = confirm('Are you sure you want to delete this class?');
     if (prompt === true) {
       this.classService.closeClass(selectedClass)
-        .subscribe(response => {
-          toast('You have successfully deleted a class.', 2000);
-          this.getClasses(this.teacherId);
+        .subscribe((response: any) => {
+          if (response.success !== false) {
+            toast('You have successfully deleted a class.', 2000);
+            this.getClasses(this.teacherId);
+          }
+          else {
+            toast('Something went wrong. Please try logging in again.', 2000);
+          }
         })
     }
 
