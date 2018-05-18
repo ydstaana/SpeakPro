@@ -10,3 +10,16 @@
 .modal .row{
   margin-bottom: 0px;
 }
+
+.submit{
+  background-color: #2196F3;
+}
+
+.forgot-password{
+  margin-top: 15px;
+}
+
+
+a{
+  cursor: pointer;
+}
