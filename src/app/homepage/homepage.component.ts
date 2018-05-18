@@ -104,4 +104,9 @@ export class HomepageComponent implements OnInit {
         }
       );
   }
+
+  forgotPassword() {
+    this.closeModal(this.loginForm, this.loginModal);
+    this.router.navigate(['forgot-password']);
+  }
 }
