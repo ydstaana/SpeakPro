@@ -1,3 +1,4 @@
+import { AuthService } from './../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 
@@ -9,10 +10,10 @@ import { User } from '../../model/user';
 export class SidebarComponent implements OnInit {
   user: User;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('loggedUser'));
+    this.user = this.auth.decodeAccessToken(localStorage.getItem('token'));
   }
 
 

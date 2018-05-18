@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../model/user';
 import { MaterializeAction } from 'angular2-materialize';
 import { toast } from 'angular2-materialize';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HomepageComponent implements OnInit {
   loginModal: EventEmitter<string | MaterializeAction>;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private auth: AuthService) {
     this.fullImagePath = 'assets/images';
     this.studentForm = this.createForm('STUDENT');
     this.teacherForm = this.createForm('TEACHER');
@@ -66,7 +67,7 @@ export class HomepageComponent implements OnInit {
       .subscribe(
         data => this.closeModal(form, modal),
         err => console.log(err));
-        toast('You have successfully registered. Please check your email.', 4000)
+    toast('You have successfully registered. Please check your email.', 4000)
   }
 
   closeModal(form, modal) {
@@ -90,26 +91,17 @@ export class HomepageComponent implements OnInit {
 
   login(credentials) {
     this.userService.login(credentials)
-      .subscribe((response: any) => {
-        if (response) {
-          const { token, ...loggedUser } = response;
-          this.loginModal.emit({ action: "modal", params: ['close'] });
-          this.loginForm.reset();
-          window.localStorage.setItem('token', response.token);
+      .subscribe(
+        (response: any) => {
+          const token = response.token;
+          localStorage.setItem('token', token);
+          this.closeModal(this.loginForm, this.loginModal);
           this.router.navigate(['/dashboard/add-classes']);
-          this.tokenTry();
+        },
+        (error) => {
+          this.closeModal(this.loginForm, this.loginModal);
+          toast(error.statusText, 2000);
         }
-        else {
-          alert('Error. Please try again.');
-        }
-
-
-      });
+      );
   }
-
-  tokenTry() {
-    var loggedUser = this.userService.getDecodedAccessToken(window.localStorage.getItem('token'));
-    window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-  }
-
 }

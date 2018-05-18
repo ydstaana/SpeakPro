@@ -5,6 +5,7 @@ import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
 import { toast } from 'angular2-materialize';
 import * as FileSaver from 'file-saver';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-my-materials',
@@ -21,10 +22,10 @@ export class MyMaterialsComponent implements OnInit {
   private fileUploadSub: any;
   private loggedUser: User;
 
-  constructor(private userService: UserService, private uploadService: UploadService) { }
+  constructor(private userService: UserService, private uploadService: UploadService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.loggedUser = this.auth.decodeAccessToken(localStorage.getItem('token'));
     this.getAvailableMaterials();
   }
 
@@ -64,7 +65,16 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress.push(0); //Sets the progress of the selected file to zero
 
       this.fileUploadSub = this.uploadService.uploadMaterials(formData)
-        .subscribe(event => this.handleProgress(event, i, this.uploadQueue[i].name));
+        .subscribe((event: any) => {
+          console.log(event)
+          if (event.success !== false) {
+            this.handleProgress(event, i, this.uploadQueue[i].name)
+          }
+          else {
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
+          }
+        });
     }
   }
 
@@ -72,7 +82,15 @@ export class MyMaterialsComponent implements OnInit {
   getAvailableMaterials() {
     this.availableFiles = null;
     this.userService.getAvailableMaterialsById(this.loggedUser.id)
-      .subscribe((response: any) => this.availableFiles = response.data);
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.availableFiles = response.data;
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 
 
@@ -103,6 +121,14 @@ export class MyMaterialsComponent implements OnInit {
 
   download(fileName) {
     this.userService.downloadFile(fileName)
-      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          FileSaver.saveAs(response, fileName);
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 }

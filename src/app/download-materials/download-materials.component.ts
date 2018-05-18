@@ -1,7 +1,9 @@
+import { AuthService } from './../../service/auth.service';
 import { UploadService } from './../../service/upload.service';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import * as FileSaver from 'file-saver';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-download-materials',
@@ -12,7 +14,7 @@ import * as FileSaver from 'file-saver';
 export class DownloadMaterialsComponent implements OnInit {
   files: any[];
 
-  constructor(private userService: UserService, private uploadService: UploadService) { }
+  constructor(private userService: UserService, private uploadService: UploadService, private auth: AuthService) { }
 
   ngOnInit() {
     this.getAvailableMaterials();
@@ -20,13 +22,29 @@ export class DownloadMaterialsComponent implements OnInit {
 
   getAvailableMaterials() {
     this.userService.getAvailableMaterials()
-      .subscribe((response: any[]) => this.files = response);
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.files = response
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 
 
   download(fileName) {
     this.userService.downloadFile(fileName)
-      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          FileSaver.saveAs(response, fileName)
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 
   formatBytes(bytes) {
