@@ -44,4 +44,7 @@ input:focus {
 
 input:focus + label {
   color: #64B5F6 !important;
+
+.indicator {
+    background-color: #64B5F6 !important;
 }

@@ -7,6 +7,7 @@ import { ClassService } from '../../service/class.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { toast } from 'angular2-materialize';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class DropClassesComponent implements OnInit {
     private fb: FormBuilder,
     private classService: ClassService,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private auth: AuthService) {
 
     this.createForm();
   }
@@ -49,7 +51,8 @@ export class DropClassesComponent implements OnInit {
           this.form.setControl('enrolledClasses', this.buildCheckboxes());
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -104,7 +107,8 @@ export class DropClassesComponent implements OnInit {
             this.getEnrolledClasses();
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         });
     }

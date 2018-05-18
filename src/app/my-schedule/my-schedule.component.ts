@@ -3,6 +3,7 @@ import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Sched } from '../../model/sched';
 import { toast } from 'angular2-materialize';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-my-schedule',
@@ -14,7 +15,8 @@ export class MyScheduleComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.getEnrolledClasses();
@@ -28,7 +30,8 @@ export class MyScheduleComponent implements OnInit {
           this.enrolledClasses = response
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }

@@ -41,7 +41,7 @@
           </div>
           <div class="row">
             <div class="col s12 center">
-              <button type="submit" class="btn blue lighten-2 waves-effect waves-light">
+              <button type="submit" class="btn blue lighten-2 waves-effect waves-light" [ngClass]="{'disabled': !form.valid}">
                 Update
               </button>
             </div>
