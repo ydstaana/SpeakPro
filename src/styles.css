@@ -44,6 +44,18 @@ input:focus {
 
 input:focus + label {
   color: #64B5F6 !important;
+}
+
+
+input.invalid:focus {
+  border-bottom: 1px solid red !important;
+  -webkit-box-shadow: 0 1px 0 0 red;
+  box-shadow: 0 1px 0 0 red;
+}
+
+input.invalid + label {
+color: red !important;
+}
 
 .indicator {
     background-color: #64B5F6 !important;
