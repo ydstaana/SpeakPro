@@ -36,8 +36,8 @@ import { MyMaterialsComponent } from './my-materials/my-materials.component';
 import { UploadService } from '../service/upload.service';
 import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
-import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -60,8 +60,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MyScheduleComponent,
     DownloadMaterialsComponent,
     MyMaterialsComponent,
-    LostPasswordComponent,
     ResetPasswordComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +76,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
       { path: 'home', component: HomepageComponent },
       { path: 'student-profile', component: StudentProfileComponent },
       { path: 'reset', component: ResetPasswordComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent, canActivate: [SessionGuard] },
