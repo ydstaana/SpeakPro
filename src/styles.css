@@ -42,7 +42,7 @@ input:focus {
     box-shadow: 0 1px 0 0 #64B5F6;
 }
 
-input:focus + label {
+input:focus + label + i {
   color: #64B5F6 !important;
 }
 
@@ -59,4 +59,8 @@ color: red !important;
 
 .indicator {
     background-color: #64B5F6 !important;
+}
+
+a{
+  cursor: pointer;
 }
