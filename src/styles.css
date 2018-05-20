@@ -79,8 +79,15 @@ a {
 }
 
 @font-face {
-  font-family: 'Octarine';
-  src: url('assets/fonts/Octarine-Bold.otf') format('opentype');
-  font-style: normal;
-  font-weight: bold;
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-LightOblique.otf') format('opentype');
+    font-style: oblique;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-Bold.otf') format('opentype');
+    font-style: normal;
+    font-weight: bold;
 }
