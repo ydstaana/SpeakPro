@@ -79,10 +79,12 @@ a{
     text-transform: none;
 }
 
+/* How it works */
+
 #how-it-works {
     background-color: #f2f2f2;
     height: max-content;
-    padding: 35px 0;
+    padding: 50px 0;
 }
 
 #how-it-works .row {
@@ -115,6 +117,122 @@ a{
     font-size: 17px;
 }
 
+/* Pricing */
+
+#pricing {
+    padding: 60px 0;
+}
+
+#pricing .row {
+    margin: 0 5%;
+    min-height: 60vh;
+}
+
+#pricing .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+#pricing .text-block h4 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 0px;
+    max-width: 480px;
+}
+
+#pricing .text-block p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 20px;
+    margin: 15px 0;
+    max-width: 480px;
+}
+
+#pricing .btn-large {
+    background-color: #F2D12F;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+
+#pricing table thead {
+    background-color: #2196F3;
+    color: white;
+}
+
+#pricing th {
+    border-radius: 20px 20px 0 0px;
+}
+
+#pricing th {
+    text-align: center;
+}
+
+#pricing th .price {
+    position: relative;
+}
+
+#pricing th .currency {
+    position: relative;
+    top: -30px;
+    font-family: 'Octarine', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#pricing th .value {
+    display: inline-block;
+    font-family: 'Octarine', sans-serif;
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    width: max-content;
+}
+
+#pricing th .unit {
+    font-family: 'Octarine', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    margin-top: -25px;
+}
+
+#pricing table {
+    width: 60%;
+}
+
+#pricing table tbody {
+    background-color: #F4F4F4;
+}
+
+#pricing tr td {
+    font-family: 'Octarine', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 2;
+    text-align: center;
+}
+
+#pricing tr:nth-last-of-type(2) {
+    border: 0;
+}
+
+#pricing tr:last-of-type td {
+    border-radius: 0 0 20px 20px;
+    color: #BFBFBF;
+    font-family: 'Octarine', sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1;
+    padding-top: 0;
+    padding-bottom: 25px;
+}
+
 /* Testimonials */
 
 #testimonials {
@@ -129,13 +247,14 @@ a{
 #testimonials h4 {
     font-family: 'Octarine', sans-serif;
     font-weight: 500;
-    margin-top: 0;
+    margin: 0;
 }
 
 #testimonials p {
     color: #939292;
     font-family: 'Octarine', sans-serif;
     font-size: 17px;
+    margin-top: 10px;
 }
 
 #testimonials .card {
@@ -163,7 +282,7 @@ a{
     align-items: center;
 }
 
-#testimonials .card .customer .customer-details  {
+#testimonials .card .customer .customer-details {
     margin-left: 10px;
 }
 
