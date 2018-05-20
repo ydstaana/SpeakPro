@@ -114,3 +114,37 @@ a{
     font-family: 'Octarine', sans-serif;
     font-size: 17px;
 }
+
+#teach-speakpro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 35px 0;
+}
+
+#teach-speakpro .row{
+  margin-bottom: 0;
+}
+
+#teach-speakpro h4 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 0px;
+}
+
+#teach-speakpro p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 17px;
+}
+
+#teach-speakpro .btn-large {
+    background-color: #F2D12F;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
