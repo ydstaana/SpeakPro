@@ -42,25 +42,38 @@ input:focus {
     box-shadow: 0 1px 0 0 #64B5F6;
 }
 
-input:focus + label + i {
-  color: #64B5F6 !important;
+input:focus+label+i {
+    color: #64B5F6 !important;
 }
-
 
 input.invalid:focus {
-  border-bottom: 1px solid red !important;
-  -webkit-box-shadow: 0 1px 0 0 red;
-  box-shadow: 0 1px 0 0 red;
+    border-bottom: 1px solid red !important;
+    -webkit-box-shadow: 0 1px 0 0 red;
+    box-shadow: 0 1px 0 0 red;
 }
 
-input.invalid + label {
-color: red !important;
+input.invalid+label {
+    color: red !important;
 }
 
 .indicator {
     background-color: #64B5F6 !important;
 }
 
-a{
-  cursor: pointer;
+a {
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine.otf') format('opentype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-Medium.otf') format('opentype');
+    font-style: normal;
+    font-weight: 500;
 }
