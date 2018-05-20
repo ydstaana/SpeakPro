@@ -20,13 +20,15 @@
 }
 
 
-a{
-  cursor: pointer;
-} */
+ */
 
 .logo {
     height: 80px;
     padding: 0.5px 0px;
+}
+
+a {
+    cursor: pointer;
 }
 
 nav {
@@ -34,15 +36,16 @@ nav {
     position: absolute;
     top: 10px;
     height: 80px;
+    z-index: 100;
 }
 
 nav a {
     color: #939292;
 }
 
-nav li{
-  height: 80px;
-  line-height: 80px;
+nav li {
+    height: 80px;
+    line-height: 80px;
 }
 
 .nav-wrapper {
