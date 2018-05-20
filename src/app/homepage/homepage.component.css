@@ -24,6 +24,31 @@ a{
   cursor: pointer;
 } */
 
+.logo {
+    height: 80px;
+    padding: 0.5px 0px;
+}
+
+nav {
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    height: 80px;
+}
+
+nav a {
+    color: #939292;
+}
+
+nav li{
+  height: 80px;
+  line-height: 80px;
+}
+
+.nav-wrapper {
+    margin: 0 5%;
+}
+
 #hero {
     min-height: 80vh;
     position: relative;
@@ -120,7 +145,7 @@ a{
 /* Pricing */
 
 #pricing {
-    padding: 60px 0;
+    padding: 20px 0;
 }
 
 #pricing .row {
@@ -159,7 +184,6 @@ a{
     padding: 0 40px;
     text-transform: none;
 }
-
 
 #pricing table thead {
     background-color: #2196F3;
