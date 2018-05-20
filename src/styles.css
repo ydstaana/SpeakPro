@@ -77,3 +77,10 @@ a {
     font-style: normal;
     font-weight: 500;
 }
+
+@font-face {
+  font-family: 'Octarine';
+  src: url('assets/fonts/Octarine-Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: bold;
+}

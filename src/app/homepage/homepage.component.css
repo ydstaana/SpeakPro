@@ -24,6 +24,61 @@ a{
   cursor: pointer;
 } */
 
+#hero {
+    min-height: 80vh;
+    position: relative;
+}
+
+#hero .col.m6:not(.hero-text-container) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#hero object {
+    height: 460px;
+    padding: 0 30px;
+}
+
+#hero .col {
+    min-height: 80vh;
+}
+
+#hero .hero-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero .hero-text {
+    height: max-content;
+}
+
+#hero .hero-text h2 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+#hero .hero-text p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 5px 0;
+    max-width: 480px;
+}
+
+#hero .btn-large {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
 #how-it-works {
     background-color: #f2f2f2;
     height: max-content;
