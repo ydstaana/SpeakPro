@@ -123,8 +123,8 @@ a{
     padding: 35px 0;
 }
 
-#teach-speakpro .row{
-  margin-bottom: 0;
+#teach-speakpro .row {
+    margin-bottom: 0;
 }
 
 #teach-speakpro h4 {
@@ -147,4 +147,28 @@ a{
     line-height: 48px;
     padding: 0 40px;
     text-transform: none;
+}
+
+footer {
+    background-color: #2196F3;
+    padding: 35px 0;
+}
+
+footer .row {
+    margin: 0 5%;
+}
+
+.footer-brand{
+  color: white;
+  font-family: 'Octarine', sans-serif;
+}
+
+.footer-menu{
+  display: flex;
+  justify-content: space-evenly;
+}
+.footer-menu a {
+    color: white;
+    font-family: 'Octarine', sans-serif;
+    font-weight: bold;
 }
