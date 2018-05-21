@@ -41,13 +41,13 @@ export class HomepageComponent implements OnInit {
     let form: FormGroup = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       skypeID: ['', Validators.required],
       userType: [userType],
       newUser: [true],
-      active: [true]
+      active: [false]
     });
 
     return form;

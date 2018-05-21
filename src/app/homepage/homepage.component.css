@@ -15,9 +15,7 @@
   background-color: #2196F3;
 }
 
-.forgot-password{
-  margin-top: 15px;
-}
+
 
 
  */
@@ -39,8 +37,15 @@ nav {
     z-index: 100;
 }
 
-nav a {
-    color: #939292;
+
+nav .btn-flat{
+  color: #939292;
+  font-family: 'Octarine', sans-serif;
+  text-transform: none;
+}
+
+nav .btn-flat:focus, nav .btn-flat:active, nav .btn-flat:hover{
+  background-color: transparent;
 }
 
 nav li {
@@ -392,3 +397,30 @@ footer .row {
     font-family: 'Octarine', sans-serif;
     font-weight: bold;
 }
+
+.btn.cancel {
+    background-color: black;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+.btn.submit {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+.forgot-password {
+    font-family: 'Octarine', sans-serif;
+}
+
+
+
