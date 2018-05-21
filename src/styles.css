@@ -42,8 +42,14 @@ input:focus {
     box-shadow: 0 1px 0 0 #64B5F6;
 }
 
-input:focus+label+i {
+input:focus+label+i,
+input:focus+label {
     color: #64B5F6 !important;
+}
+
+input+label,
+input+label+i {
+    font-family: 'Octarine' !important;
 }
 
 input.invalid:focus {
@@ -90,4 +96,28 @@ a {
     src: url('assets/fonts/Octarine-Bold.otf') format('opentype');
     font-style: normal;
     font-weight: bold;
+}
+
+/* Modal */
+
+.modal#login-box {
+    width: 25%;
+}
+
+.modal.open,
+.modal {
+    border-radius: 20px !important;
+}
+
+.modal-content h5 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+}
+
+.modal-content>.row {
+    margin: 0;
+}
+
+.modal-content>.row>.col>.row:last-of-type {
+    margin-bottom: 0;
 }

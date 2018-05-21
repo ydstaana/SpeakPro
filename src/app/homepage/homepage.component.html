@@ -5,7 +5,7 @@
       <img class="logo" src="assets/images/SpeakPRO.png">
       <ul class="right ">
         <li>
-          <a class="modal-trigger" data-target="login-box">Login</a>
+          <a class="modal-trigger btn-flat" data-target="login-box">Login</a>
         </li>
       </ul>
     </div>
@@ -192,30 +192,28 @@
 
 
   <!-- Login Box -->
-  <div id="login-box" class="modal" materialize="modal" [materializeActions]="loginModal">
+  <div id="login-box" class="modal" materialize="modal" [materializeActions]="loginModal" [materializeParams]="[{ endingTop: '25%'}]">
     <div class="modal-content">
       <h5 class="center">Login</h5>
       <div class="row">
         <form class="col s12" [formGroup]="loginForm" (submit)="login(loginForm.value)">
           <!-- Username & Password -->
           <div class="row">
-            <div class="input-field col s6 offset-s3">
-              <i class="material-icons prefix">account_circle</i>
+            <div class="input-field col s12">
               <input id="login-username" type="text" formControlName="username">
               <label for="login-username">Username</label>
             </div>
-            <div class="input-field col s6 offset-s3">
-              <i class="material-icons prefix">lock</i>
+            <div class="input-field col s12">
               <input id="login-password" type="password" formControlName="password">
               <label for="login-password">Password</label>
             </div>
             <div class="col s6 center offset-s3">
-              <button type="submit" class="btn waves-effect waves-light submit">
+              <button type="submit" class="btn submit z-depth-0">
                 Login
               </button>
             </div>
           </div>
-          <div class="col s6 center offset-s3 forgot-password">
+          <div class="col s12 center forgot-password">
             <a (click)="forgotPassword()">Forgot password?</a>
           </div>
         </form>
@@ -224,18 +222,19 @@
   </div>
 
   <!-- Registration Form for Student -->
-  <div id="apply-student" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="studentModal">
+  <div id="apply-student" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '20%'}]"
+    [materializeActions]="studentModal">
     <div class="modal-content">
       <h5 class="center">Register as a Student</h5>
       <div class="row">
         <form class="col s12" [formGroup]="studentForm">
           <!-- First Name & Last Name -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="first-name" type="text" formControlName="firstName">
               <label for="first-name">First Name</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="last-name" type="text" formControlName="lastName">
               <label for="last-name">Last Name</label>
             </div>
@@ -243,23 +242,23 @@
 
           <!-- Username & Password -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="username" type="text" formControlName="username">
-              <label for="username">Username</label>
+              <label for="username">Username (minimum of 6 characters)</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="password" type="password" formControlName="password">
-              <label for="password">Password</label>
+              <label for="password">Password (minimum of 8 characters)</label>
             </div>
           </div>
 
           <!-- Email & Skype ID -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="email" type="text" formControlName="email">
               <label for="email">Email Address</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="skype-id" type="text" formControlName="skypeID">
               <label for="skype-id">Skype ID</label>
             </div>
@@ -267,10 +266,11 @@
 
           <div class="row container">
             <div class="col s12 center">
-              <button class="btn waves-effect modal-close waves-light" (click)="closeModal(studentForm, studentModal)">Cancel
+              <button class="btn cancel modal-close z-depth-0" (click)="closeModal(studentForm, studentModal)">
+                Cancel
               </button>
-              <button class="btn waves-effect waves-light" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid">Register
-                <i class="material-icons right">send</i>
+              <button class="btn submit z-depth-0" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid">
+                Register
               </button>
             </div>
           </div>
@@ -280,18 +280,19 @@
   </div>
 
   <!-- Registration Form for Teacher -->
-  <div id="apply-teacher" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="teacherModal">
+  <div id="apply-teacher" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '20%'}]"
+    [materializeActions]="teacherModal">
     <div class="modal-content">
       <h5 class="center">Register as a Teacher</h5>
       <div class="row">
         <form class="col s12" [formGroup]="teacherForm">
           <!-- First Name & Last Name -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-first-name" type="text" formControlName="firstName">
               <label for="teacher-first-name">First Name</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-last-name" type="text" formControlName="lastName">
               <label for="teacher-last-name">Last Name</label>
             </div>
@@ -299,23 +300,23 @@
 
           <!-- Username & Password -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-username" type="text" formControlName="username">
-              <label for="teacher-username">Username</label>
+              <label for="teacher-username">Username (minimum of 6 characters)</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-password" type="password" formControlName="password">
-              <label for="teacher-password">Password</label>
+              <label for="teacher-password">Password (minimum of 8 characters)</label>
             </div>
           </div>
 
           <!-- Email & Skype ID -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-email" type="text" formControlName="email">
               <label for="teacher-email">Email Address</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-skype-id" type="text" formControlName="skypeID">
               <label for="teacher-skype-id">Skype ID</label>
             </div>
@@ -323,10 +324,11 @@
 
           <div class="row container">
             <div class="col s12 center">
-              <button class="btn waves-effect modal-close waves-light" (click)="closeModal(teacherForm, teacherModal)">Cancel
+              <button class="btn cancel modal-close z-depth-0" (click)="closeModal(teacherForm, teacherModal)">
+                Cancel
               </button>
-              <button class="btn waves-effect waves-light" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid">Register
-                <i class="material-icons right">send</i>
+              <button class="btn submit z-depth-0" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid">
+                Register
               </button>
             </div>
           </div>
