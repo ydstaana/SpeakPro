@@ -8,11 +8,11 @@
           <div class="row">
             <div class="input-field col s6">
               <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': form.controls.firstName.dirty && form.controls.firstName.errors}">
-              <label for="teacher-first-name" class="active">First Name</label>
+              <label for="teacher-first-name" class="active">First Name *</label>
             </div>
             <div class="input-field col s6">
               <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': form.controls.lastName.dirty && form.controls.lastName.errors}">
-              <label for="teacher-last-name" class="active">Last Name</label>
+              <label for="teacher-last-name" class="active">Last Name *</label>
             </div>
           </div>
 
@@ -50,14 +50,13 @@
           <div class="row">
             <div class="input-field col s6">
               <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': form.controls.email.dirty && form.controls.email.errors}">
-              <label for="teacher-email" class="active">Email Address</label>
+              <label for="teacher-email" class="active">Email Address *</label>
             </div>
             <div class="input-field col s6">
               <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': form.controls.skypeID.dirty && form.controls.skypeID.errors}">
-              <label for="teacher-skype-id" class="active">Skype ID</label>
+              <label for="teacher-skype-id" class="active">Skype ID *</label>
             </div>
           </div>
-          <!-- <p>Form value: {{ form.value | json }}</p> -->
         </div>
       </div>
     </div>
