@@ -172,8 +172,10 @@ a {
     margin-top: 15px;
 }
 
-.material-tooltip{
+.material-tooltip, .toast{
     font-family: 'Octarine', sans-serif !important;
     border-radius: 20px !important;   
     padding: 10px 20px !important; 
 }
+
+
