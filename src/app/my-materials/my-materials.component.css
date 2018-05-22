@@ -41,3 +41,11 @@ main{
   display: flex;
   justify-content: center;
 }
+
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px 30px;
+}
