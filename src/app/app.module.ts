@@ -37,6 +37,7 @@ import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AdminGuard } from './admin.guard';
 
 
 @NgModule({
@@ -87,8 +88,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 
 
           { path: 'teachers/:username', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
-          { path: 'all-students', component: AllStudentsComponent },
-          { path: 'all-teachers', component: AllTeachersComponent },
+          { path: 'admin/all-students', component: AllStudentsComponent, canActivate: [AdminGuard, SessionGuard] },
+          { path: 'admin/all-teachers', component: AllTeachersComponent, canActivate: [AdminGuard, SessionGuard] },
 
           { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
           { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard] }
@@ -101,6 +102,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
   providers: [
     ClassService,
     UserService,
+    AdminGuard,
     TeacherGuard,
     StudentGuard,
     SessionGuard,
