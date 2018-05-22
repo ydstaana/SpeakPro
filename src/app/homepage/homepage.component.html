@@ -231,23 +231,23 @@
           <!-- First Name & Last Name -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="first-name" type="text" formControlName="firstName">
-              <label for="first-name">First Name</label>
+              <input id="first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': studentForm.controls.firstName.dirty && studentForm.controls.firstName.errors}">
+              <label for="first-name">First Name *</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="last-name" type="text" formControlName="lastName">
-              <label for="last-name">Last Name</label>
+              <input id="last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': studentForm.controls.lastName.dirty && studentForm.controls.lastName.errors}">
+              <label for="last-name">Last Name *</label>
             </div>
           </div>
 
           <!-- Username & Password -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="username" type="text" formControlName="username">
+              <input id="username" type="text" formControlName="username" [ngClass]="{'invalid': studentForm.controls.username.dirty && studentForm.controls.username.errors}">
               <label for="username">Username (minimum of 6 characters)</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="password" type="password" formControlName="password">
+              <input id="password" type="password" formControlName="password" [ngClass]="{'invalid': studentForm.controls.password.dirty && studentForm.controls.password.errors}">
               <label for="password">Password (minimum of 8 characters)</label>
             </div>
           </div>
@@ -255,12 +255,12 @@
           <!-- Email & Skype ID -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="email" type="text" formControlName="email">
-              <label for="email">Email Address</label>
+              <input id="email" type="text" formControlName="email" [ngClass]="{'invalid': studentForm.controls.email.dirty && studentForm.controls.email.errors}">
+              <label for="email">Email Address *</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="skype-id" type="text" formControlName="skypeID">
-              <label for="skype-id">Skype ID</label>
+              <input id="skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': studentForm.controls.skypeID.dirty && studentForm.controls.skypeID.errors}">
+              <label for="skype-id">Skype ID *</label>
             </div>
           </div>
 
@@ -289,23 +289,23 @@
           <!-- First Name & Last Name -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="teacher-first-name" type="text" formControlName="firstName">
-              <label for="teacher-first-name">First Name</label>
+              <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': teacherForm.controls.firstName.dirty && teacherForm.controls.firstName.errors}">
+              <label for="teacher-first-name">First Name *</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="teacher-last-name" type="text" formControlName="lastName">
-              <label for="teacher-last-name">Last Name</label>
+              <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': teacherForm.controls.lastName.dirty && teacherForm.controls.lastName.errors}">
+              <label for="teacher-last-name">Last Name *</label>
             </div>
           </div>
 
           <!-- Username & Password -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="teacher-username" type="text" formControlName="username">
+              <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': teacherForm.controls.username.dirty && teacherForm.controls.username.errors}">
               <label for="teacher-username">Username (minimum of 6 characters)</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="teacher-password" type="password" formControlName="password">
+              <input id="teacher-password" type="password" formControlName="password" [ngClass]="{'invalid': teacherForm.controls.password.dirty && teacherForm.controls.password.errors}">
               <label for="teacher-password">Password (minimum of 8 characters)</label>
             </div>
           </div>
@@ -313,12 +313,12 @@
           <!-- Email & Skype ID -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="teacher-email" type="text" formControlName="email">
-              <label for="teacher-email">Email Address</label>
+              <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': teacherForm.controls.email.dirty && teacherForm.controls.email.errors}">
+              <label for="teacher-email">Email Address *</label>
             </div>
             <div class="input-field col s12 m6">
-              <input id="teacher-skype-id" type="text" formControlName="skypeID">
-              <label for="teacher-skype-id">Skype ID</label>
+              <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': teacherForm.controls.skypeID.dirty && teacherForm.controls.skypeID.errors}">
+              <label for="teacher-skype-id">Skype ID *</label>
             </div>
           </div>
 
