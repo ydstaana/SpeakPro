@@ -17,6 +17,14 @@ main{
   border-bottom: 2px solid #2196F3;
 }
 
-.btn {
-  min-width: 151px;
+
+.btn.rounded {
+  min-width: 169.3px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px 30px;
 }
