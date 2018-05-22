@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MenuComponent } from './menu/menu.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -46,7 +45,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HomepageComponent,
     MenuComponent,
     StudentProfileComponent,
-    FooterComponent,
     AddClassesComponent,
     DashboardComponent,
     SidebarComponent,

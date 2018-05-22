@@ -121,3 +121,46 @@ a {
 .modal-content>.row>.col>.row:last-of-type {
     margin-bottom: 0;
 }
+
+
+.section{
+    padding-top: 0 !important;
+}
+.section h5.title {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.section .card{
+    border-radius: 20px;
+    margin-bottom: 0;
+}
+
+.section .card th {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+}
+
+
+.section .card td {
+    font-family: 'Octarine', sans-serif;
+    font-weight: normal;
+    min-height: 33px;
+}
+
+.section .card td a{
+    font-weight: 500;
+}
+
+.btn.rounded {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+    margin-top: 15px;
+}

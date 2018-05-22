@@ -14,9 +14,10 @@
   justify-content: center;
 }
 
-.section .title {
-  margin-top: 0px;
-  margin-bottom: 15px;
+main{
+  min-height: max-content;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 
 /** CARD STYLES **/
