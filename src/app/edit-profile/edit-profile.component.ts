@@ -46,7 +46,7 @@ export class EditProfileComponent implements OnInit {
     let form: FormGroup = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', Validators.minLength(8)],
       email: ['', [Validators.required, Validators.email]],
       skypeID: ['', Validators.required],

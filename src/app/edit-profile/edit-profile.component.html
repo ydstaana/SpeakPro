@@ -1,54 +1,52 @@
 <main>
-  <div class="section">
-    <h5 class="title">Edit Profile</h5>
-    <div class="card" *ngIf="form">
-      <div class="card-content">
-        <form [formGroup]="form" (submit)="editProfile(form.value)">
-          <!-- First Name & Last Name -->
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-first-name" type="text" formControlName="firstName">
-              <label for="teacher-first-name" class="active">First Name</label>
+  <form [formGroup]="form" (submit)="editProfile(form.value)">
+    <div class="section">
+      <h5 class="title">Edit Profile</h5>
+      <div class="card" *ngIf="form">
+        <div class="card-content">
+            <!-- First Name & Last Name -->
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': form.controls.firstName.dirty && form.controls.firstName.errors}">
+                <label for="teacher-first-name" class="active">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': form.controls.lastName.dirty && form.controls.lastName.errors}">
+                <label for="teacher-last-name" class="active">Last Name</label>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-last-name" type="text" formControlName="lastName">
-              <label for="teacher-last-name" class="active">Last Name</label>
-            </div>
-          </div>
 
-          <!-- Username & Password -->
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-username" type="text" formControlName="username">
-              <label for="teacher-username" class="active">Username</label>
+            <!-- Username & Password -->
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': form.controls.username.dirty && form.controls.username.errors}">
+                <label for="teacher-username" class="active">Username</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="teacher-password" type="password" formControlName="password" placeholder="********" [ngClass]="{'invalid': form.controls.password.dirty && form.controls.password.errors}">
+                <label for="teacher-password" class="active">New Password (Leave empty to retain current)</label>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-password" type="password" formControlName="password" placeholder="********">
-              <label for="teacher-password" class="active">Password</label>
-            </div>
-          </div>
 
-          <!-- Email & Skype ID -->
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-email" type="text" formControlName="email">
-              <label for="teacher-email" class="active">Email Address</label>
+            <!-- Email & Skype ID -->
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': form.controls.email.dirty && form.controls.email.errors}">
+                <label for="teacher-email" class="active">Email Address</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': form.controls.skypeID.dirty && form.controls.skypeID.errors}">
+                <label for="teacher-skype-id" class="active">Skype ID</label>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-skype-id" type="text" formControlName="skypeID">
-              <label for="teacher-skype-id" class="active">Skype ID</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12 center">
-              <button type="submit" class="btn blue lighten-2 waves-effect waves-light" [ngClass]="{'disabled': !form.valid}">
-                Update
-              </button>
-            </div>
-          </div>
-          <!-- <p>Form value: {{ form.value | json }}</p> -->
-        </form>
+            <!-- <p>Form value: {{ form.value | json }}</p> -->
+        </div>
       </div>
     </div>
-  </div>
+    <div class="center">
+      <button type="submit" class="btn rounded" [ngClass]="{'disabled': !form.valid}">
+        Update
+      </button>
+    </div>
+  </form>
 </main>
