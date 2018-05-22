@@ -99,7 +99,7 @@ export class HomepageComponent implements OnInit {
           const token = response.token;
           localStorage.setItem('token', token);
           this.closeModal(this.loginForm, this.loginModal);
-          this.router.navigate(['/dashboard/add-classes']);
+          this.router.navigate(['/dashboard/my-schedule']);
         },
         (error) => {
           this.closeModal(this.loginForm, this.loginModal);
