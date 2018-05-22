@@ -5,7 +5,9 @@ var secret = "speakpro";
 
 module.exports = function (req, res, next) {
   User.authenticate(req.body.username, req.body.password, function (err, user) {
-    if (err) return next(err);
+    if (err){
+      return next(err);
+    }
 
     else {
       console.log(user);

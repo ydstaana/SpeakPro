@@ -99,6 +99,7 @@ export class HomepageComponent implements OnInit {
           this.router.navigate(['/dashboard/add-classes']);
         },
         (error) => {
+          console.log(error.error)
           this.closeModal(this.loginForm, this.loginModal);
           toast(error.statusText, 2000);
         }
