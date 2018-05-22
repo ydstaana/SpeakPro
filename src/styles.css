@@ -36,6 +36,8 @@ tr:last-child {
     width: 10%;
 }
 
+
+
 input:focus {
     border-bottom: 1px solid #64B5F6 !important;
     -webkit-box-shadow: 0 1px 0 0 #64B5F6;
@@ -48,8 +50,12 @@ input:focus+label {
 }
 
 input+label,
-input+label+i {
+input+label+i, label+.select-wrapper, label {
     font-family: 'Octarine' !important;
+}
+
+.dropdown-content li > span {
+    color: #64B5F6 !important;
 }
 
 input.invalid:focus {
@@ -163,4 +169,10 @@ a {
     padding: 0 40px;
     text-transform: none;
     margin-top: 15px;
+}
+
+.material-tooltip{
+    font-family: 'Octarine', sans-serif !important;
+    border-radius: 20px !important;   
+    padding: 10px 20px !important; 
 }

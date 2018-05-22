@@ -26,8 +26,11 @@ main{
   padding: 0px;
 }
 
+.add-class.card{
+  margin-bottom: 20px;
+}
 .add-class.card>.card-content {
-  padding: 14px 15px 15px 10px;
+  padding: 14px 25px 15px 25px;
 }
 
 .add-class.card>.card-content>.row {
