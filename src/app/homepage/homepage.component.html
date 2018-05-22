@@ -243,8 +243,25 @@
           <!-- Username & Password -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="username" type="text" formControlName="username" [ngClass]="{'invalid': studentForm.controls.username.dirty && studentForm.controls.username.errors}">
+              <input id="username" type="text" formControlName="username" (input)="checkAvailability(studentForm)" [ngClass]="{'invalid': (studentForm.controls.username.dirty && studentForm.controls.username.errors) || available === false}">
               <label for="username">Username (minimum of 6 characters)</label>
+              <div class="helper-text " *ngIf="available===false ">Username is already taken</div>
+              <div class="checker-text " *ngIf="available===null && studentForm.controls.username.dirty && studentForm.controls.username.value.length> 5">
+                <div>Checking availability</div>
+                <div class="preloader-wrapper very small active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="input-field col s12 m6">
               <input id="password" type="password" formControlName="password" [ngClass]="{'invalid': studentForm.controls.password.dirty && studentForm.controls.password.errors}">
@@ -269,7 +286,7 @@
               <button class="btn cancel modal-close z-depth-0" (click)="closeModal(studentForm, studentModal)">
                 Cancel
               </button>
-              <button class="btn submit z-depth-0" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid">
+              <button class="btn submit z-depth-0" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid || available === null">
                 Register
               </button>
             </div>
@@ -301,8 +318,26 @@
           <!-- Username & Password -->
           <div class="row">
             <div class="input-field col s12 m6">
-              <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': teacherForm.controls.username.dirty && teacherForm.controls.username.errors}">
-              <label for="teacher-username">Username (minimum of 6 characters)</label>
+              <input id="teacher-username" type="text" formControlName="username" (input)="checkAvailability(teacherForm)" formControlName="username"
+                [ngClass]="{'invalid': (teacherForm.controls.username.dirty && teacherForm.controls.username.errors) || available === false}">
+              <label for=" teacher-username ">Username (minimum of 6 characters)</label>
+              <div class="helper-text " *ngIf="available===false ">Username is already taken</div>
+              <div class="checker-text " *ngIf="available===null && teacherForm.controls.username.dirty && teacherForm.controls.username.value.length> 5">
+                <div>Checking availability</div>
+                <div class="preloader-wrapper very small active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="input-field col s12 m6">
               <input id="teacher-password" type="password" formControlName="password" [ngClass]="{'invalid': teacherForm.controls.password.dirty && teacherForm.controls.password.errors}">
@@ -327,7 +362,7 @@
               <button class="btn cancel modal-close z-depth-0" (click)="closeModal(teacherForm, teacherModal)">
                 Cancel
               </button>
-              <button class="btn submit z-depth-0" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid">
+              <button class="btn submit z-depth-0" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid || available === null">
                 Register
               </button>
             </div>

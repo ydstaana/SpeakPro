@@ -24,6 +24,8 @@ export class HomepageComponent implements OnInit {
   teacherModal: EventEmitter<string | MaterializeAction>;
   loginModal: EventEmitter<string | MaterializeAction>;
 
+  available: boolean = null;
+
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private auth: AuthService) {
     this.fullImagePath = 'assets/images';
@@ -72,6 +74,7 @@ export class HomepageComponent implements OnInit {
 
   closeModal(form, modal) {
     form.reset(this.resetForm(form.value))
+    this.available = null;
     modal.emit({ action: "modal", params: ['close'] });
   }
 
@@ -108,5 +111,23 @@ export class HomepageComponent implements OnInit {
   forgotPassword() {
     this.closeModal(this.loginForm, this.loginModal);
     this.router.navigate(['forgot-password']);
+  }
+
+
+  checkAvailability(form) {
+    this.available = null;
+    const newUsername = form.get('username').value;
+    if (newUsername.length > 5) {
+      this.userService.checkUsernameAvailability(newUsername)
+        .subscribe((res: any) => {
+          if (res.available) {
+            this.available = true;
+            form.controls.username.setErrors(null);
+          } else {
+            this.available = false;
+            form.controls.username.setErrors({ taken: true });
+          }
+        });
+    }
   }
 }

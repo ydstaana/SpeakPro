@@ -37,15 +37,16 @@ nav {
     z-index: 100;
 }
 
-
-nav .btn-flat{
-  color: #939292;
-  font-family: 'Octarine', sans-serif;
-  text-transform: none;
+nav .btn-flat {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    text-transform: none;
 }
 
-nav .btn-flat:focus, nav .btn-flat:active, nav .btn-flat:hover{
-  background-color: transparent;
+nav .btn-flat:focus,
+nav .btn-flat:active,
+nav .btn-flat:hover {
+    background-color: transparent;
 }
 
 nav li {
@@ -417,10 +418,23 @@ footer .row {
     padding: 0 40px;
     text-transform: none;
 }
+.preloader-wrapper.very.small {
+  margin-left: 10px;
+  height: 15px;
+  width: 15px;
+}
 
 .forgot-password {
     font-family: 'Octarine', sans-serif;
 }
 
+.checker-text {
+    font-family: 'Octarine', sans-serif;
+    display: flex;
+    align-items: center;
+}
 
-
+.helper-text {
+    font-family: 'Octarine', sans-serif;
+    color: red;
+}
