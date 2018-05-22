@@ -139,6 +139,7 @@ a {
     margin-bottom: 15px;
 }
 
+
 .section .card{
     border-radius: 20px;
     margin-bottom: 0;
@@ -160,7 +161,7 @@ a {
     font-weight: 500;
 }
 
-.btn.rounded {
+.btn.rounded, .btn.rounded:hover, .btn.rounded:focus {
     background-color: #2196F3;
     border-radius: 50px;
     font-family: 'Octarine', sans-serif;
