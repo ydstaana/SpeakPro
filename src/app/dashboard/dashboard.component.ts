@@ -1,6 +1,7 @@
 import { AuthService } from './../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,5 +29,9 @@ export class DashboardComponent implements OnInit {
 
   toggleSidebar() {
     this.showSidebar = this.showSidebar ? false : true;
+  }
+
+  openNotifications(){
+    toast('Feature is not available at the moment', 1000);
   }
 }
