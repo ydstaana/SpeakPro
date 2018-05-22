@@ -75,6 +75,12 @@ export class UserService {
     return this.http.get(`http://localhost:3000/download/${filename}`, httpOptions)
   }
 
+
+  checkUsernameAvailability(username) {
+    return this.http.get(`http://localhost:3000/users/${username}/availability`, { headers: this.getHeaders() })
+      .pipe();
+  }
+
   getHeaders() {
     const token = localStorage.getItem('token');
     return new HttpHeaders({ 'Authorization': token });

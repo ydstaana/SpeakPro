@@ -1,9 +1,27 @@
 .row:last-child {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
-main{
-  min-height: max-content;
-  padding-top: 20px;
-  padding-bottom: 35px;
+main {
+    min-height: max-content;
+    padding-top: 20px;
+    padding-bottom: 35px;
 }
+
+.preloader-wrapper.very.small {
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+}
+
+.checker-text {
+    font-family: 'Octarine', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.helper-text {
+    font-family: 'Octarine', sans-serif;
+    color: red;
+}
+

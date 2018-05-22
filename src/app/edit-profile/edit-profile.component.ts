@@ -15,6 +15,7 @@ declare var Materialize: any;
 export class EditProfileComponent implements OnInit {
   form: FormGroup = null;
   loggedUser: User;
+  available: boolean = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private auth: AuthService) {
     this.form = this.createForm('TEACHER');
@@ -83,5 +84,22 @@ export class EditProfileComponent implements OnInit {
       return updatedFormNoPassword;
     }
     return updatedForm;
+  }
+
+  checkAvailability() {
+    this.available = null;
+    const newUsername = this.form.get('username').value;
+    if (newUsername.length > 5) {
+      this.userService.checkUsernameAvailability(newUsername)
+        .subscribe((res: any) => {
+          if (res.available) {
+            this.available = true;
+            this.form.controls.username.setErrors(null);
+          } else {
+            this.available = newUsername === this.loggedUser.username ? true : false;
+            if (newUsername !== this.loggedUser.username) this.form.controls.username.setErrors({ taken: true });
+          }
+        });
+    }
   }
 }
