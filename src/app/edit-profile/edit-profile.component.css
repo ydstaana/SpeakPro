@@ -25,3 +25,23 @@ main {
     color: red;
 }
 
+
+.btn.cancel {
+  background-color: black;
+  border-radius: 50px;
+  font-family: 'Octarine', sans-serif;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 40px;
+  text-transform: none;
+}
+
+.btn.submit {
+  background-color: #2196F3;
+  border-radius: 50px;
+  font-family: 'Octarine', sans-serif;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 40px;
+  text-transform: none;
+}

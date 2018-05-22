@@ -1,10 +1,10 @@
 import { AuthService } from './../../service/auth.service';
 import { UserService } from './../../service/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../model/user';
 import { window } from 'rxjs/operator/window';
-import { toast } from 'angular2-materialize';
+import { toast, MaterializeAction } from 'angular2-materialize';
 declare var Materialize: any;
 
 @Component({
@@ -14,11 +14,14 @@ declare var Materialize: any;
 })
 export class EditProfileComponent implements OnInit {
   form: FormGroup = null;
+  confirmPassForm: FormGroup = null;
   loggedUser: User;
   available: boolean = null;
+  confirmPassModal: EventEmitter<string | MaterializeAction> = new EventEmitter<string | MaterializeAction>();
 
   constructor(private fb: FormBuilder, private userService: UserService, private auth: AuthService) {
     this.form = this.createForm('TEACHER');
+    this.confirmPasswordForm();
     this.auth.getUserCreds().subscribe((response: any) => {
       if (response.success !== false) {
         this.loggedUser = response;
@@ -58,24 +61,55 @@ export class EditProfileComponent implements OnInit {
     return form;
   }
 
+  confirmPasswordForm() {
+    this.confirmPassForm = this.fb.group({
+      password: ['', Validators.required],
+    });
+  }
+
+  openModal() {
+    this.confirmPassModal.emit({ action: "modal", params: ['open'] });
+    this.form.disable();
+  }
+
+  closeModal() {
+    this.confirmPassModal.emit({ action: "modal", params: ['close'] });
+    this.confirmPassForm.reset({ password: '' });
+    this.form.enable();
+  }
+
+  confirmPassword() {
+    this.confirmPassForm.get('password').disable();
+    this.auth.confirmPassword({ username: this.loggedUser.username, password: this.confirmPassForm.controls.password.value })
+      .subscribe((res: any) => {
+        this.closeModal();
+        this.confirmPassForm.get('password').enable();
+        this.editProfile(this.form.value);
+      }, err => {
+        this.closeModal();
+        this.confirmPassForm.get('password').enable();
+        toast(err.statusText, 2000);
+      });
+  }
+
   editProfile(form) {
     const updatedUser = this.isPasswordEmpty(form);
-    const prompt = confirm('Are you sure you want to update your profile?');
+    console.log(updatedUser);
+    this.userService.editProfile(updatedUser, this.loggedUser.username)
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.success !== false) {
+          const token = response.token;
+          localStorage.setItem('token', token);
+          this.loggedUser = this.auth.decodeAccessToken(token);
+          toast('Your profile has been updated', 2000);
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      }, err => console.log);
 
-    if (prompt === true) {
-      console.log(updatedUser);
-      this.userService.editProfile(updatedUser, this.loggedUser.username)
-        .subscribe((response: any) => {
-          console.log(response);
-          if (response.success !== false) {
-            toast('Your profile has been updated', 2000);
-          }
-          else {
-            alert('Your session has expired. Please login again to continue.')
-            this.auth.logout();
-          }
-        }, err => console.log);
-    }
   }
 
   isPasswordEmpty(updatedForm) {
@@ -102,4 +136,6 @@ export class EditProfileComponent implements OnInit {
         });
     }
   }
+
+
 }

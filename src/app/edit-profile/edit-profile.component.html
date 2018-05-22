@@ -1,5 +1,5 @@
 <main>
-  <form [formGroup]="form" (submit)="editProfile(form.value)">
+  <form [formGroup]="form" (submit)="openModal()">
     <div class="section">
       <h5 class="title">Edit Profile</h5>
       <div class="card" *ngIf="form">
@@ -19,7 +19,8 @@
           <!-- Username & Password -->
           <div class="row">
             <div class="input-field col s6">
-              <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': (form.controls.username.dirty && form.controls.username.errors) || available === false}" (input)="checkAvailability()">
+              <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': (form.controls.username.dirty && form.controls.username.errors) || available === false}"
+                (input)="checkAvailability()">
               <label for="teacher-username" class="active">Username (minimum of 6 characters)</label>
               <div class="helper-text" *ngIf="available === false">Username is already taken</div>
               <div class="checker-text" *ngIf="available === null && form.controls.username.dirty && form.controls.username.value.length > 5">
@@ -67,3 +68,29 @@
     </div>
   </form>
 </main>
+
+
+<!-- Login Box -->
+<div id="confirm-password" class="modal" materialize="modal" [materializeActions]="confirmPassModal" [materializeParams]="[{ dismissible: false, endingTop: '33%'}]">
+  <div class="modal-content">
+    <h5 class="center">Enter Current Password</h5>
+    <div class="row">
+      <form class="col s12" [formGroup]="confirmPassForm" (submit)="confirmPassword()">
+        <!-- Username & Password -->
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="login-password" type="password" formControlName="password">
+            <label for="login-password">Current Password</label>
+          </div>
+          <div class="col s12 center">
+            <a class="btn cancel z-depth-0" (click)="closeModal()">
+              Cancel
+            </a>
+            <button class="btn submit z-depth-0" type="submit" [ngClass]="{'disabled': !confirmPassForm.valid}">Confirm</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

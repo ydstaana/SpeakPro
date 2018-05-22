@@ -5,7 +5,7 @@ const get_single_user = require('./_v/_v1/get_single_user');
 const get_all_users = require('./_v/_v1/get_all_users');
 const check_username_availability = require('./_v/_v1/check_username_availability');
 const create_user = require('./_v/_v1/create_user');
-const update_user = require('./_v/_v1/update_user');
+const update_user = require('./_v/_v2/update_user');
 const core = require('../../services/core');
 
 
