@@ -8,15 +8,11 @@ import { Sched } from '../model/sched';
 export class UploadService {
   private cart: any = undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
-  }
-
-
-  uploadMaterials(formData) {
-    console.log(formData)
+  uploadMaterials(formData, authorId) {
     const req = new HttpRequest('POST', `http://localhost:3000/uploads`,
-      formData, { reportProgress: true, headers: this.getHeaders() });
+      formData, { reportProgress: true, headers: this.getHeadersWithAuthorId(authorId) });
 
     return this.http.request(req);
   }
@@ -37,6 +33,11 @@ export class UploadService {
   getHeaders() {
     const token = localStorage.getItem('token');
     return new HttpHeaders({ 'Authorization': token });
+  }
+
+  getHeadersWithAuthorId(authorId){
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({ 'Authorization': token, 'author': authorId });
   }
 
 }
