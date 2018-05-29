@@ -18,6 +18,9 @@ h6 {
     color: gray;
     font-size: 0.85em;
     font-family: 'Octarine', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .order-summary {
@@ -38,6 +41,13 @@ h6 {
 
 li {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.item-content{
+    width: 100%; 
 }
 
 
@@ -77,4 +87,22 @@ h6{
 
 .card .card-content{
     border-radius: 0 0 20px 20px;
+}
+
+.btn-flat.remove{
+    box-sizing: content-box;
+    height: 16px;    
+    line-height: 16px;
+    padding: 0;
+    margin-right: 5px;
+    color: gray;
+    display: none;
+}
+
+li:hover .btn-flat.remove {
+    display: block;
+}
+
+li:hover .item-content {
+    width: 90%;
 }

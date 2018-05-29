@@ -6,14 +6,32 @@
         <div class="card">
           <div class="order-summary card-content">
             <h6>Order Summary</h6>
+            <div class="center cart-loader" *ngIf="!cart">
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-yellow-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <ul *ngIf="cart">
               <li *ngIf="cart.length === 0">Your cart is empty</li>
               <li *ngFor="let item of cart">
-                <div class="item-title">
-                  <span>{{item.day}} Class</span>
-                  <span>$6.00</span>
+                <button class="btn-flat remove" (click)="removeItem(item)" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Remove item"><i class="material-icons">highlight_off</i></button>                
+                <div class="item-content">
+                  <div class="item-title">
+                    <span>{{item.day}} Class</span>
+                    <span>$6.00</span>
+                  </div>
+                  <div class="item-description">{{item.timeSlot}} • {{item.teacher.firstName}} {{item.teacher.lastName}}</div>
                 </div>
-                <div class="item-description">{{item.timeSlot}} • {{item.teacher.firstName}} {{item.teacher.lastName}}</div>
               </li>
             </ul>
 
@@ -68,7 +86,7 @@
           </div>
         </div>
         <div class="center">
-            <button class="btn rounded z-depth-0" (click)="checkout(creditCardForm.value)"  [ngClass]="{'disabled': !creditCardForm.valid || cart.length === 0}">Checkout</button>
+            <button class="btn rounded z-depth-0" (click)="checkout(creditCardForm.value)"  [ngClass]="{'disabled': !creditCardForm.valid || cart === null || cart.length === 0}">Checkout</button>
         </div>
       </div>
     </div>
