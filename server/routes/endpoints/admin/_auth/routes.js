@@ -12,6 +12,6 @@ router.post('/users/login', login);
 router.post('/users/lost_password', lost_password);
 router.post('/users/reset_password', reset_password);
 router.post('/users/confirm_password', confirm_password);
-router.post('/users/confirm_password', confirm_email_registration);
+router.post('/users/confirm_email', confirm_email_registration);
 
 module.exports = router;

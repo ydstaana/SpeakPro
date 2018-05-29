@@ -38,6 +38,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AdminGuard } from './admin.guard';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { AdminGuard } from './admin.guard';
     MyMaterialsComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import { AdminGuard } from './admin.guard';
     RoundProgressModule,
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
-      { path: 'student-profile', component: StudentProfileComponent },
+      { path: 'confirm', component: ConfirmComponent },
       { path: 'reset', component: ResetPasswordComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       {

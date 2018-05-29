@@ -12,4 +12,8 @@ export class ResetService {
   resetPassword(token, password) {
     return this.http.post(`http://localhost:3000/users/reset_password`, { token: token, password: password }).pipe();
   }
+
+  confirmUser(id, token){
+    return this.http.post('http://localhost:3000/users/confirm_email', { id: id, token: token }).pipe();
+  }
 }
