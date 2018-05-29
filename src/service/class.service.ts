@@ -56,7 +56,6 @@ export class ClassService {
   }
 
   closeClass(selectedClass) {
-    console.log(selectedClass);
     return this.http.request('delete', `http://localhost:3000/classes/${selectedClass._id}`,
       { headers: this.getHeaders(), body: { teacher: selectedClass.teacher, code: selectedClass.code, student: selectedClass.student } }).pipe();
   }

@@ -94,10 +94,8 @@ export class EditProfileComponent implements OnInit {
 
   editProfile(form) {
     const updatedUser = this.isPasswordEmpty(form);
-    console.log(updatedUser);
     this.userService.editProfile(updatedUser, this.loggedUser.username)
       .subscribe((response: any) => {
-        console.log(response);
         if (response.success !== false) {
           const token = response.token;
           localStorage.setItem('token', token);
@@ -108,7 +106,7 @@ export class EditProfileComponent implements OnInit {
           alert('Your session has expired. Please login again to continue.')
           this.auth.logout();
         }
-      }, err => console.log);
+      }, err => toast(err, 2000));
 
   }
 

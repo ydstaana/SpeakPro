@@ -64,17 +64,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout(credentials) {
-
-
-    console.log(credentials);
-
-
     TCO.requestToken((res) => {
       const data = { tcoToken: res.response.token.token, total: this.totalPrice };
-
       this.openModal();
-      console.log(data);
-
       this.paymentService.checkout(data).subscribe(
         response => {
           this.classService.addClass(this.cart)

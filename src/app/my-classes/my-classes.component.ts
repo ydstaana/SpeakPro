@@ -82,9 +82,6 @@ export class MyClassesComponent implements OnInit {
       available: true
     };
 
-    console.log(newClass);
-
-
     //Get user credentials first from the server
     this.auth.getUserCreds()
       .subscribe((response: any) => {

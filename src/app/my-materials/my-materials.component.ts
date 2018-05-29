@@ -56,8 +56,6 @@ export class MyMaterialsComponent implements OnInit {
 
     this.uploadQueue = this.uploadQueue.concat(selectedFiles); //Adds newly selected files to upload queue
 
-    console.log(this.uploadQueue);
-
     //Sends request for each selected files
     for (let i = currentIndex; i < totalSize; i++) {
       const formData: FormData = new FormData();
@@ -67,7 +65,6 @@ export class MyMaterialsComponent implements OnInit {
 
       this.fileUploadSub = this.uploadService.uploadMaterials(formData, this.loggedUser.id.toString())
         .subscribe((event: any) => {
-          console.log(event)
           if (event.success !== false) {
             this.handleProgress(event, i, this.uploadQueue[i].name)
           }
