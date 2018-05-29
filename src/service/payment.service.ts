@@ -7,8 +7,9 @@ export class PaymentService {
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
-  checkout(token) {
-    return this.http.post('http://localhost:3000/checkout', token, { headers: this.getHeaders() })
+  checkout(data) {
+    data.user = this.auth.decodeAccessToken(localStorage.getItem('token'));
+    return this.http.post('http://localhost:3000/checkout', data, { headers: this.getHeaders() })
       .pipe();
   }
 

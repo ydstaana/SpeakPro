@@ -17,16 +17,17 @@ module.exports = function(req, res, next){
 	    "currency": "USD",
 	    "total": req.body.total,
 	    "billingAddr": {
-	        "name": "Joe Flagster",
-	        "addrLine1": "123 Main Street",
-	        "city": "Townsville",
-	        "state": "Ohio",
-	        "zipCode": "43206",
-	        "country": "USA",
-	        "email": "example@2co.com",
-	        "phoneNumber": "5555555555"
+	        "name": `${req.body.user.firstName} ${req.body.user.lastName}`,
+	        "addrLine1": "SpeakPro HQ",
+	        "city": "Makati City",
+	        "state": "NCR",
+	        "zipCode": "1630",
+	        "country": "PH",
+			"email": req.body.user.email
 	    }
 	};
+
+	console.log(params)
 
 	tco.checkout.authorize(params, function (error, data) {
 		console.log("i was called");
