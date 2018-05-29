@@ -67,9 +67,14 @@ export class HomepageComponent implements OnInit {
   submitForm(form: FormGroup, modal: EventEmitter<string | MaterializeAction>) {
     this.userService.createUser(form.value)
       .subscribe(
-        data => this.closeModal(form, modal),
-        err => console.log(err));
-    toast('You have successfully registered. Please check your email.', 4000)
+        data => {
+          this.closeModal(form, modal);
+          toast('You have successfully registered. Please check your email.', 4000)
+        },
+        err => {
+          this.closeModal(form, modal);
+          toast('An error occurred', 2000);
+        });
   }
 
   closeModal(form, modal) {

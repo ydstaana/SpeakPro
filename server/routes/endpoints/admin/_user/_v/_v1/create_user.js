@@ -75,7 +75,7 @@ module.exports = function (req, res, next) {
         template: 'registration-confirmation-email',
         subject: 'Please confirm your email',
         context: {
-          url: 'http://localhost:4200/#/confirm' + '&id=' + user._id + '?token=' + token,
+          url: 'http://localhost:4200/#/confirm' + '?id=' + user._id + '&token=' + token,
           name: user.firstName,
           token: token
         }
