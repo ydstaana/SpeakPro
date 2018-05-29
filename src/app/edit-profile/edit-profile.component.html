@@ -6,11 +6,11 @@
         <div class="card-content">
           <!-- First Name & Last Name -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': form.controls.firstName.dirty && form.controls.firstName.errors}">
               <label for="teacher-first-name" class="active">First Name *</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': form.controls.lastName.dirty && form.controls.lastName.errors}">
               <label for="teacher-last-name" class="active">Last Name *</label>
             </div>
@@ -18,7 +18,7 @@
 
           <!-- Username & Password -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': (form.controls.username.dirty && form.controls.username.errors) || available === false}"
                 (input)="checkAvailability()">
               <label for="teacher-username" class="active">Username (minimum of 6 characters)</label>
@@ -40,7 +40,7 @@
                 </div>
               </div>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-password" type="password" formControlName="password" placeholder="********" [ngClass]="{'invalid': form.controls.password.dirty && form.controls.password.errors}">
               <label for="teacher-password" class="active">New Password (Leave empty to retain current)</label>
             </div>
@@ -48,11 +48,11 @@
 
           <!-- Email & Skype ID -->
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': form.controls.email.dirty && form.controls.email.errors}">
               <label for="teacher-email" class="active">Email Address *</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': form.controls.skypeID.dirty && form.controls.skypeID.errors}">
               <label for="teacher-skype-id" class="active">Skype ID *</label>
             </div>

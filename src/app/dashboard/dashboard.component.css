@@ -9,6 +9,13 @@
   width: calc(100% - 300px);
 }
 
+@media screen and (max-width: 992px) {
+  .sidebar-toggled {
+    margin: 0 auto !important;
+    width: 85%;
+  }
+}
+
 .logged-user {
   font-family: 'Octarine', sans-serif;
   font-weight: bold;
