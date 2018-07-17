@@ -100,6 +100,7 @@ nav li {
     font-size: 20px;
     font-weight: normal;
     margin: 5px 0;
+    margin-bottom: 8px;        
     max-width: 480px;
 }
 
@@ -109,7 +110,22 @@ nav li {
     font-family: 'Octarine', sans-serif;
     height: 48px;
     line-height: 48px;
-    padding: 0 40px;
+    margin-top: 10px;
+    margin-right: 5px;    
+    padding: 0 30px;
+    text-transform: none;
+}
+
+#hero .btn-large.outline {
+    background-color: transparent;
+    border: 2px solid #2196F3;
+    border-radius: 50px;
+    color: #2196F3;
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 30px;
     text-transform: none;
 }
 
