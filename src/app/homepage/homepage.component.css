@@ -1,4 +1,4 @@
-.logo{
+/* .logo{
   height: 64px;
   padding: 0.5px 0px;
 }
@@ -9,4 +9,432 @@
 
 .modal .row{
   margin-bottom: 0px;
+}
+
+.submit{
+  background-color: #2196F3;
+}
+
+
+
+
+ */
+
+.logo {
+    height: 80px;
+    padding: 0.5px 0px;
+}
+
+a {
+    cursor: pointer;
+}
+
+nav {
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    height: 80px;
+    z-index: 100;
+}
+
+nav .btn-flat {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    text-transform: none;
+}
+
+nav .btn-flat:focus,
+nav .btn-flat:active,
+nav .btn-flat:hover {
+    background-color: transparent;
+}
+
+nav li {
+    height: 80px;
+    line-height: 80px;
+}
+
+.nav-wrapper {
+    margin: 0 5%;
+}
+
+#hero {
+    min-height: 80vh;
+    position: relative;
+}
+
+#hero .col.m6:not(.hero-text-container) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#hero object {
+    height: 460px;
+    padding: 0 30px;
+}
+
+#hero .col {
+    min-height: 80vh;
+}
+
+#hero .hero-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero .hero-text {
+    height: max-content;
+}
+
+#hero .hero-text h2 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+#hero .hero-text p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 5px 0;
+    max-width: 480px;
+}
+
+#hero .btn-large {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+/* How it works */
+
+#how-it-works {
+    background-color: #f2f2f2;
+    height: max-content;
+    padding: 50px 0;
+}
+
+#how-it-works .row {
+    margin: 0 5%;
+}
+
+#how-it-works h5 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 0px;
+}
+
+#how-it-works .step * {
+    display: block;
+    margin: auto;
+    width: 250px;
+}
+
+#how-it-works .step object {
+    height: 230px;
+    padding: 20px 0;
+}
+
+#how-it-works .col:nth-child(2) .step object {
+    padding: 30px 0px 10px 0;
+}
+
+#how-it-works .step span {
+    font-family: 'Octarine', sans-serif;
+    font-size: 17px;
+}
+
+/* Pricing */
+
+#pricing {
+    padding: 20px 0;
+}
+
+#pricing .row {
+    margin: 0 5%;
+    min-height: 60vh;
+}
+
+#pricing .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+#pricing .text-block h4 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 0px;
+    max-width: 480px;
+}
+
+#pricing .text-block p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 20px;
+    margin: 15px 0;
+    max-width: 480px;
+}
+
+#pricing .btn-large {
+    background-color: #F2D12F;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+#pricing table thead {
+    background-color: #2196F3;
+    color: white;
+}
+
+#pricing th {
+    border-radius: 20px 20px 0 0px;
+}
+
+#pricing th {
+    text-align: center;
+}
+
+#pricing th .price {
+    position: relative;
+}
+
+#pricing th .currency {
+    position: relative;
+    top: -30px;
+    font-family: 'Octarine', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#pricing th .value {
+    display: inline-block;
+    font-family: 'Octarine', sans-serif;
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    width: max-content;
+}
+
+#pricing th .unit {
+    font-family: 'Octarine', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    margin-top: -25px;
+}
+
+#pricing table {
+    width: 60%;
+}
+
+#pricing table tbody {
+    background-color: #F4F4F4;
+}
+
+#pricing tr td {
+    font-family: 'Octarine', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 2;
+    text-align: center;
+}
+
+#pricing tr:nth-last-of-type(2) {
+    border: 0;
+}
+
+#pricing tr:last-of-type td {
+    border-radius: 0 0 20px 20px;
+    color: #BFBFBF;
+    font-family: 'Octarine', sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1;
+    padding-top: 0;
+    padding-bottom: 25px;
+}
+
+/* Testimonials */
+
+#testimonials {
+    background-color: #F9E46E;
+    padding: 60px 0;
+}
+
+#testimonials .row {
+    margin: 0 5%;
+}
+
+#testimonials h4 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+
+#testimonials p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+#testimonials .card {
+    border-radius: 20px;
+    margin: 7px 30px 14px 30px;
+    padding: 20px;
+}
+
+#testimonials .card .card-title {
+    color: black;
+    font-family: 'Octarine', sans-serif;
+    font-size: 20px;
+    font-style: oblique;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+#testimonials .card .customer img {
+    height: 50px;
+    border-radius: 100%;
+}
+
+#testimonials .card .customer {
+    display: flex;
+    align-items: center;
+}
+
+#testimonials .card .customer .customer-details {
+    margin-left: 10px;
+}
+
+#testimonials .card .customer .customer-details * {
+    display: block;
+}
+
+#testimonials .card .customer .customer-details h6 {
+    font-family: 'Octarine', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#testimonials .card .customer .customer-details span {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 12px;
+}
+
+/* Teach With SpeakPro */
+
+#teach-speakpro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 35px 0;
+}
+
+#teach-speakpro .row {
+    margin-bottom: 0;
+}
+
+#teach-speakpro h4 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 0px;
+}
+
+#teach-speakpro p {
+    color: #939292;
+    font-family: 'Octarine', sans-serif;
+    font-size: 17px;
+}
+
+#teach-speakpro .btn-large {
+    background-color: #F2D12F;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+/* Footer */
+
+footer {
+    background-color: #2196F3;
+    padding: 35px 0;
+}
+
+footer .row {
+    margin: 0 5%;
+}
+
+.footer-brand {
+    color: white;
+    font-family: 'Octarine', sans-serif;
+}
+
+.footer-menu {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-menu a {
+    color: white;
+    font-family: 'Octarine', sans-serif;
+    font-weight: bold;
+}
+
+.btn.cancel {
+    background-color: black;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+
+.btn.submit {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+}
+.preloader-wrapper.very.small {
+  margin-left: 10px;
+  height: 15px;
+  width: 15px;
+}
+
+.forgot-password {
+    font-family: 'Octarine', sans-serif;
+}
+
+.checker-text {
+    font-family: 'Octarine', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.helper-text {
+    font-family: 'Octarine', sans-serif;
+    color: red;
 }

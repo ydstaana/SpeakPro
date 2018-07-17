@@ -15,7 +15,17 @@ var UserSchema = new mongoose.Schema({
 	classCodes: [{type: Number, default: []}],
 
 	newUser: Boolean,
-  active: Boolean
+  active: Boolean,
+
+  //For reset
+  reset_password_token: {
+    type: String,
+    default: ''
+  },
+  reset_password_expires: {
+    type: Date,
+    default: ''
+  }
 });
 
 

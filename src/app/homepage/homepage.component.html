@@ -1,310 +1,373 @@
 <!--NAVBAR-->
-<div class="navbar-fixed">
-  <nav class="blue lighten-2">
-    <div class="nav-wrapper container">
-      <img class="logo" [src]="fullImagePath + '/SpeakPRO.png'">
-      <ul class="right hide-on-med-and-down">
+<div class="navbar">
+  <nav class="z-depth-0">
+    <div class="nav-wrapper">
+      <img class="logo" src="assets/images/SpeakPRO.png">
+      <ul class="right hide-on-small-only">
         <li>
-          <a>Teach With Us</a>
-        </li>
-        <li>
-          <a>Learn With Us</a>
-        </li>
-        <li>
-          <a>Testimonials</a>
-        </li>
-        <li>
-          <a>About Us</a>
-        </li>
-        <li>
-          <button data-target="login-box" class="btn modal-trigger yellow lighten-5 darken-1">Login</button>
+          <a class="modal-trigger btn-flat" data-target="login-box">Login</a>
         </li>
       </ul>
-      <a href="#" data-target="slide-out" class="button-collapse">
-        <i class="material-icons">menu</i>
-      </a>
     </div>
   </nav>
-</div>
-<div id="index-banner" class="parallax-container">
-  <div class="section no-pad-bot">
-    <div class="container">
-      <br>
-      <br>
-      <h1 class="header center white-text text-lighten-2">Global Teaching Career From Home</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">Join the largest online English education platform</h5>
-      </div>
-      <div class="row center">
-        <a href="#" id="get-started" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-      </div>
-      <br>
-      <br>
 
-    </div>
-  </div>
-  <div class="parallax" materialize="parallax">
-    <img [src]="fullImagePath + '/img1.png'" alt="Unsplashed background img 1">
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="section">
+  <div id="hero">
     <div class="row">
-      <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center brown-text">
-            <i class="material-icons">flash_on</i>
-          </h2>
-          <h5 class="center">Speeds up development</h5>
-
-          <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.
-            Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-        </div>
+      <div class="col m6 hide-on-small-only">
+        <object type="image/svg+xml" data="assets/images/hero.svg">
+          Your browser does not support SVG
+        </object>
       </div>
-
-      <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center brown-text">
-            <i class="material-icons">group</i>
-          </h2>
-          <h5 class="center">User Experience Focused</h5>
-
-          <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components
-            and animations that provide more feedback to users. Additionally, a single underlying responsive system across
-            all platforms allow for a more unified user experience.</p>
-        </div>
-      </div>
-
-      <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center brown-text">
-            <i class="material-icons">settings</i>
-          </h2>
-          <h5 class="center">Easy to work with</h5>
-
-          <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are
-            also always open to feedback and can answer any questions a user may have about Materialize.</p>
+      <div class="col m6 s12 hero-text-container">
+        <div class="hero-text">
+          <h2>Learn, Anywhere.</h2>
+          <p>SpeakPro makes it easier for you to become fluent in English anywhere you are.</p>
+          <div class="btn-large z-depth-0 modal-trigger" data-target="apply-student">Get started</div>
         </div>
       </div>
     </div>
-
   </div>
-</div>
 
 
-<div class="parallax-container valign-wrapper">
-  <div class="section no-pad-bot">
-    <div class="container">
-      <div class="row center">
-      </div>
-    </div>
-  </div>
-  <div class="parallax" materialize="parallax">
-    <img [src]="fullImagePath + '/img2.jpg'" alt="Unsplashed background img 2">
-  </div>
-</div>
 
-<!-- Teach With Us Banner -->
-<div class="container">
-  <div class="section">
 
+
+  <!-- How it Works  -->
+  <div id="how-it-works">
     <div class="row">
       <div class="col s12 center">
-        <h3>
-          <i class="mdi-content-send brown-text"></i>
-        </h3>
-        <h4>Teach With Us</h4>
-        <p class="left-align light">Different people have different approaches to editing their websites. Not everybody wants to dig in the code to change
-          a headline or an image. Not everybody is technical. Embrace that and choose your ways to manage your website content.</p>
-        <button data-target="apply-teacher" class="btn modal-trigger waves-effect waves-light">Start Teaching</button>
+        <h5>How it works</h5>
       </div>
     </div>
-
-  </div>
-</div>
-
-
-<div class="parallax-container valign-wrapper">
-  <div class="section no-pad-bot">
-    <div class="container">
-      <div class="row center">
+    <div class="row">
+      <div class="col l4 m12 s12 center">
+        <div class="step">
+          <object type="image/svg+xml" data="assets/images/choose.svg">
+            Your browser does not support SVG
+          </object>
+          <span>Choose the suitable classes for your schedule</span>
+        </div>
+      </div>
+      <div class="col l4 m12 s12 center">
+        <div class="step">
+          <object type="image/svg+xml" data="assets/images/credit-card.svg">
+            Your browser does not support SVG
+          </object>
+          <span>Pay for your classes through different payment methods</span>
+        </div>
+      </div>
+      <div class="col l4 m12 s12 center">
+        <div class="step">
+          <object type="image/svg+xml" data="assets/images/skype.svg">
+            Your browser does not support SVG
+          </object>
+          <span>Learn with your instructor using Skype</span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="parallax" materialize="parallax">
-    <img [src]="fullImagePath + '/img3.jpg'" alt="Unsplashed background img 3">
+
+  <!-- Pricing -->
+  <div id="pricing">
+    <div class="row">
+      <div class="col l6 m6 s12">
+        <div class="text-block">
+          <h4>Become fluent easily without spending too much.</h4>
+          <p>Each session is priced reasonably for the benefit of those who want to speak cannot afford to pay hefty fees.</p>
+          <div class="btn-large z-depth-0 modal-trigger" data-target="apply-student">Sign Up Now</div>
+        </div>
+      </div>
+      <div class="col l6 m6 s12">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <div class="price">
+                  <span class="currency">$</span>
+                  <span class="value">6</span>
+                </div>
+                <div class="unit">per session</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                1-hr speaking lesson
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Downloadable Materials
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Cancelable anytime
+              </td>
+            </tr>
+            <tr>
+              <td>
+                * cancellations are non-refundable
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- Learn With Us Banner -->
-<div class="container">
-  <div class="section">
 
+  <!-- People Loves SpeakPro -->
+  <div id="testimonials">
     <div class="row">
       <div class="col s12 center">
-        <h3>
-          <i class="mdi-content-send brown-text"></i>
-        </h3>
-        <h4>Learn With Us</h4>
-        <p class="left-align light">Different people have different approaches to editing their websites. Not everybody wants to dig in the code to change
-          a headline or an image. Not everybody is technical. Embrace that and choose your ways to manage your website content.</p>
-        <button data-target="apply-student" class="btn modal-trigger waves-effect waves-light">Start Learning</button>
+        <h4>People Loves SpeakPro</h4>
+        <p>Hear the success stories of our customers</p>
       </div>
     </div>
-
-  </div>
-</div>
-
-<app-footer></app-footer>
-<script>
-  $(document).ready(function () {
-    $('.parallax').parallax();
-  });
-</script>
-
-<!-- Login Box -->
-<div id="login-box" class="modal" materialize="modal" [materializeActions]="loginModal">
-  <div class="modal-content">
-    <h5 class="center">Login</h5>
     <div class="row">
-      <form class="col s12" [formGroup]="loginForm">
-        <!-- Username & Password -->
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="login-username" type="text" formControlName="username">
-            <label for="login-username">Username</label>
-          </div>
-          <div class="input-field col s6">
-            <i class="material-icons prefix">lock</i>
-            <input id="login-password" type="text" formControlName="password">
-            <label for="login-password">Password</label>
-          </div>
-        </div>
-
-
-        <div class="row container">
-          <div class="col s12 center">
-            <button class="btn waves-effect waves-light" (click)="login(loginForm.value)">
-              Login
-            </button>
+      <div class="col l6 m12 s12">
+        <div class="card z-depth-0">
+          <div class="card-content">
+            <span class="card-title">“ SpeakPro helped me in enhancing my speaking skills, as well as, my self-confidence in having conversation with
+              those who are already fluent in English ”</span>
+            <div class="customer">
+              <img src="assets/images/user.jpg" alt="">
+              <div class="customer-details">
+                <h6>Juan Dela Cruz</h6>
+                <span>College Student • Philippines</span>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
+      </div>
+      <div class="col l6 m12 s12">
+        <div class="card z-depth-0">
+          <div class="card-content">
+            <span class="card-title">“ SpeakPro helped me in enhancing my speaking skills, as well as, my self-confidence in having conversation with
+              those who are already fluent in English ”</span>
+            <div class="customer">
+              <img src="assets/images/user.jpg" alt="">
+              <div class="customer-details">
+                <h6>Juan Dela Cruz</h6>
+                <span>College Student • Philippines</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Registration Form for Student -->
-<div id="apply-student" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="studentModal">
-  <div class="modal-content">
-    <h5 class="center">Register as a Student</h5>
+
+  <!-- Teach with SpeakPro -->
+  <div id="teach-speakpro">
     <div class="row">
-      <form class="col s12" [formGroup]="studentForm">
-        <!-- First Name & Last Name -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="first-name" type="text" formControlName="firstName">
-            <label for="first-name">First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="last-name" type="text" formControlName="lastName">
-            <label for="last-name">Last Name</label>
-          </div>
+      <div class="col s12 center">
+        <div class="text-block">
+          <h4>Teach with SpeakPro</h4>
+          <p>SpeakPro makes it easier for you to become fluent in English anywhere you are.</p>
+          <div class="btn-large z-depth-0 modal-trigger" data-target="apply-teacher">Join SpeakPro</div>
         </div>
-
-        <!-- Username & Password -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="username" type="text" formControlName="username">
-            <label for="username">Username</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="password" type="password" formControlName="password">
-            <label for="password">Password</label>
-          </div>
-        </div>
-
-        <!-- Email & Skype ID -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="email" type="text" formControlName="email">
-            <label for="email">Email Address</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="skype-id" type="text" formControlName="skypeID">
-            <label for="skype-id">Skype ID</label>
-          </div>
-        </div>
-
-        <div class="row container">
-          <div class="col s12 center">
-            <button class="btn waves-effect modal-close waves-light" (click)="closeModal(studentForm, studentModal)">Cancel
-            </button>
-            <button class="btn waves-effect waves-light" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid">Register
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Registration Form for Teacher -->
-<div id="apply-teacher" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="teacherModal">
-  <div class="modal-content">
-    <h5 class="center">Register as a Teacher</h5>
+
+  <!-- Footer -->
+  <footer>
     <div class="row">
-      <form class="col s12" [formGroup]="teacherForm">
-        <!-- First Name & Last Name -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="teacher-first-name" type="text" formControlName="firstName">
-            <label for="teacher-first-name">First Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="teacher-last-name" type="text" formControlName="lastName">
-            <label for="teacher-last-name">Last Name</label>
-          </div>
-        </div>
+      <div class="col m3 s4 footer-brand">
+        &copy; 2018 SpeakPro
+      </div>
+      <div class="col offset-m6 m3 s8 footer-menu">
+        <a>Email Us</a>
+        <a>Facebook</a>
+        <a>Twitter</a>
+      </div>
+    </div>
+  </footer>
 
-        <!-- Username & Password -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="teacher-username" type="text" formControlName="username">
-            <label for="teacher-username">Username</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="teacher-password" type="password" formControlName="password">
-            <label for="teacher-password">Password</label>
-          </div>
-        </div>
 
-        <!-- Email & Skype ID -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="teacher-email" type="text" formControlName="email">
-            <label for="teacher-email">Email Address</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="teacher-skype-id" type="text" formControlName="skypeID">
-            <label for="teacher-skype-id">Skype ID</label>
-          </div>
-        </div>
 
-        <div class="row container">
-          <div class="col s12 center">
-            <button class="btn waves-effect modal-close waves-light" (click)="closeModal(teacherForm, teacherModal)">Cancel
-            </button>
-            <button class="btn waves-effect waves-light" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid">Register
-              <i class="material-icons right">send</i>
-            </button>
+  <!-- Login Box -->
+  <div id="login-box" class="modal" materialize="modal" [materializeActions]="loginModal" [materializeParams]="[{ endingTop: '25%'}]">
+    <div class="modal-content">
+      <h5 class="center">Login</h5>
+      <div class="row">
+        <form class="col s12" [formGroup]="loginForm" (submit)="login(loginForm.value)">
+          <!-- Username & Password -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="login-username" type="text" formControlName="username">
+              <label for="login-username">Username</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="login-password" type="password" formControlName="password">
+              <label for="login-password">Password</label>
+            </div>
+            <div class="col s6 center offset-s3">
+              <button type="submit" class="btn submit z-depth-0">
+                Login
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+          <div class="col s12 center forgot-password">
+            <a (click)="forgotPassword()">Forgot password?</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+
+  <!-- Registration Form for Student -->
+  <div id="apply-student" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '20%'}]"
+    [materializeActions]="studentModal">
+    <div class="modal-content">
+      <h5 class="center">Register as a Student</h5>
+      <div class="row">
+        <form class="col s12" [formGroup]="studentForm">
+          <!-- First Name & Last Name -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': studentForm.controls.firstName.dirty && studentForm.controls.firstName.errors}">
+              <label for="first-name">First Name *</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': studentForm.controls.lastName.dirty && studentForm.controls.lastName.errors}">
+              <label for="last-name">Last Name *</label>
+            </div>
+          </div>
+
+          <!-- Username & Password -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="username" type="text" formControlName="username" (input)="checkAvailability(studentForm)" [ngClass]="{'invalid': (studentForm.controls.username.dirty && studentForm.controls.username.errors) || available === false}">
+              <label for="username">Username (minimum of 6 characters)</label>
+              <div class="helper-text " *ngIf="available===false ">Username is already taken</div>
+              <div class="checker-text " *ngIf="available===null && studentForm.controls.username.dirty && studentForm.controls.username.value.length> 5">
+                <div>Checking availability</div>
+                <div class="preloader-wrapper very small active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="password" type="password" formControlName="password" [ngClass]="{'invalid': studentForm.controls.password.dirty && studentForm.controls.password.errors}">
+              <label for="password">Password (minimum of 8 characters)</label>
+            </div>
+          </div>
+
+          <!-- Email & Skype ID -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="email" type="text" formControlName="email" [ngClass]="{'invalid': studentForm.controls.email.dirty && studentForm.controls.email.errors}">
+              <label for="email">Email Address *</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': studentForm.controls.skypeID.dirty && studentForm.controls.skypeID.errors}">
+              <label for="skype-id">Skype ID *</label>
+            </div>
+          </div>
+
+          <div class="row container">
+            <div class="col s12 center">
+              <button class="btn cancel modal-close z-depth-0" (click)="closeModal(studentForm, studentModal)">
+                Cancel
+              </button>
+              <button class="btn submit z-depth-0" (click)="submitForm(studentForm, studentModal)" [disabled]="!studentForm.valid || available === null">
+                Register
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration Form for Teacher -->
+  <div id="apply-teacher" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '20%'}]"
+    [materializeActions]="teacherModal">
+    <div class="modal-content">
+      <h5 class="center">Register as a Teacher</h5>
+      <div class="row">
+        <form class="col s12" [formGroup]="teacherForm">
+          <!-- First Name & Last Name -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': teacherForm.controls.firstName.dirty && teacherForm.controls.firstName.errors}">
+              <label for="teacher-first-name">First Name *</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': teacherForm.controls.lastName.dirty && teacherForm.controls.lastName.errors}">
+              <label for="teacher-last-name">Last Name *</label>
+            </div>
+          </div>
+
+          <!-- Username & Password -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="teacher-username" type="text" formControlName="username" (input)="checkAvailability(teacherForm)" formControlName="username"
+                [ngClass]="{'invalid': (teacherForm.controls.username.dirty && teacherForm.controls.username.errors) || available === false}">
+              <label for=" teacher-username ">Username (minimum of 6 characters)</label>
+              <div class="helper-text " *ngIf="available===false ">Username is already taken</div>
+              <div class="checker-text " *ngIf="available===null && teacherForm.controls.username.dirty && teacherForm.controls.username.value.length> 5">
+                <div>Checking availability</div>
+                <div class="preloader-wrapper very small active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="teacher-password" type="password" formControlName="password" [ngClass]="{'invalid': teacherForm.controls.password.dirty && teacherForm.controls.password.errors}">
+              <label for="teacher-password">Password (minimum of 8 characters)</label>
+            </div>
+          </div>
+
+          <!-- Email & Skype ID -->
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': teacherForm.controls.email.dirty && teacherForm.controls.email.errors}">
+              <label for="teacher-email">Email Address *</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': teacherForm.controls.skypeID.dirty && teacherForm.controls.skypeID.errors}">
+              <label for="teacher-skype-id">Skype ID *</label>
+            </div>
+          </div>
+
+          <div class="row container">
+            <div class="col s12 center">
+              <button class="btn cancel modal-close z-depth-0" (click)="closeModal(teacherForm, teacherModal)">
+                Cancel
+              </button>
+              <button class="btn submit z-depth-0" (click)="submitForm(teacherForm, teacherModal)" [disabled]="!teacherForm.valid || available === null">
+                Register
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

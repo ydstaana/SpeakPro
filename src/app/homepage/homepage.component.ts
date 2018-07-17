@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../model/user';
 import { MaterializeAction } from 'angular2-materialize';
 import { toast } from 'angular2-materialize';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -23,8 +24,10 @@ export class HomepageComponent implements OnInit {
   teacherModal: EventEmitter<string | MaterializeAction>;
   loginModal: EventEmitter<string | MaterializeAction>;
 
+  available: boolean = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private auth: AuthService) {
     this.fullImagePath = 'assets/images';
     this.studentForm = this.createForm('STUDENT');
     this.teacherForm = this.createForm('TEACHER');
@@ -40,13 +43,13 @@ export class HomepageComponent implements OnInit {
     let form: FormGroup = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       skypeID: ['', Validators.required],
       userType: [userType],
       newUser: [true],
-      active: [true]
+      active: [false]
     });
 
     return form;
@@ -64,13 +67,19 @@ export class HomepageComponent implements OnInit {
   submitForm(form: FormGroup, modal: EventEmitter<string | MaterializeAction>) {
     this.userService.createUser(form.value)
       .subscribe(
-        data => this.closeModal(form, modal),
-        err => console.log(err));
-        toast('You have successfully registered. Please check your email.', 4000)
+        data => {
+          this.closeModal(form, modal);
+          toast('You have successfully registered. Please check your email.', 4000)
+        },
+        err => {
+          this.closeModal(form, modal);
+          toast('An error occurred', 2000);
+        });
   }
 
   closeModal(form, modal) {
     form.reset(this.resetForm(form.value))
+    this.available = null;
     modal.emit({ action: "modal", params: ['close'] });
   }
 
@@ -90,26 +99,40 @@ export class HomepageComponent implements OnInit {
 
   login(credentials) {
     this.userService.login(credentials)
-      .subscribe((response: any) => {
-        if (response) {
-          const { token, ...loggedUser } = response;
-          this.loginModal.emit({ action: "modal", params: ['close'] });
-          this.loginForm.reset();
-          window.localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard/add-classes']);
-          this.tokenTry();
+      .subscribe(
+        (response: any) => {
+          const token = response.token;
+          localStorage.setItem('token', token);
+          this.closeModal(this.loginForm, this.loginModal);
+          this.router.navigate(['/dashboard/my-schedule']);
+        },
+        (error) => {
+          this.closeModal(this.loginForm, this.loginModal);
+          toast(error.statusText, 2000);
         }
-        else {
-          alert('Error. Please try again.');
-        }
-
-
-      });
+      );
   }
 
-  tokenTry() {
-    var loggedUser = this.userService.getDecodedAccessToken(window.localStorage.getItem('token'));
-    window.localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+  forgotPassword() {
+    this.closeModal(this.loginForm, this.loginModal);
+    this.router.navigate(['forgot-password']);
   }
 
+
+  checkAvailability(form) {
+    this.available = null;
+    const newUsername = form.get('username').value;
+    if (newUsername.length > 5) {
+      this.userService.checkUsernameAvailability(newUsername)
+        .subscribe((res: any) => {
+          if (res.available) {
+            this.available = true;
+            form.controls.username.setErrors(null);
+          } else {
+            this.available = false;
+            form.controls.username.setErrors({ taken: true });
+          }
+        });
+    }
+  }
 }

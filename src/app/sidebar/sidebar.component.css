@@ -1,7 +1,10 @@
 nav {
   height: 0px;
 }
-
+li a{
+  font-family: 'Octarine', sans-serif;
+  line-height: 50px;
+}
 li.active {
   background-color: #fdd835
 }

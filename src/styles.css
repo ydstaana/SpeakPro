@@ -36,6 +36,146 @@ tr:last-child {
     width: 10%;
 }
 
+
+
+input:focus {
+    border-bottom: 1px solid #64B5F6 !important;
+    -webkit-box-shadow: 0 1px 0 0 #64B5F6;
+    box-shadow: 0 1px 0 0 #64B5F6;
+}
+
+input:focus+label+i,
+input:focus+label {
+    color: #64B5F6 !important;
+}
+
+input+label,
+input+label+i, label+.select-wrapper, label {
+    font-family: 'Octarine' !important;
+}
+
+.dropdown-content li > span {
+    color: #64B5F6 !important;
+}
+
+input.invalid:focus {
+    border-bottom: 1px solid red !important;
+    -webkit-box-shadow: 0 1px 0 0 red;
+    box-shadow: 0 1px 0 0 red;
+}
+
+input.invalid+label {
+    color: red !important;
+}
+
 .indicator {
     background-color: #64B5F6 !important;
 }
+
+a {
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine.otf') format('opentype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-Medium.otf') format('opentype');
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-LightOblique.otf') format('opentype');
+    font-style: oblique;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Octarine';
+    src: url('assets/fonts/Octarine-Bold.otf') format('opentype');
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* Modal */
+
+.modal#login-box {
+    width: 25%;
+}
+
+.modal.open,
+.modal {
+    border-radius: 20px !important;
+}
+
+.modal-content h5 {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+}
+
+.modal-content>.row {
+    margin: 0;
+}
+
+.modal-content>.row>.col>.row:last-of-type {
+    margin-bottom: 0;
+}
+
+
+.section{
+    padding-top: 0 !important;
+}
+.section h5.title {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.section .card{
+    border-radius: 20px;
+    margin-bottom: 0;
+}
+
+.section .card th {
+    font-family: 'Octarine', sans-serif;
+    font-weight: 500;
+}
+
+
+.section .card td {
+    font-family: 'Octarine', sans-serif;
+    font-weight: normal;
+    min-height: 33px;
+}
+
+.section .card td a{
+    font-weight: 500;
+}
+
+.btn.rounded, .btn.rounded:hover, .btn.rounded:focus {
+    background-color: #2196F3;
+    border-radius: 50px;
+    font-family: 'Octarine', sans-serif;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 40px;
+    text-transform: none;
+    margin-top: 15px;
+}
+
+.material-tooltip, .toast{
+    font-family: 'Octarine', sans-serif !important;
+    border-radius: 20px !important;   
+    padding: 10px 20px !important; 
+}
+
+

@@ -59,7 +59,8 @@ export class MyClassesComponent implements OnInit {
         if (response.success !== false) this.classes = response;
         else {
           this.classes = null;
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -80,9 +81,6 @@ export class MyClassesComponent implements OnInit {
       student: null,
       available: true
     };
-
-    console.log(newClass);
-
 
     //Get user credentials first from the server
     this.auth.getUserCreds()
@@ -107,14 +105,16 @@ export class MyClassesComponent implements OnInit {
                     this.getClasses(this.teacherId);
                   }
                   else {
-                    toast('Something went wrong. Please try logging in again.', 2000);
+                    alert('Your session has expired. Please login again to continue.')
+                    this.auth.logout();
                   }
                 });
             }
           }
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -123,9 +123,15 @@ export class MyClassesComponent implements OnInit {
     const prompt = confirm('Are you sure you want to delete this class?');
     if (prompt === true) {
       this.classService.closeClass(selectedClass)
-        .subscribe(response => {
-          toast('You have successfully deleted a class.', 2000);
-          this.getClasses(this.teacherId);
+        .subscribe((response: any) => {
+          if (response.success !== false) {
+            toast('You have successfully deleted a class.', 2000);
+            this.getClasses(this.teacherId);
+          }
+          else {
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
+          }
         })
     }
 

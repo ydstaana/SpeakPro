@@ -15,7 +15,7 @@
       <h5 class="title">Enrollable Classes</h5>
       <div class="card">
         <div class="card-content">
-          <table class="centered highlight responsive-table">
+          <table class="centered highlight ">
             <colgroup>
               <col class="td-1">
               <col>
@@ -52,7 +52,7 @@
                   No classes available
                 </td>
               </tr>
-              <tr *ngFor="let class of availableClasses.controls; let i = index">
+              <tr *ngFor="let class of availableClasses; let i = index">
                 <td>
                   <input type="checkbox" id="{{i}}" [formControl]="class">
                   <label for="{{i}}"></label>
@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class="submit-btn-container center">
-      <button class="waves-effect waves-light btn" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
+      <button class="btn rounded z-depth-0" type="submit" [ngClass]="{'disabled': isCheckboxDisabled()}">Enroll</button>
     </div>
   </form>
 </main>

@@ -3,7 +3,14 @@
     <h5 class="title">All Teachers</h5>
     <div class="card">
       <div class="card-content">
-        <table class="centered highlight responsive-table">
+        <table class="centered highlight ">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col class="td-1">
+            </colgroup>
           <thead>
             <th>Full Name</th>
             <th>Username</th>
@@ -34,17 +41,20 @@
               </td>
             </tr>
             <tr *ngFor="let teacher of teachers; let i = index">
-              <td>{{teacher.firstName}} {{teacher.lastName}}</td>
-              <td>{{teacher.username}}</td>
-              <td>{{teacher.email}}</td>
-              <td>{{teacher.skypeID}}</td>
+                <td class="ellipsis" materialize="tooltip" data-position="right" data-delay="50" [attr.data-tooltip]="teacher.firstName + ' ' + teacher.lastName">{{teacher.firstName}} {{teacher.lastName}}</td>
+                <td class="ellipsis" materialize="tooltip" data-position="right" data-delay="50" [attr.data-tooltip]="teacher.username">{{teacher.username}}</td>
+                <td class="ellipsis" materialize="tooltip" data-position="right" data-delay="50" [attr.data-tooltip]="teacher.email">{{teacher.email}}</td>
+                <td materialize="tooltip" data-position="left" data-delay="50" [attr.data-tooltip]="teacher.skypeID" [materializeParams]="[{margin: 1}]">{{teacher.skypeID}}</td>
               <td>
-                <a class="waves-effect waves-light red lighten-1 btn" (click)="suspendUser(teacher._id)" *ngIf="teacher.active">
-                  Suspend
-                </a>
-                <a class="waves-effect waves-light red darken-2 btn disabled" *ngIf="!teacher.active">
-                  Suspended
-                </a>
+                  <button class="btn-floating red lighten-1 z-depth-0" (click)="suspendUser(teacher._id)" *ngIf="teacher.active" materialize="tooltip"
+                  data-position="top" data-delay="50" data-tooltip="Suspend Teacher">
+                  <i class="material-icons">remove</i>
+                </button>
+
+                <button class="btn-floating red lighten-1 z-depth-0 disabled" *ngIf="!teacher.active" materialize="tooltip" data-position="top"
+                  data-delay="50" data-tooltip="Suspended">
+                  <i class="material-icons">remove</i>
+                </button>
               </td>
             </tr>
           </tbody>

@@ -3,7 +3,7 @@
     <h5 class="title">My Schedule</h5>
     <div class="card ">
       <div class="card-content">
-        <table class="centered highlight responsive-table">
+        <table class="centered highlight">
           <thead>
             <th>Time</th>
             <th>Day</th>
@@ -37,7 +37,7 @@
               <td>{{enrolledClasses[i].timeSlot}}</td>
               <td>{{enrolledClasses[i].day}}</td>
               <td>
-                <a (click)="viewTeacher(class.teacher._id)">{{enrolledClasses[i].teacher.firstName + ' ' + enrolledClasses[i].teacher.lastName}}</a>
+                <a (click)="viewTeacher(class.teacher.username)">{{enrolledClasses[i].teacher.firstName + ' ' + enrolledClasses[i].teacher.lastName}}</a>
               </td>
               <td *ngIf="class.available">Open</td>
               <td *ngIf="!class.available">Enrolled</td>

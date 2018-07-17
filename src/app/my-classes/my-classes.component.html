@@ -1,32 +1,32 @@
 <main>
   <div class="section">
-    <h5 class="title" *ngIf="teacher">My Classes</h5>
+    <h5 class="title">My Classes</h5>
     <form [formGroup]="form" (submit)="openClass(form.value)">
-      <div class="add-class card z-index-1">
+      <div class="add-class card z-depth-1">
         <div class="card-content">
           <div class="row">
-            <div class="col s3">
+            <div class="col s12 m12 l5">
               <label for="dropdown">Choose Timeslot</label>
               <select name="dropdown" materialize="material_select" [materializeSelectOptions]="timeslots" formControlName="timeslot">
                 <option *ngFor="let timeslot of timeslots; let i = index" [value]="timeslot.code + '~' + timeslot.time">{{timeslot.time}}</option>
               </select>
             </div>
-            <div class="col s3">
+            <div class="col s8 m8 l5">
               <label for="date">Choose a Day</label>
               <select name="dropdown" materialize="material_select" [materializeSelectOptions]="days" formControlName="day">
                 <option *ngFor="let day of days; let i = index" [value]="day.code + '~' + day.day">{{day.day}}</option>
               </select>
             </div>
-            <div class="col s3">
+            <!-- <div class="col s3">
               <label for="teacher-id">Teacher ID</label>
               <input id="teacher-id" name="teacher-id" value="{{teacherId}}" materialize type="text" [disabled]="teacherId"/>
             </div>
             <div class="col s2">
               <label for="max-students">Number of Students</label>
               <input id="max-students" name="max-students" value="1" materialize type="text" [disabled]="true"/>
-            </div>
-            <div class="col s1 centered-container">
-              <button class="btn-floating yellow darken-1" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
+            </div> -->
+            <div class="col s4 m4 l2 centered-container">
+              <button class="btn-floating yellow darken-1 z-depth-0" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
                 <i class="material-icons">add</i>
               </button>
             </div>
@@ -37,12 +37,14 @@
     </form>
     <div class="table card">
       <div class="card-content">
-        <table class="centered highlight responsive-table">
+        <table class="centered highlight ">
           <colgroup>
             <col class="td-1">
             <col>
             <col>
             <col>
+            <col>
+            <col class="td-1">
           </colgroup>
           <thead>
             <th>#</th>
@@ -81,10 +83,14 @@
               <td>{{class.day}}</td>
               <td *ngIf="class.available">Open</td>
               <td *ngIf="!class.available">Closed</td>
-              <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName}}</td>
+              <td *ngIf="class.student" class="ellipsis" materialize="tooltip" data-position="left" data-delay="50" [attr.data-tooltip]="class.student.firstName + ' ' + class.student.lastName">{{class.student.firstName}} {{class.student.lastName}}</td>
               <td *ngIf="!class.student">n/a</td>
               <td>
-                <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class)">Delete Class</button>
+                <!-- <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class)">Delete Class</button> -->
+                <button class="btn-floating red lighten-1 z-depth-0" (click)="closeClass(class)" materialize="tooltip" data-position="top"
+                  data-delay="50" data-tooltip="Delete Class">
+                  <i class="material-icons">remove</i>
+                </button>
               </td>
             </tr>
           </tbody>

@@ -7,6 +7,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { MaterializeAction } from 'angular2-materialize';
 import { toast } from 'angular2-materialize';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
+
 
 @Component({
   selector: 'app-checkout',
@@ -16,23 +18,37 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 
 export class CheckoutComponent implements OnInit {
-  cart: any = [];
+  cart: any = null;
   confirmationModal: EventEmitter<string | MaterializeAction>;
   creditCardForm: FormGroup;
   totalPrice = 0;
 
-  constructor(private classService: ClassService, private paymentService: PaymentService, private router: Router, private fb: FormBuilder) {
-    this.cart = this.classService.getCart();
+  constructor(private classService: ClassService, private paymentService: PaymentService, private router: Router, private fb: FormBuilder, private auth: AuthService) {
+    this.getCart();
     this.confirmationModal = new EventEmitter<string | MaterializeAction>();
     this.creditCardForm = this.createCCForm();
-    this.totalPrice = (this.cart.length * 6.00);
-    console.log(this.cart);
   }
 
   ngOnInit() { }
 
   ngAfterViewInit() {
     TCO.loadPubKey('sandbox');
+  }
+
+  getCart(){
+    this.cart = null;
+    this.totalPrice = 0;
+    this.paymentService.getCart()
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.cart = response.content;
+          this.totalPrice = (this.cart.length * 6.00);
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      }, (err) => toast('An error occured', 2000));
   }
 
 
@@ -48,17 +64,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout(credentials) {
-
-
-    console.log(credentials);
-
-
     TCO.requestToken((res) => {
       const data = { tcoToken: res.response.token.token, total: this.totalPrice };
-
       this.openModal();
-      console.log(data);
-
       this.paymentService.checkout(data).subscribe(
         response => {
           this.classService.addClass(this.cart)
@@ -69,7 +77,8 @@ export class CheckoutComponent implements OnInit {
                 this.router.navigate(['dashboard/my-schedule']);
               }
               else {
-                toast('Something went wrong. Please try logging in again.', 2000);
+                alert('Your session has expired. Please login again to continue.')
+                this.auth.logout();
               }
             })
         },
@@ -86,5 +95,19 @@ export class CheckoutComponent implements OnInit {
 
   closeModal() {
     this.confirmationModal.emit({ action: "modal", params: ['close'] });
+  }
+
+  removeItem(item){
+    this.paymentService.removeItem(item._id)
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          toast(`You have successfully remove an item from cart`, 2000);
+          this.getCart();
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      }, (err) => toast(err.errorMsg, 2000));
   }
 }

@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MenuComponent } from './menu/menu.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { FooterComponent } from './footer/footer.component';
 import { AddClassesComponent } from './add-classes/add-classes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -36,6 +35,10 @@ import { MyMaterialsComponent } from './my-materials/my-materials.component';
 import { UploadService } from '../service/upload.service';
 import { AuthService } from '../service/auth.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AdminGuard } from './admin.guard';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
@@ -44,7 +47,6 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     HomepageComponent,
     MenuComponent,
     StudentProfileComponent,
-    FooterComponent,
     AddClassesComponent,
     DashboardComponent,
     SidebarComponent,
@@ -58,6 +60,9 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     MyScheduleComponent,
     DownloadMaterialsComponent,
     MyMaterialsComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,9 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
     RoundProgressModule,
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
-      { path: 'student-profile', component: StudentProfileComponent },
+      { path: 'confirm', component: ConfirmComponent },
+      { path: 'reset', component: ResetPasswordComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
       {
         path: 'dashboard', component: DashboardComponent, children: [
           { path: 'edit-profile', component: EditProfileComponent, canActivate: [SessionGuard] },
@@ -83,8 +90,8 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
 
           { path: 'teachers/:username', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
-          { path: 'all-students', component: AllStudentsComponent },
-          { path: 'all-teachers', component: AllTeachersComponent },
+          { path: 'admin/all-students', component: AllStudentsComponent, canActivate: [AdminGuard, SessionGuard] },
+          { path: 'admin/all-teachers', component: AllTeachersComponent, canActivate: [AdminGuard, SessionGuard] },
 
           { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
           { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard] }
@@ -97,6 +104,7 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
   providers: [
     ClassService,
     UserService,
+    AdminGuard,
     TeacherGuard,
     StudentGuard,
     SessionGuard,

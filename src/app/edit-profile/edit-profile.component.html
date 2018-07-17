@@ -1,54 +1,95 @@
 <main>
-  <div class="section">
-    <h5 class="title">Edit Profile</h5>
-    <div class="card" *ngIf="form">
-      <div class="card-content">
-        <form [formGroup]="form" (submit)="editProfile(form.value)">
+  <form [formGroup]="form" (submit)="openModal()">
+    <div class="section">
+      <h5 class="title">Edit Profile</h5>
+      <div class="card" *ngIf="form">
+        <div class="card-content">
           <!-- First Name & Last Name -->
           <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-first-name" type="text" formControlName="firstName">
-              <label for="teacher-first-name" class="active">First Name</label>
+            <div class="input-field col s12 m6">
+              <input id="teacher-first-name" type="text" formControlName="firstName" [ngClass]="{'invalid': form.controls.firstName.dirty && form.controls.firstName.errors}">
+              <label for="teacher-first-name" class="active">First Name *</label>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-last-name" type="text" formControlName="lastName">
-              <label for="teacher-last-name" class="active">Last Name</label>
+            <div class="input-field col s12 m6">
+              <input id="teacher-last-name" type="text" formControlName="lastName" [ngClass]="{'invalid': form.controls.lastName.dirty && form.controls.lastName.errors}">
+              <label for="teacher-last-name" class="active">Last Name *</label>
             </div>
           </div>
 
           <!-- Username & Password -->
           <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-username" type="text" formControlName="username">
-              <label for="teacher-username" class="active">Username</label>
+            <div class="input-field col s12 m6">
+              <input id="teacher-username" type="text" formControlName="username" [ngClass]="{'invalid': (form.controls.username.dirty && form.controls.username.errors) || available === false}"
+                (input)="checkAvailability()">
+              <label for="teacher-username" class="active">Username (minimum of 6 characters)</label>
+              <div class="helper-text" *ngIf="available === false">Username is already taken</div>
+              <div class="checker-text" *ngIf="available === null && form.controls.username.dirty && form.controls.username.value.length > 5">
+                <div>Checking availability</div>
+                <div class="preloader-wrapper very small active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-password" type="password" formControlName="password" placeholder="********">
-              <label for="teacher-password" class="active">Password</label>
+            <div class="input-field col s12 m6">
+              <input id="teacher-password" type="password" formControlName="password" placeholder="********" [ngClass]="{'invalid': form.controls.password.dirty && form.controls.password.errors}">
+              <label for="teacher-password" class="active">New Password (Leave empty to retain current)</label>
             </div>
           </div>
 
           <!-- Email & Skype ID -->
           <div class="row">
-            <div class="input-field col s6">
-              <input id="teacher-email" type="text" formControlName="email">
-              <label for="teacher-email" class="active">Email Address</label>
+            <div class="input-field col s12 m6">
+              <input id="teacher-email" type="text" formControlName="email" [ngClass]="{'invalid': form.controls.email.dirty && form.controls.email.errors}">
+              <label for="teacher-email" class="active">Email Address *</label>
             </div>
-            <div class="input-field col s6">
-              <input id="teacher-skype-id" type="text" formControlName="skypeID">
-              <label for="teacher-skype-id" class="active">Skype ID</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12 center">
-              <button type="submit" class="btn blue lighten-2 waves-effect waves-light">
-                Update
-              </button>
+            <div class="input-field col s12 m6">
+              <input id="teacher-skype-id" type="text" formControlName="skypeID" [ngClass]="{'invalid': form.controls.skypeID.dirty && form.controls.skypeID.errors}">
+              <label for="teacher-skype-id" class="active">Skype ID *</label>
             </div>
           </div>
-          <!-- <p>Form value: {{ form.value | json }}</p> -->
-        </form>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="center">
+      <button type="submit" class="btn rounded z-depth-0" [ngClass]="{'disabled': !form.valid}">
+        Update
+      </button>
+    </div>
+  </form>
 </main>
+
+
+<!-- Login Box -->
+<div id="confirm-password" class="modal" materialize="modal" [materializeActions]="confirmPassModal" [materializeParams]="[{ dismissible: false, endingTop: '33%'}]">
+  <div class="modal-content">
+    <h5 class="center">Enter Current Password</h5>
+    <div class="row">
+      <form class="col s12" [formGroup]="confirmPassForm" (submit)="confirmPassword()">
+        <!-- Username & Password -->
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="login-password" type="password" formControlName="password">
+            <label for="login-password">Current Password</label>
+          </div>
+          <div class="col s12 center">
+            <a class="btn cancel z-depth-0" (click)="closeModal()">
+              Cancel
+            </a>
+            <button class="btn submit z-depth-0" type="submit" [ngClass]="{'disabled': !confirmPassForm.valid}">Confirm</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

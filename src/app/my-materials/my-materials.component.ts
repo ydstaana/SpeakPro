@@ -1,10 +1,11 @@
 import { UploadService } from './../../service/upload.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
 import { toast } from 'angular2-materialize';
 import * as FileSaver from 'file-saver';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-my-materials',
@@ -13,18 +14,20 @@ import * as FileSaver from 'file-saver';
   providers: [UploadService]
 })
 export class MyMaterialsComponent implements OnInit {
-  private availableFiles: any[];
-  private uploadQueue: any[] = [];
+  availableFiles: any[];
+  uploadQueue: any[] = [];
   private uploadQueueProgress: any[] = [];
   private uploadedCnt = 0;
   private uploadedFiles: any[];
   private fileUploadSub: any;
   private loggedUser: User;
 
-  constructor(private userService: UserService, private uploadService: UploadService) { }
+  @ViewChild('fileInput') fileInput: ElementRef;
+
+  constructor(private userService: UserService, private uploadService: UploadService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.loggedUser = this.auth.decodeAccessToken(localStorage.getItem('token'));
     this.getAvailableMaterials();
   }
 
@@ -53,18 +56,28 @@ export class MyMaterialsComponent implements OnInit {
 
     this.uploadQueue = this.uploadQueue.concat(selectedFiles); //Adds newly selected files to upload queue
 
-    console.log(this.uploadQueue);
-
     //Sends request for each selected files
     for (let i = currentIndex; i < totalSize; i++) {
       const formData: FormData = new FormData();
       formData.append("selectedFiles", this.uploadQueue[i], this.uploadQueue[i].name)
-      formData.append('user', this.loggedUser.id.toString());
 
       this.uploadQueueProgress.push(0); //Sets the progress of the selected file to zero
 
-      this.fileUploadSub = this.uploadService.uploadMaterials(formData)
-        .subscribe(event => this.handleProgress(event, i, this.uploadQueue[i].name));
+      this.fileUploadSub = this.uploadService.uploadMaterials(formData, this.loggedUser.id.toString())
+        .subscribe((event: any) => {
+          if (event.success !== false) {
+            this.handleProgress(event, i, this.uploadQueue[i].name)
+          }
+          else {
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
+          }
+        }, (err) => {
+          this.uploadQueue = [];
+          this.uploadQueueProgress = [];
+          this.getAvailableMaterials();          
+          toast(err.statusText, 2000);
+        });
     }
   }
 
@@ -72,7 +85,15 @@ export class MyMaterialsComponent implements OnInit {
   getAvailableMaterials() {
     this.availableFiles = null;
     this.userService.getAvailableMaterialsById(this.loggedUser.id)
-      .subscribe((response: any) => this.availableFiles = response.data);
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.availableFiles = response.data;
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 
 
@@ -84,7 +105,7 @@ export class MyMaterialsComponent implements OnInit {
     else if (event.type === HttpEventType.Response) {
       this.uploadQueue = [];
       this.getAvailableMaterials();
-      toast(`You have successfully uploaded ${filename}`, 2000)
+      toast(event.body.message, 2000)
     }
   }
 
@@ -99,10 +120,20 @@ export class MyMaterialsComponent implements OnInit {
     }
 
     this.uploadMaterials(selectedFiles, selectedFiles.length); //Calls the upload function
+    
+    this.fileInput.nativeElement.value = ''; //Reset input file
   }
 
-  download(fileName) {
+  download(fileName, displayName) {
     this.userService.downloadFile(fileName)
-      .subscribe((response: any) => FileSaver.saveAs(response, fileName));
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          FileSaver.saveAs(response, displayName);
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      });
   }
 }

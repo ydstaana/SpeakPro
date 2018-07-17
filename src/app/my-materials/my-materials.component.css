@@ -1,8 +1,7 @@
-/** PAGE HEADER **/
-
-.section .title {
-  margin-top: 0px;
-  margin-bottom: 15px;
+main{
+  min-height: max-content;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 
 /** CARD STYLES **/
@@ -41,4 +40,12 @@
 .td-center{
   display: flex;
   justify-content: center;
+}
+
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px 30px;
 }

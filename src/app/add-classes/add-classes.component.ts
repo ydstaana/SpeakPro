@@ -9,12 +9,14 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { User } from '../../model/user';
 import { toast } from 'angular2-materialize';
+import { PaymentService } from '../../service/payment.service';
 
 
 @Component({
   selector: 'app-add-classes',
   templateUrl: './add-classes.component.html',
-  styleUrls: ['./add-classes.component.css']
+  styleUrls: ['./add-classes.component.css'],
+  providers: [PaymentService]
 })
 export class AddClassesComponent implements OnInit {
   classes: any[];
@@ -24,6 +26,7 @@ export class AddClassesComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private classService: ClassService,
+    private payment: PaymentService,
     private userService: UserService,
     private router: Router) {
   }
@@ -50,7 +53,8 @@ export class AddClassesComponent implements OnInit {
           this.form.setControl('availableClasses', this.buildCheckboxes(this.classes));
         }
         else {
-          toast('Something went wrong. Please try logging in again.', 2000);
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
         }
       });
   }
@@ -98,6 +102,12 @@ export class AddClassesComponent implements OnInit {
     });
   }
 
+  getClassesId(classes){
+    return classes.map(e => {
+      return e._id;
+    });
+  }
+
   //Check conflicts in the selected classes
   findConflicts(selectedClasses) {
     let codes = []; //Stores unique class codes
@@ -119,7 +129,7 @@ export class AddClassesComponent implements OnInit {
    ************************************/
 
   get availableClasses() {
-    return this.form.get('availableClasses');
+    return this.form.get('availableClasses')['controls'];
   };
 
   isCheckboxDisabled() {
@@ -156,15 +166,36 @@ export class AddClassesComponent implements OnInit {
               });
             }
             else { //If there are no conflicts, add the classes to cart
-              const msg = confirm('Are you sure you want to enroll this?');
+              const msg = confirm('Are you sure you want to reserve the selected class/es?');
               if (msg === true) {
-                this.classService.setCart(selectedClasses);
-                this.router.navigate(['dashboard/checkout']);
+                this.payment.reserveClasses(student._id, this.getClassesId(selectedClasses))
+                  .subscribe((response: any) => {
+                    toast('You have successfully reserved the selected class/es. Please check your cart.', 2000);
+                    this.createForm();
+                    this.getEnrollableClasses();
+                  }, (err) => {
+                    if(err.error.reserved === null && err.error.notReserved !== null){
+                      toast(err.error.message, 5000);
+                    }
+                    else if(err.error.reserved !== null && err.error.notReserved !== null){
+                      toast('You have successfully reserved some of the selected classes. Please check your cart.', 5000);
+                      for(let item of err.error.notReserved){
+                        toast(`${item.timeSlot} ${item.day} - ${item.teacher.firstName.charAt(0)}. ${item.teacher.lastName} is already reserved by other student`, 5000);
+                      }
+                    }
+                    else{
+                      toast('An error occured', 2000);
+                    }
+
+                    this.createForm();
+                    this.getEnrollableClasses();
+                  });
               }
             }
           }
           else {
-            toast('Something went wrong. Please try logging in again.', 2000);
+            alert('Your session has expired. Please login again to continue.')
+            this.auth.logout();
           }
         });
     }

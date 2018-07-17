@@ -1,5 +1,7 @@
+import { AuthService } from './../../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   showSidebar: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
   }
@@ -20,12 +22,16 @@ export class DashboardComponent implements OnInit {
   }
 
   greetings() {
-    const user = JSON.parse(localStorage.getItem('loggedUser'));
+    const user = this.auth.decodeAccessToken(localStorage.getItem('token'));
     return `${user.username}`;
   }
 
 
   toggleSidebar() {
     this.showSidebar = this.showSidebar ? false : true;
+  }
+
+  openNotifications(){
+    toast('Feature is not available at the moment', 1000);
   }
 }
