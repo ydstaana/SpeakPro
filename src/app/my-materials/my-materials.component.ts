@@ -14,8 +14,8 @@ import { AuthService } from '../../service/auth.service';
   providers: [UploadService]
 })
 export class MyMaterialsComponent implements OnInit {
-  private availableFiles: any[];
-  private uploadQueue: any[] = [];
+  availableFiles: any[];
+  uploadQueue: any[] = [];
   private uploadQueueProgress: any[] = [];
   private uploadedCnt = 0;
   private uploadedFiles: any[];

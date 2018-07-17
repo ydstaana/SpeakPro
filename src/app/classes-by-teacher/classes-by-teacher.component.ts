@@ -16,8 +16,8 @@ import { AuthService } from '../../service/auth.service';
   providers: [ClassService, UserService]
 })
 export class ClassesByTeacherComponent implements OnInit {
-  private teacher: User;
-  private classes: Sched[];
+  teacher: User;
+  classes: Sched[];
 
   constructor(private route: ActivatedRoute, private router: Router, private classService: ClassService, private userService: UserService, private auth: AuthService) { }
 

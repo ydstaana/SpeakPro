@@ -52,7 +52,7 @@
                   No classes available
                 </td>
               </tr>
-              <tr *ngFor="let class of availableClasses.controls; let i = index">
+              <tr *ngFor="let class of availableClasses; let i = index">
                 <td>
                   <input type="checkbox" id="{{i}}" [formControl]="class">
                   <label for="{{i}}"></label>

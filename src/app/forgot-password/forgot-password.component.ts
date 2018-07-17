@@ -10,9 +10,9 @@ import { ResetService } from '../../service/reset.service';
   providers: [ResetService]
 })
 export class ForgotPasswordComponent implements OnInit {
-  private form: FormGroup;
-  private errorMsg: string = null;
-  private confirmation: boolean = false;
+  form: FormGroup;
+  errorMsg: string = null;
+  confirmation: boolean = false;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private resetService: ResetService) { }
 

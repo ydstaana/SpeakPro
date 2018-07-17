@@ -129,7 +129,7 @@ export class AddClassesComponent implements OnInit {
    ************************************/
 
   get availableClasses() {
-    return this.form.get('availableClasses');
+    return this.form.get('availableClasses')['controls'];
   };
 
   isCheckboxDisabled() {
