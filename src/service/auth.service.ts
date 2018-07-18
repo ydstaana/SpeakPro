@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
 import { toast } from 'angular2-materialize';
 import { Router } from '@angular/router';
+import { appConfig } from '../app.config';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
 
   getUserCreds() {
     const user = this.decodeAccessToken(this.getUserToken());
-    return this.http.get(`http://localhost:3000/users/${user.username}`, { headers: this.getHeaders() })
+    return this.http.get(`${appConfig.apiURL}/users/${user.username}`, { headers: this.getHeaders() })
       .pipe();
   }
 
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   confirmPassword(credentials) {
-    return this.http.post(`http://localhost:3000/users/confirm_password`, { username: credentials.username, password: credentials.password, })
+    return this.http.post(`${appConfig.apiURL}/users/confirm_password`, { username: credentials.username, password: credentials.password, })
       .pipe();
   }
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Sched } from '../model/sched';
+import { appConfig } from '../app.config';
 
 @Injectable()
 export class UploadService {
@@ -11,7 +12,7 @@ export class UploadService {
   constructor(private http: HttpClient) {}
 
   uploadMaterials(formData, authorId) {
-    const req = new HttpRequest('POST', `http://localhost:3000/uploads`,
+    const req = new HttpRequest('POST', `${appConfig.apiURL}/uploads`,
       formData, { reportProgress: true, headers: this.getHeadersWithAuthorId(authorId) });
 
     return this.http.request(req);
