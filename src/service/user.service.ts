@@ -77,7 +77,7 @@ export class UserService {
 
 
   checkUsernameAvailability(username) {
-    return this.http.get(`${appConfig.apiURL}/users/${username}/availability`, { headers: this.getHeaders() })
+    return this.http.get(`${appConfig.apiURL}/users/${username}/availability`)
       .pipe();
   }
 
