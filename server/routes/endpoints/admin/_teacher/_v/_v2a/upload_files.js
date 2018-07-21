@@ -31,7 +31,7 @@ const uploadFile = async function(req, res){
         })
 
         // A bucket is a container for objects (files).
-        const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
+        const bucket = storage.bucket("teacher-materials");
 
 
         //Promisify multer upload
@@ -69,30 +69,7 @@ const uploadFile = async function(req, res){
                         newDisplayName = `${filename} (${cnt}).${fileExtension}`; //filename (n).jpg
                     }
 
-                    //Uploading of new file information to db starts here
-                    const newFile = {
-                        fileName: filename + "." + fileExtension,
-                        displayName: newDisplayName,
-                        author: authorId,
-                        uploadDate: uploadDate.format(),
-                        fileSize: item.size
-                    }
-                    console.log(newFile.fileName);
-
-                    File.create(newFile, (err, file) => {
-                        if(err) {
-                            res.status(500).json({
-                                code: 500,
-                                message: err
-                            });
-                        }
-
-                        res.status(200).json({
-                            code: 200,
-                            message: 'Successfully uploaded the file ' + newDisplayName
-                        });
-                    });
-
+                    
                     // Create a new blob in the bucket and upload the file data.
                     const blob = bucket.file(req.file.originalname);
                     const blobStream = blob.createWriteStream({
@@ -105,6 +82,32 @@ const uploadFile = async function(req, res){
 
                     blobStream.on('finish', () => {
                         // The public URL can be used to directly access the file via HTTP.
+                        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+                        //Uploading of new file information to db starts here
+                        const newFile = {
+                            fileName: filename + "." + fileExtension,
+                            displayName: newDisplayName,
+                            author: authorId,
+                            uploadDate: uploadDate.format(),
+                            fileSize: item.size,
+                            url : publicUrl
+                        }
+                        console.log(newFile.fileName);
+
+                        File.create(newFile, (err, file) => {
+                            if(err) {
+                                res.status(500).json({
+                                    code: 500,
+                                    message: err
+                                });
+                            }
+
+                            res.status(200).json({
+                                code: 200,
+                                message: 'Successfully uploaded the file ' + newDisplayName
+                            });
+                        });
+
                         console.log("upload successful");
                     });
 

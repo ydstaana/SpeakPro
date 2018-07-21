@@ -10,6 +10,7 @@ const config = require('../../../../../../../config.js');
 var api_key = config.api_key;
 var DOMAIN = config.DOMAIN;
 var EMAIL = config.EMAIL;
+var baseURL = config.BASE_URL;
 
 var MailgunMustacheMailer = require("mailgun-mustache-mailer");
 var data = { domain: DOMAIN, apiKey: api_key, from:EMAIL};
@@ -52,9 +53,9 @@ module.exports = function (req, res, next) {
       };
 
       var recipient = {
-          email: "speakpro.help@gmail.com",
+          email: user.email,
           name: user.firstName,
-          url: 'http://localhost:4200/#/confirm' + '?id=' + user._id + '&token=' + token,
+          url: baseURL + '/confirm' + '?id=' + user._id + '&token=' + token,
           token :token
       };
 

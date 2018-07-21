@@ -9,6 +9,7 @@ var FileSchema = new mongoose.Schema({
 	},
 	uploadDate : Date,
 	fileSize : Number,
+	url: String
 });
 
 

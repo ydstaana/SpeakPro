@@ -70,9 +70,9 @@ export class UserService {
   }
 
 
-  downloadFile(filename) {
-    const httpOptions = { headers: this.getHeaders(), responseType: 'blob' as 'blob' }
-    return this.http.get(`${appConfig.apiURL}/download/${filename}`, httpOptions)
+  downloadFile(filepath) {
+    const httpOptions = { responseType: 'blob' as 'blob' }
+    return this.http.get(filepath, httpOptions)
   }
 
 

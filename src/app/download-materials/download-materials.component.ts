@@ -34,17 +34,9 @@ export class DownloadMaterialsComponent implements OnInit {
   }
 
 
-  download(fileName) {
-    this.userService.downloadFile(fileName)
-      .subscribe((response: any) => {
-        if (response.success !== false) {
-          FileSaver.saveAs(response, fileName)
-        }
-        else {
-          alert('Your session has expired. Please login again to continue.')
-          this.auth.logout();
-        }
-      });
+  download(filepath, filename) {
+    this.userService.downloadFile(filepath)
+      .subscribe((response: any) => FileSaver.saveAs(response, filename));
   }
 
   formatBytes(bytes) {

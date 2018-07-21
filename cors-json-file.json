@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://my-sandbox-210713.appspot.com"],
+      "responseHeader": ["Content-Type"],
+      "method": ["GET", "HEAD", "DELETE"],
+      "maxAgeSeconds": 3600
+    }
+]
