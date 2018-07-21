@@ -1,26 +1,18 @@
 var mongoose = require('mongoose');
 var User = require('../../../../../../models/UserSchema.js');
 var bcrypt = require('bcrypt');
-var nodemailer = require('nodemailer');
-var email = "speakpro.help@gmail.com"
-var pass = "help@speakpro"
-var hbs = require('nodemailer-express-handlebars')
 
-var smtpTransport = nodemailer.createTransport({
-  service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
-  auth: {
-    user: email,
-    pass: pass
-  }
-});
+const config = require('../../../../../../../config.js');
 
-var handlebarsOptions = {
-  viewEngine: 'handlebars',
-  viewPath: 'server/templates',
-  extName: '.html'
-};
+var api_key = config.api_key;
+var DOMAIN = config.DOMAIN;
+var EMAIL = config.EMAIL;
+var MailgunMustacheMailer = require("mailgun-mustache-mailer");
+var data = { domain: DOMAIN, apiKey: api_key, from:EMAIL};
+var log = { info: console.log };
 
-smtpTransport.use('compile', hbs(handlebarsOptions));
+var mailgunMustacheMailer = new MailgunMustacheMailer(data, log);
+
 module.exports = function (req, res, next) {
   User.findOne({
     reset_password_token: req.body.token,
@@ -45,26 +37,22 @@ module.exports = function (req, res, next) {
             message: "Successfully updated user"
           });
 
-          var data = {
-            to: user.email,
-            from: email,
-            template: 'reset-password-email',
-            subject: 'Password Reset Confirmation',
-            context: {
-              name: user.firstName
-            }
+          var template = {
+              subject: "Password reset",
+              text: "Hello {{name}}!\n",
+              html: "<div><p>Your password has been successfuly reset, you can now login with your new password.</p><br><div>Cheers!</div>"
           };
 
-          smtpTransport.sendMail(data, function (err) {
-            if (!err) {
-              return res.json({
-                message: 'Password Reset'
-              })
-            }
-            else {
-              return next(err);
-            }
-          })
+          var recipient = {
+              email: "speakpro.help@gmail.com",
+              name: user.firstName
+          };
+
+          mailgunMustacheMailer.send(template, recipient, (error, mailId) => {
+              if(error) return console.log(error);
+              console.log("New mail was send with id %s", mailId);
+          });
+
         });
       })
 

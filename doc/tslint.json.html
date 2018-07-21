@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tslint.json</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "tslint.json";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>tslint.json</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="json">{
+  <span class="hljs-attr">"rulesDirectory"</span>: [
+    <span class="hljs-string">"node_modules/codelyzer"</span>
+  ],
+  <span class="hljs-attr">"rules"</span>: {
+    <span class="hljs-attr">"arrow-return-shorthand"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"callable-types"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"class-name"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"comment-format"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"check-space"</span>
+    ],
+    <span class="hljs-attr">"curly"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"deprecation"</span>: {
+      <span class="hljs-attr">"severity"</span>: <span class="hljs-string">"warn"</span>
+    },
+    <span class="hljs-attr">"eofline"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"forin"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"import-blacklist"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"rxjs"</span>,
+      <span class="hljs-string">"rxjs/Rx"</span>
+    ],
+    <span class="hljs-attr">"import-spacing"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"indent"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"spaces"</span>
+    ],
+    <span class="hljs-attr">"interface-over-type-literal"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"label-position"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"max-line-length"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-number">140</span>
+    ],
+    <span class="hljs-attr">"member-access"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"member-ordering"</span>: [
+      <span class="hljs-literal">true</span>,
+      {
+        <span class="hljs-attr">"order"</span>: [
+          <span class="hljs-string">"static-field"</span>,
+          <span class="hljs-string">"instance-field"</span>,
+          <span class="hljs-string">"static-method"</span>,
+          <span class="hljs-string">"instance-method"</span>
+        ]
+      }
+    ],
+    <span class="hljs-attr">"no-arg"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-bitwise"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-console"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"debug"</span>,
+      <span class="hljs-string">"info"</span>,
+      <span class="hljs-string">"time"</span>,
+      <span class="hljs-string">"timeEnd"</span>,
+      <span class="hljs-string">"trace"</span>
+    ],
+    <span class="hljs-attr">"no-construct"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-debugger"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-duplicate-super"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-empty"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"no-empty-interface"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-eval"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-inferrable-types"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"ignore-params"</span>
+    ],
+    <span class="hljs-attr">"no-misused-new"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-non-null-assertion"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-shadowed-variable"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-string-literal"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"no-string-throw"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-switch-case-fall-through"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-trailing-whitespace"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-unnecessary-initializer"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-unused-expression"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-use-before-declare"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-var-keyword"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"object-literal-sort-keys"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"one-line"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"check-open-brace"</span>,
+      <span class="hljs-string">"check-catch"</span>,
+      <span class="hljs-string">"check-else"</span>,
+      <span class="hljs-string">"check-whitespace"</span>
+    ],
+    <span class="hljs-attr">"prefer-const"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"quotemark"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"single"</span>
+    ],
+    <span class="hljs-attr">"radix"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"semicolon"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"always"</span>
+    ],
+    <span class="hljs-attr">"triple-equals"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"allow-null-check"</span>
+    ],
+    <span class="hljs-attr">"typedef-whitespace"</span>: [
+      <span class="hljs-literal">true</span>,
+      {
+        <span class="hljs-attr">"call-signature"</span>: <span class="hljs-string">"nospace"</span>,
+        <span class="hljs-attr">"index-signature"</span>: <span class="hljs-string">"nospace"</span>,
+        <span class="hljs-attr">"parameter"</span>: <span class="hljs-string">"nospace"</span>,
+        <span class="hljs-attr">"property-declaration"</span>: <span class="hljs-string">"nospace"</span>,
+        <span class="hljs-attr">"variable-declaration"</span>: <span class="hljs-string">"nospace"</span>
+      }
+    ],
+    <span class="hljs-attr">"unified-signatures"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"variable-name"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"whitespace"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"check-branch"</span>,
+      <span class="hljs-string">"check-decl"</span>,
+      <span class="hljs-string">"check-operator"</span>,
+      <span class="hljs-string">"check-separator"</span>,
+      <span class="hljs-string">"check-type"</span>
+    ],
+    <span class="hljs-attr">"directive-selector"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"attribute"</span>,
+      <span class="hljs-string">"app"</span>,
+      <span class="hljs-string">"camelCase"</span>
+    ],
+    <span class="hljs-attr">"component-selector"</span>: [
+      <span class="hljs-literal">true</span>,
+      <span class="hljs-string">"element"</span>,
+      <span class="hljs-string">"app"</span>,
+      <span class="hljs-string">"kebab-case"</span>
+    ],
+    <span class="hljs-attr">"no-output-on-prefix"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"use-input-property-decorator"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"use-output-property-decorator"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"use-host-property-decorator"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-input-rename"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"no-output-rename"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"use-life-cycle-interface"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"use-pipe-transform-interface"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"component-class-suffix"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"directive-class-suffix"</span>: <span class="hljs-literal">true</span>
+  }
+}
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

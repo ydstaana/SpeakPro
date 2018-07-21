@@ -52,7 +52,7 @@ export class ClassService {
   }
 
   openClass(newClass) {
-    return this.http.request('post', '${appConfig.apiURL}/classes', { body: newClass, headers: this.getHeaders() })
+    return this.http.request('post', `${appConfig.apiURL}/classes`, { body: newClass, headers: this.getHeaders() })
       .pipe();
   }
 

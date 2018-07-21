@@ -3,37 +3,34 @@ const jwt = require('jsonwebtoken');
 const async = require('async');
 const bcrypt = require('bcrypt');
 var User = require('../../../../../../models/UserSchema.js');
-var hbs = require('nodemailer-express-handlebars')
 var path = require('path')
-var nodemailer = require('nodemailer');
-var email = "speakpro.help@gmail.com"
-var pass = "help@speakpro"
 
-var smtpTransport = nodemailer.createTransport({
-  service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
-  auth: {
-    user: email,
-    pass: pass
-  }
-});
+const config = require('../../../../../../../config.js');
 
-var handlebarsOptions = {
-  viewEngine: 'handlebars',
-  viewPath: 'server/templates',
-  extName: '.html'
-};
+var api_key = config.api_key;
+var DOMAIN = config.DOMAIN;
+var EMAIL = config.EMAIL;
 
-smtpTransport.use('compile', hbs(handlebarsOptions));
+var MailgunMustacheMailer = require("mailgun-mustache-mailer");
+var data = { domain: DOMAIN, apiKey: api_key, from:EMAIL};
+var log = { info: console.log };
+
+var mailgunMustacheMailer = new MailgunMustacheMailer(data, log);
+
+
+var filepath = path.join(__dirname, '../../../../../../templates/forgot-password-email.html');
+
 
 module.exports = function (req, res, next) {
-
+  console.log(__dirname)
   // do functions one after another through async waterfall
   async.waterfall([
     function (done) {
-      console.log(req.body)
+      console.log(req.body.username)
       User.findOne({
         username: req.body.username
       }).exec(function (err, user) {
+        console.log(user)
         if (user) {
           done(err, user);
         }
@@ -59,30 +56,23 @@ module.exports = function (req, res, next) {
       });
     },
     function (token, user, done) {
-      console.log(token);
-      console.log(user);
-      var data = {
-        to: user.email,
-        from: email,
-        template: 'forgot-password-email',
-        subject: 'Lost password',
-        context: {
-          url: 'http://localhost:4200/#/reset?token=' + token,
-          name: user.firstName,
-          token: token
-        }
+      var template = {
+          subject: "Account Recovery Instructions",
+          text: "Hello {{name}}!\n",
+          html: "<div><p>You requested for a password reset, kindly use this <a href='{{url}}'>link</a> to reset your password</p><br><p>Cheers!</p></div>"
       };
 
-      smtpTransport.sendMail(data, function (err) {
-        if (!err) {
-          return res.json({
-            message: 'Kindly check your email for further instructions'
-          })
-        }
-        else {
-          return done(err);
-        }
-      })
+      var recipient = {
+          email: "speakpro.help@gmail.com",
+          name: user.firstName,
+          url : 'http://localhost:4200/#/reset?token=' + token,
+          token :token
+      };
+
+      mailgunMustacheMailer.send(template, recipient, (error, mailId) => {
+          if(error) return console.log(error);
+          console.log("New mail was send with id %s", mailId);
+      });
     }
   ], function (err) {
     return res.status(422).json({

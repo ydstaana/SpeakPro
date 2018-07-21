@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>styles.css</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "src/styles.css";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>styles.css</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="css"><span class="hljs-comment">/* You can add global styles to this file, and also import other style files */</span>
+
+<span class="hljs-selector-id">#sidenav-overlay</span> {
+    <span class="hljs-attribute">display</span>: none;
+}
+
+<span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">overflow</span>: visible <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">width</span>: auto <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-comment">/** TABLE STYLES **/</span>
+
+<span class="hljs-selector-tag">table</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">table-layout</span>: fixed;
+}
+
+<span class="hljs-selector-tag">thead</span>&gt;<span class="hljs-selector-tag">th</span> {
+    <span class="hljs-attribute">text-align</span>: center;
+}
+
+<span class="hljs-selector-tag">tr</span> {
+    <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(0, 0, 0, 0.12);
+}
+
+<span class="hljs-selector-tag">tr</span><span class="hljs-selector-pseudo">:last-child</span> {
+    <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">0px</span>;
+}
+
+<span class="hljs-selector-class">.empty-table</span> {
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">67px</span>;
+}
+
+<span class="hljs-selector-class">.td-1</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">10%</span>;
+}
+
+
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
+    <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#64B5F6</span> <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">-webkit-box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">#64B5F6</span>;
+    <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">#64B5F6</span>;
+}
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus+label+i</span>,
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus+label</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#64B5F6</span> <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-tag">input</span>+<span class="hljs-selector-tag">label</span>,
+<span class="hljs-selector-tag">input</span>+<span class="hljs-selector-tag">label</span>+<span class="hljs-selector-tag">i</span>, <span class="hljs-selector-tag">label</span>+<span class="hljs-selector-class">.select-wrapper</span>, <span class="hljs-selector-tag">label</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span> <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-class">.dropdown-content</span> <span class="hljs-selector-tag">li</span> &gt; <span class="hljs-selector-tag">span</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#64B5F6</span> <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.invalid</span><span class="hljs-selector-pseudo">:focus</span> {
+    <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid red <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">-webkit-box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> red;
+    <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> red;
+}
+
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.invalid</span>+<span class="hljs-selector-tag">label</span> {
+    <span class="hljs-attribute">color</span>: red <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-class">.indicator</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#64B5F6</span> <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-tag">a</span> {
+    <span class="hljs-attribute">cursor</span>: pointer;
+}
+
+@<span class="hljs-keyword">font-face</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>;
+    <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'assets/fonts/Octarine.otf'</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">'opentype'</span>);
+    <span class="hljs-attribute">font-style</span>: normal;
+    <span class="hljs-attribute">font-weight</span>: normal;
+}
+
+@<span class="hljs-keyword">font-face</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>;
+    <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'assets/fonts/Octarine-Medium.otf'</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">'opentype'</span>);
+    <span class="hljs-attribute">font-style</span>: normal;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+}
+
+@<span class="hljs-keyword">font-face</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>;
+    <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'assets/fonts/Octarine-LightOblique.otf'</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">'opentype'</span>);
+    <span class="hljs-attribute">font-style</span>: oblique;
+    <span class="hljs-attribute">font-weight</span>: normal;
+}
+
+@<span class="hljs-keyword">font-face</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>;
+    <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">'assets/fonts/Octarine-Bold.otf'</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">'opentype'</span>);
+    <span class="hljs-attribute">font-style</span>: normal;
+    <span class="hljs-attribute">font-weight</span>: bold;
+}
+
+<span class="hljs-comment">/* Modal */</span>
+
+<span class="hljs-selector-class">.modal</span><span class="hljs-selector-id">#login-box</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">25%</span>;
+}
+
+<span class="hljs-selector-class">.modal</span><span class="hljs-selector-class">.open</span>,
+<span class="hljs-selector-class">.modal</span> {
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">20px</span> <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-selector-class">.modal-content</span> <span class="hljs-selector-tag">h5</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+}
+
+<span class="hljs-selector-class">.modal-content</span>&gt;<span class="hljs-selector-class">.row</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.modal-content</span>&gt;<span class="hljs-selector-class">.row</span>&gt;<span class="hljs-selector-class">.col</span>&gt;<span class="hljs-selector-class">.row</span><span class="hljs-selector-pseudo">:last-of-type</span> {
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">0</span>;
+}
+
+
+<span class="hljs-selector-class">.section</span>{
+    <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">0</span> <span class="hljs-meta">!important</span>;
+}
+<span class="hljs-selector-class">.section</span> <span class="hljs-selector-tag">h5</span><span class="hljs-selector-class">.title</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">15px</span>;
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">15px</span>;
+}
+
+
+<span class="hljs-selector-class">.section</span> <span class="hljs-selector-class">.card</span>{
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">20px</span>;
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.section</span> <span class="hljs-selector-class">.card</span> <span class="hljs-selector-tag">th</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+}
+
+
+<span class="hljs-selector-class">.section</span> <span class="hljs-selector-class">.card</span> <span class="hljs-selector-tag">td</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif;
+    <span class="hljs-attribute">font-weight</span>: normal;
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">33px</span>;
+}
+
+<span class="hljs-selector-class">.section</span> <span class="hljs-selector-class">.card</span> <span class="hljs-selector-tag">td</span> <span class="hljs-selector-tag">a</span>{
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+}
+
+<span class="hljs-selector-class">.btn</span><span class="hljs-selector-class">.rounded</span>, <span class="hljs-selector-class">.btn</span><span class="hljs-selector-class">.rounded</span><span class="hljs-selector-pseudo">:hover</span>, <span class="hljs-selector-class">.btn</span><span class="hljs-selector-class">.rounded</span><span class="hljs-selector-pseudo">:focus</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#2196F3</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50px</span>;
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">48px</span>;
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">48px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">40px</span>;
+    <span class="hljs-attribute">text-transform</span>: none;
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">15px</span>;
+}
+
+<span class="hljs-selector-class">.material-tooltip</span>, <span class="hljs-selector-class">.toast</span>{
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Octarine'</span>, sans-serif <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">20px</span> <span class="hljs-meta">!important</span>;   
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">20px</span> <span class="hljs-meta">!important</span>; 
+}
+
+
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

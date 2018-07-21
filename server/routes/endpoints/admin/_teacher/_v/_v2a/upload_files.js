@@ -1,13 +1,16 @@
 const moment = require('moment');
-const multer = require('multer');
+const Multer = require('multer');
 const pify = require('pify');
 
 const File = require('../../../../../../models/FileSchema.js');
 
+const Storage = require('@google-cloud/storage');
+
+// Instantiate a storage client
+const storage = Storage();
 
 /* Upload File Logic */
 const uploadFile = async function(req, res){
-
     //Get timestamp
     const uploadDate = moment();
     
@@ -16,27 +19,31 @@ const uploadFile = async function(req, res){
         //Get author id from headers
         const authorId = req.headers.author; 
 
-        //Configure multer upload
-        const storage = multer.diskStorage({
-            destination: function(req, file, cb) {
-                cb(null, 'uploads/')
-            },
-            filename: function(req, file, cb) {
-                cb(null, generateFilename(file, authorId, uploadDate));
-            }
-        });
-        const upload = multer({ storage: storage });
+        const destination = '../uploads/'
+        const filename = (req, file, cb) => cb(null, generateFilename(file, authorId, uploadDate));
+
+        const disk = Multer.diskStorage({ destination, filename })
+
+        const multer = Multer({ disk, 
+            limits: {
+                fileSize: 5 * 1024 * 1024 // no larger than 5mb, you can change as needed.
+            } 
+        })
+
+        // A bucket is a container for objects (files).
+        const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
+
 
         //Promisify multer upload
-        const uploadFormData = pify(upload.single('selectedFiles'));
+        const uploadFormData = pify(multer.single('selectedFiles'));
 
         try {
             await uploadFormData(req, res);
+            console.log(req.file);
 
             //Process the uploaded file
             if(req.file) {
                 const item = req.file;
-
                 //Tokenized the uploaded file's original name
                 const tokenized = splitFilename(item.originalname);
                 
@@ -64,12 +71,13 @@ const uploadFile = async function(req, res){
 
                     //Uploading of new file information to db starts here
                     const newFile = {
-                        fileName: item.filename,
+                        fileName: filename + "." + fileExtension,
                         displayName: newDisplayName,
                         author: authorId,
                         uploadDate: uploadDate.format(),
                         fileSize: item.size
                     }
+                    console.log(newFile.fileName);
 
                     File.create(newFile, (err, file) => {
                         if(err) {
@@ -84,6 +92,24 @@ const uploadFile = async function(req, res){
                             message: 'Successfully uploaded the file ' + newDisplayName
                         });
                     });
+
+                    // Create a new blob in the bucket and upload the file data.
+                    const blob = bucket.file(req.file.originalname);
+                    const blobStream = blob.createWriteStream({
+                        resumable: false
+                    });
+
+                    blobStream.on('error', (err) => {
+                        next(err);
+                    });
+
+                    blobStream.on('finish', () => {
+                        // The public URL can be used to directly access the file via HTTP.
+                        console.log("upload successful");
+                    });
+
+                    blobStream.end(req.file.buffer);
+
                 } else {
                     res.status(500).json({
                         code: 500,

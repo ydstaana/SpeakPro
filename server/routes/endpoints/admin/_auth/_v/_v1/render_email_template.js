@@ -1,8 +1,8 @@
 var hbs = require('nodemailer-express-handlebars'),
 var path = require('path')
 var nodemailer = require('nodemailer');
-var email = "speakpro.help@gmail.com"
-var pass = "help@speakpro"
+var email = "speakproenglishschool@gmail.com"
+var pass = "Sp3akproschool"
 
 var smtpTransport = nodemailer.createTransport({
   service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',

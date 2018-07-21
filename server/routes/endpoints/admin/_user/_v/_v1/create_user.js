@@ -1,44 +1,22 @@
 var mongoose = require('mongoose');
 var User = require('../../../../../../models/UserSchema.js');
 const jwt = require('jsonwebtoken');
-var hbs = require('nodemailer-express-handlebars')
 var path = require('path')
-var nodemailer = require('nodemailer');
-var email = "speakpro.help@gmail.com"
-var pass = "help@speakpro"
 const async = require('async');
 const bcrypt = require('bcrypt');
 
-var smtpTransport = nodemailer.createTransport({
-  service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
-  auth: {
-    user: email,
-    pass: pass
-  }
-});
+const config = require('../../../../../../../config.js');
 
-var handlebarsOptions = {
-  viewEngine: 'handlebars',
-  viewPath: 'server/templates',
-  extName: '.html'
-};
+var api_key = config.api_key;
+var DOMAIN = config.DOMAIN;
+var EMAIL = config.EMAIL;
 
-smtpTransport.use('compile', hbs(handlebarsOptions));
+var MailgunMustacheMailer = require("mailgun-mustache-mailer");
+var data = { domain: DOMAIN, apiKey: api_key, from:EMAIL};
+var log = { info: console.log };
 
-/*module.exports = function(req, res, next){
-	req.body.newUser = true;
-	User.create(req.body, function (err, post) {
-		if (err) res.status(500).json({
-	    	code : 500,
-	    	message : err
-	    });
-	    res.status(200).json({
-	    	code : 200,
-	    	message : "Successfully created user"
-	    });
-	});
-}
-*/
+var mailgunMustacheMailer = new MailgunMustacheMailer(data, log);
+
 module.exports = function (req, res, next) {
 
   // do functions one after another through async waterfall
@@ -67,30 +45,29 @@ module.exports = function (req, res, next) {
       })
     },
     function (token, user, done) {
-      console.log(token);
-      console.log(user);
-      var data = {
-        to: user.email,
-        from: email,
-        template: 'registration-confirmation-email',
-        subject: 'Please confirm your email',
-        context: {
-          url: 'http://localhost:4200/#/confirm' + '?id=' + user._id + '&token=' + token,
-          name: user.firstName,
-          token: token
-        }
+      var template = {
+          subject: "Confirm your registration to SpeakPro English School",
+          text: "Hello {{name}}!\n",
+          html: "<div><p>Thank you for creating an account at SpeakPro, kindly use this <a href='{{url}}'>link</a> to confirm your registration.</p><br><p>Cheers!</p></div>"
       };
 
-      smtpTransport.sendMail(data, function (err) {
-        if (!err) {
-          return res.json({
-            message: 'Kindly check your email for further instructions'
-          })
-        }
-        else {
-          return done(err);
-        }
-      })
+      var recipient = {
+          email: "speakpro.help@gmail.com",
+          name: user.firstName,
+          url: 'http://localhost:4200/#/confirm' + '?id=' + user._id + '&token=' + token,
+          token :token
+      };
+
+      mailgunMustacheMailer.send(template, recipient, (error, mailId) => {
+          if (!error) {
+            return res.json({
+              message: 'Kindly check your email for further instructions'
+            })
+          }
+          else {
+            return done(error);
+          }
+      });
     }
   ], function (err) {
     return res.status(422).json({
