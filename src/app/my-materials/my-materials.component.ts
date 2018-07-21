@@ -75,7 +75,7 @@ export class MyMaterialsComponent implements OnInit {
         }, (err) => {
           this.uploadQueue = [];
           this.uploadQueueProgress = [];
-          this.getAvailableMaterials();          
+          this.getAvailableMaterials();
           toast(err.statusText, 2000);
         });
     }
@@ -120,20 +120,12 @@ export class MyMaterialsComponent implements OnInit {
     }
 
     this.uploadMaterials(selectedFiles, selectedFiles.length); //Calls the upload function
-    
+
     this.fileInput.nativeElement.value = ''; //Reset input file
   }
 
-  download(fileName, displayName) {
-    this.userService.downloadFile(fileName)
-      .subscribe((response: any) => {
-        if (response.success !== false) {
-          FileSaver.saveAs(response, displayName);
-        }
-        else {
-          alert('Your session has expired. Please login again to continue.')
-          this.auth.logout();
-        }
-      });
+  download(filepath, filename) {
+    this.userService.downloadFile(filepath)
+      .subscribe((response: any) => FileSaver.saveAs(response, filename));
   }
 }

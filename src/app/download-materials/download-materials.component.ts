@@ -34,8 +34,9 @@ export class DownloadMaterialsComponent implements OnInit {
   }
 
 
-  async download(filepath) {
-    window.open(filepath);
+  download(filepath, filename) {
+    this.userService.downloadFile(filepath)
+      .subscribe((response: any) => FileSaver.saveAs(response, filename));
   }
 
   formatBytes(bytes) {

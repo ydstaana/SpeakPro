@@ -46,7 +46,7 @@
               <td>{{file.author.firstName}} {{file.author.lastName}}</td>
               <td>{{file.uploadDate | date: 'MMM dd, yyyy h:mm:ss a z'}}</td>
               <td>{{uploadService.formatBytes(file.fileSize)}}</td>
-              <td (click)="download(file.url)">
+              <td (click)="download(file.url, file.fileName)">
                 <a class="btn-floating yellow darken-1 z-depth-0">
                   <i class="material-icons">file_download</i>
                 </a>
