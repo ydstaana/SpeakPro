@@ -39,6 +39,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AdminGuard } from './admin.guard';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     ReactiveFormsModule,
     HttpClientModule,
     RoundProgressModule,
+    ScrollToModule.forRoot(),
     RouterModule.forRoot([
       { path: 'home', component: HomepageComponent },
       { path: 'confirm', component: ConfirmComponent },
