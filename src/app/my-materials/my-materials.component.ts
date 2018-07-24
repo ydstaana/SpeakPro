@@ -31,7 +31,6 @@ export class MyMaterialsComponent implements OnInit {
     this.getAvailableMaterials();
   }
 
-
   ngOnDestroy() {
     //TODO: Prevent user from leaving page while uploading
     // if (!this.isUploadDone()) {
@@ -44,7 +43,6 @@ export class MyMaterialsComponent implements OnInit {
     //   }
     // }
   }
-
 
   isUploadDone() {
     return this.uploadQueueProgress.every(e => e === 100); //Checks if all uploads are 100%
@@ -73,10 +71,14 @@ export class MyMaterialsComponent implements OnInit {
             this.auth.logout();
           }
         }, (err) => {
-          this.uploadQueue = [];
-          this.uploadQueueProgress = [];
+          this.uploadQueueProgress[i] = 101;
           this.getAvailableMaterials();
-          toast(err.statusText, 2000);
+          if (err.error.message.code === 'LIMIT_FILE_SIZE') {
+            toast(`${this.uploadQueue[i].name} exceeds the file size limit allowed and cannot be saved.`, 5000)
+          }
+          else {
+            toast(err.error.message.code, 2000);
+          }
         });
     }
   }
@@ -103,9 +105,9 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress[index] = Math.round(100 * event.loaded / event.total);
     }
     else if (event.type === HttpEventType.Response) {
-      this.uploadQueue = [];
       this.getAvailableMaterials();
-      toast(event.body.message, 2000)
+      toast(event.body.message, 2000);
+      this.uploadQueueProgress[index] = 101;
     }
   }
 
