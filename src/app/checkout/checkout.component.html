@@ -24,7 +24,9 @@
             <ul *ngIf="cart">
               <li *ngIf="cart.length === 0">Your cart is empty</li>
               <li *ngFor="let item of cart">
-                <button class="btn-flat remove" (click)="removeItem(item)" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Remove item"><i class="material-icons">highlight_off</i></button>                
+                <button class="btn-flat remove" (click)="removeItem(item)" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Remove item">
+                  <i class="material-icons">highlight_off</i>
+                </button>
                 <div class="item-content">
                   <div class="item-title">
                     <span>{{item.day}} Class</span>
@@ -49,10 +51,10 @@
               <li class="tab">
                 <a href="#credit-card" class="active">Credit Card</a>
               </li>
-              <li class="tab disabled">
+              <li class="tab disabled" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Unavailable as of the moment">
                 <a href="#pera-padala">Pera Padala</a>
               </li>
-              <li class="tab disabled">
+              <li class="tab disabled" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Unavailable as of the moment">
                 <a href="#globe-smart">Globe/Smart</a>
               </li>
             </ul>
@@ -60,24 +62,36 @@
           <div class="card-content grey lighten-4">
             <form id="credit-card" [formGroup]="creditCardForm">
               <div class="row">
-                <div class="input-field col s12">
-                  <input id="card-number" type="text" formControlName="ccNo">
+                <div class="input-field col s5">
+                  <select id="card-type" name="dropdown" materialize="material_select" [materializeSelectOptions]="ccProviders" formControlName="ccProvider">
+                    <option *ngFor="let provider of ccProviders; let i = index" [value]="provider.type" [attr.data-icon]="provider.icon">{{provider.type}}</option>
+                  </select>
+                  <label for="card-type">Card Type</label>
+                </div>
+                <div class="input-field col s7">
+                  <input placeholder="Enter Card Number" id="card-number" type="text" formControlName="ccNo" [ngClass]="{'invalid': (ccNo.dirty && ccNo.errors?.required) || ccNo.errors?.pattern}">
                   <label for="card-number">Card Number</label>
+                  <div class="error-text " *ngIf="ccNo.dirty && ccNo.errors?.required">Field is required</div>
+                  <div class="error-text " *ngIf="ccNo.errors?.pattern">Invalid Credit Card</div>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col s6">
-                  <input placeholder="Month" id="expiry-month" type="text" formControlName="expMonth" maxlength="2">
-                  <label for="expiry-month">Expiry Date (MM/YYYY)</label>
+                <div class="input-field col s4">
+                  <input placeholder="MM" id="expiry-month" type="text" formControlName="expMonth" maxlength="2" [ngClass]="{'invalid': (expMonth.dirty && expMonth.errors?.required) || expMonth.errors?.pattern}">
+                  <label for="expiry-month">Expiry Date </label>
+                  <div class="error-text " *ngIf="expMonth.dirty && expMonth.errors?.required">Field is required</div>
+                  <div class="error-text " *ngIf="expMonth.errors?.pattern">Invalid Expiry Month</div>
                 </div>
-                <div class="input-field col s6">
-                  <input placeholder="Year" id="expiry-year" type="text" formControlName="expYear" maxlength="4">
+                <div class="input-field col s4">
+                  <input placeholder="YYYY" id="expiry-year" type="text" formControlName="expYear" maxlength="4" [ngClass]="{'invalid': (expYear.dirty && expYear.errors?.required) || expYear.errors?.pattern}">
+                  <div class="error-text " *ngIf="expYear.dirty && expYear.errors?.required">Field is required</div>
+                  <div class="error-text " *ngIf="expYear.errors?.pattern">Invalid Expiry Year</div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="security-code" type="text" formControlName="cvv" maxlength="4">
+                <div class="input-field col s4">
+                  <input id="security-code" type="text" formControlName="cvv" maxlength="4" [ngClass]="{'invalid': (cvv.dirty && cvv.errors?.required) || cvv.errors?.pattern}">
                   <label for="security-code">CVV</label>
+                  <div class="error-text " *ngIf="cvv.dirty && cvv.errors?.required">Field is required</div>
+                  <div class="error-text " *ngIf="cvv.errors?.pattern">Invalid CVV</div>
                 </div>
               </div>
             </form>
@@ -86,19 +100,18 @@
           </div>
         </div>
         <div class="center">
-            <button class="btn rounded z-depth-0" (click)="checkout(creditCardForm.value)"  [ngClass]="{'disabled': !creditCardForm.valid || cart === null || cart.length === 0}">Checkout</button>
+          <button class="btn rounded z-depth-0" (click)="checkout(creditCardForm.value)" [ngClass]="{'disabled': !creditCardForm.valid || cart === null || cart.length === 0}">Checkout</button>
         </div>
       </div>
     </div>
-    <div id="checkout-confirmation" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '30%'}]" [materializeActions]="confirmationModal">
+    <div id="checkout-confirmation" class="modal" materialize="modal" [materializeParams]="[{dismissible: false, endingTop: '30%'}]"
+      [materializeActions]="confirmationModal">
       <div class="modal-content">
-          <object type="image/svg+xml" data="assets/images/safe-transaction.svg">
-            Your browser does not support SVG
-          </object>
-          <h6>Processing transaction...</h6>
+        <object type="image/svg+xml" data="assets/images/safe-transaction.svg">
+          Your browser does not support SVG
+        </object>
+        <h6>Processing transaction...</h6>
       </div>
     </div>
   </div>
 </main>
-
-

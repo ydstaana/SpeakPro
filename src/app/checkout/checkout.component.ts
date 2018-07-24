@@ -8,6 +8,7 @@ import { MaterializeAction } from 'angular2-materialize';
 import { toast } from 'angular2-materialize';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { visitValue } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -19,6 +20,8 @@ import { AuthService } from '../../service/auth.service';
 
 export class CheckoutComponent implements OnInit {
   cart: any = null;
+  ccProviders: Object = [];
+  ccRegex: Object;
   confirmationModal: EventEmitter<string | MaterializeAction>;
   creditCardForm: FormGroup;
   totalPrice = 0;
@@ -29,37 +32,28 @@ export class CheckoutComponent implements OnInit {
     this.creditCardForm = this.createCCForm();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.ccProviders = this.paymentService.getCCProviders();
+    this.ccRegex = this.paymentService.getCCRegex();
+    this.onCCProviderChange();
+  }
 
   ngAfterViewInit() {
     TCO.loadPubKey('sandbox');
   }
 
-  getCart(){
-    this.cart = null;
-    this.totalPrice = 0;
-    this.paymentService.getCart()
-      .subscribe((response: any) => {
-        if (response.success !== false) {
-          this.cart = response.content;
-          this.totalPrice = (this.cart.length * 6.00);
-        }
-        else {
-          alert('Your session has expired. Please login again to continue.')
-          this.auth.logout();
-        }
-      }, (err) => toast('An error occured', 2000));
-  }
-
-
+  /*******************
+*  Form-related Functions
+*********************/
   createCCForm() {
     return this.fb.group({
       sellerId: ['901378548'],
       publishableKey: ['CF3531E4-3895-4E14-8110-3662393C7B6C'],
-      ccNo: ['4000000000000002', Validators.required],
+      ccProvider: ['Visa'],
+      ccNo: ['', [Validators.required, Validators.pattern(/^4[0-9]{12}(?:[0-9]{3})?$/)]],
       cvv: ['', [Validators.required, Validators.pattern(/^[0-9]{3,4}$/)]],
       expMonth: ['', [Validators.required, Validators.maxLength(2), Validators.pattern(/^[0-9]{2}$/)]],
-      expYear: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(/^[0-9]{4}$/)]],
+      expYear: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(/^(2018|2019|20[2-9][0-9])$/)]],
     });
   }
 
@@ -89,15 +83,26 @@ export class CheckoutComponent implements OnInit {
     }, (err) => toast(err.errorMsg, 2000), credentials);
   }
 
-  openModal() {
-    this.confirmationModal.emit({ action: "modal", params: ['open'] });
+  /*******************
+*  Cart-related Functions
+*********************/
+  getCart() {
+    this.cart = null;
+    this.totalPrice = 0;
+    this.paymentService.getCart()
+      .subscribe((response: any) => {
+        if (response.success !== false) {
+          this.cart = response.content;
+          this.totalPrice = (this.cart.length * 6.00);
+        }
+        else {
+          alert('Your session has expired. Please login again to continue.')
+          this.auth.logout();
+        }
+      }, (err) => toast('An error occured', 2000));
   }
 
-  closeModal() {
-    this.confirmationModal.emit({ action: "modal", params: ['close'] });
-  }
-
-  removeItem(item){
+  removeItem(item) {
     this.paymentService.removeItem(item._id)
       .subscribe((response: any) => {
         if (response.success !== false) {
@@ -109,5 +114,46 @@ export class CheckoutComponent implements OnInit {
           this.auth.logout();
         }
       }, (err) => toast(err.errorMsg, 2000));
+  }
+
+  /*******************
+*  Modal Functions
+*********************/
+  openModal() {
+    this.confirmationModal.emit({ action: "modal", params: ['open'] });
+  }
+
+  closeModal() {
+    this.confirmationModal.emit({ action: "modal", params: ['close'] });
+  }
+
+  /*
+    Replaces current regex with the regex of the selected credit card provider
+    and validate the credit card number field using the new regex
+  */
+  onCCProviderChange() {
+    this.creditCardForm.get('ccProvider').valueChanges.subscribe((value) => {
+      this.ccNo.setValidators([Validators.required, Validators.pattern(this.ccRegex[value])]);
+      this.ccNo.updateValueAndValidity();
+    });
+  }
+
+  /****************************************************
+  *  Shorthand Function for Accessing Form Controls
+******************************************************/
+  get ccNo() {
+    return this.creditCardForm.get('ccNo');
+  }
+
+  get cvv() {
+    return this.creditCardForm.get('cvv');
+  }
+
+  get expMonth() {
+    return this.creditCardForm.get('expMonth');
+  }
+
+  get expYear() {
+    return this.creditCardForm.get('expYear');
   }
 }

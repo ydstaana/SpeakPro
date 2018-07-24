@@ -35,7 +35,7 @@ h6 {
     font-size: 1.1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    border-radius: 0 0 20px 20px !important;    
+    border-radius: 0 0 20px 20px !important;
     font-family: 'Octarine', sans-serif;
 }
 
@@ -47,7 +47,7 @@ li {
 }
 
 .item-content{
-    width: 100%; 
+    width: 100%;
 }
 
 
@@ -91,7 +91,7 @@ h6{
 
 .btn-flat.remove{
     box-sizing: content-box;
-    height: 16px;    
+    height: 16px;
     line-height: 16px;
     padding: 0;
     margin-right: 5px;
@@ -105,4 +105,9 @@ li:hover .btn-flat.remove {
 
 li:hover .item-content {
     width: 90%;
+}
+
+.error-text {
+  font-family: 'Octarine', sans-serif;
+  color: red;
 }
