@@ -1,3 +1,4 @@
+import { PendingUploadsGuard } from './pending-uploads.guard';
 import { TimeslotService } from './../service/timeslot.service';
 import { TeacherGuard } from './teacher.guard';
 import { BrowserModule } from '@angular/platform-browser';
@@ -96,7 +97,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
           { path: 'admin/all-teachers', component: AllTeachersComponent, canActivate: [AdminGuard, SessionGuard] },
 
           { path: 'teacher/my-classes', component: MyClassesComponent, canActivate: [TeacherGuard, SessionGuard] },
-          { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard] }
+          { path: 'teacher/my-materials', component: MyMaterialsComponent, canActivate: [TeacherGuard, SessionGuard], canDeactivate: [PendingUploadsGuard] }
         ]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -112,6 +113,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     SessionGuard,
     TimeslotService,
     AuthService,
+    PendingUploadsGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

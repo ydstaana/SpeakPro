@@ -1,5 +1,6 @@
+import { ComponentCanDeactivate } from './../pending-uploads.guard';
 import { UploadService } from './../../service/upload.service';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { User } from '../../model/user';
@@ -13,7 +14,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./my-materials.component.css'],
   providers: [UploadService]
 })
-export class MyMaterialsComponent implements OnInit {
+export class MyMaterialsComponent implements OnInit, ComponentCanDeactivate {
   availableFiles: any[];
   uploadQueue: any[] = [];
   private uploadQueueProgress: any[] = [];
@@ -31,21 +32,27 @@ export class MyMaterialsComponent implements OnInit {
     this.getAvailableMaterials();
   }
 
+  // @HostListener allows us to also guard against browser refresh, close, etc.
+  @HostListener('window:beforeunload')
+  canDeactivate() {
+    // insert logic to check if there are pending changes here;
+    // returning true will navigate without confirmation
+    if (this.uploadQueue.length === 0 || this.isUploadDone()) {
+      return true;
+    }
+    return false;
+    // returning false will show a confirm dialog before navigating away
+  }
+
   ngOnDestroy() {
-    //TODO: Prevent user from leaving page while uploading
-    // if (!this.isUploadDone()) {
-    //   if(confirm("Are you sure you want to leave this page?")){
-    //     if (this.fileUploadSub) this.fileUploadSub.unsubscribe();
-    //     this.uploadQueue = [];
-    //     this.uploadQueueProgress = [];
-    //     this.uploadedCnt = 0;
-    //     this.uploadedFiles = [];
-    //   }
-    // }
+    this.uploadQueue = [];
+    this.uploadQueueProgress = [];
+    this.uploadedCnt = 0;
+    this.uploadedFiles = [];
   }
 
   isUploadDone() {
-    return this.uploadQueueProgress.every(e => e === 100); //Checks if all uploads are 100%
+    return this.uploadQueueProgress.every(e => e === 101); //Checks if all uploads are 100%
   }
 
   uploadMaterials(selectedFiles, size) {
@@ -98,7 +105,6 @@ export class MyMaterialsComponent implements OnInit {
       });
   }
 
-
   /* Handles File Upload Progress*/
   handleProgress(event, index, filename) {
     if (event.type === HttpEventType.UploadProgress) {
@@ -110,7 +116,6 @@ export class MyMaterialsComponent implements OnInit {
       this.uploadQueueProgress[index] = 101;
     }
   }
-
 
   /* Automatically uploads selected files */
   handleFileInput(filelist) {
