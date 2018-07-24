@@ -95,17 +95,14 @@ h6{
     line-height: 16px;
     padding: 0;
     margin-right: 5px;
-    color: gray;
-    display: none;
+    color: red;
+    /* display: none; */
 }
 
-li:hover .btn-flat.remove {
+/* li:hover .btn-flat.remove {
     display: block;
-}
+} */
 
-li:hover .item-content {
-    width: 90%;
-}
 
 .error-text {
   font-family: 'Octarine', sans-serif;
