@@ -59,7 +59,7 @@ nav li {
 }
 
 #hero {
-    min-height: 80vh;
+    /* min-height: 80vh; */
     position: relative;
 }
 
@@ -100,7 +100,7 @@ nav li {
     font-size: 20px;
     font-weight: normal;
     margin: 5px 0;
-    margin-bottom: 8px;        
+    margin-bottom: 8px;
     max-width: 480px;
 }
 
@@ -111,7 +111,7 @@ nav li {
     height: 48px;
     line-height: 48px;
     margin-top: 10px;
-    margin-right: 5px;    
+    margin-right: 5px;
     padding: 0 30px;
     text-transform: none;
 }
@@ -127,6 +127,33 @@ nav li {
     line-height: 48px;
     padding: 0 30px;
     text-transform: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+    #hero,
+    #hero .col {
+        min-height: max-content;
+    }
+    #hero {
+        padding: 115px 0 35px 0;
+    }
+    #hero .hero-text h2 {
+        margin: auto;
+        max-width: max-content;
+        padding: 0 15px;
+        text-align: center;
+    }
+    #hero .hero-text p {
+        font-size: 17px;
+        margin: 15px auto;
+        max-width: 90%;
+        text-align: center;
+    }
+    #hero .btn-large,
+    #hero .btn-large.outline {
+        display: block;
+        margin: 12px 5%;
+    }
 }
 
 /* How it works */
@@ -167,10 +194,19 @@ nav li {
     font-size: 17px;
 }
 
+@media only screen and (max-width: 767.98px) {
+    #how-it-works .step object {
+        height: 155px;
+    }
+    #how-it-works .step span {
+        font-size: 17px;
+    }
+}
+
 /* Pricing */
 
 #pricing {
-    padding: 20px 0;
+    padding: 60px 0;
 }
 
 #pricing .row {
@@ -195,9 +231,9 @@ nav li {
 #pricing .text-block p {
     color: #939292;
     font-family: 'Octarine', sans-serif;
-    font-size: 20px;
+    font-size: 17px;
     margin: 15px 0;
-    max-width: 480px;
+    max-width: 510px;
 }
 
 #pricing .btn-large {
@@ -282,6 +318,45 @@ nav li {
     padding-bottom: 25px;
 }
 
+@media only screen and (max-width: 767.98px) {
+    #pricing {
+        padding: 20px 0;
+    }
+    #pricing .col {
+        padding: 20px 0;
+        min-height: max-content;
+    }
+    #pricing .text-block h4 {
+        max-width: max-content;
+        padding: 0 15px;
+        text-align: center;
+    }
+    #pricing .text-block p {
+        margin: 15px auto;
+        max-width: 90%;
+        text-align: center;
+    }
+    #pricing .btn-large {
+        display: block;
+        margin: 0 20%;
+    }
+    #pricing table {
+        width: 95%;
+    }
+    #pricing tr td {
+        font-size: 15px;
+    }
+    #pricing tr:last-of-type td {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 767.99px) and (max-width: 991.98px) {
+    #pricing table {
+        width: 75%;
+    }
+}
+
 /* Testimonials */
 
 #testimonials {
@@ -303,7 +378,8 @@ nav li {
     color: #939292;
     font-family: 'Octarine', sans-serif;
     font-size: 17px;
-    margin-top: 10px;
+    margin: 15px auto;
+    max-width: 480px;
 }
 
 #testimonials .card {
@@ -352,6 +428,22 @@ nav li {
     font-size: 12px;
 }
 
+@media only screen and (max-width: 767.98px) {
+    #testimonials {
+        padding: 40px 0;
+    }
+    #testimonials .card {
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+    #testimonials .card .card-content {
+        padding: 8px;
+    }
+    #testimonials .card .card-title {
+        font-size: 17px;
+    }
+}
+
 /* Teach With SpeakPro */
 
 #teach-speakpro {
@@ -376,6 +468,8 @@ nav li {
     color: #939292;
     font-family: 'Octarine', sans-serif;
     font-size: 17px;
+    margin: 15px auto;
+    max-width: 430px;
 }
 
 #teach-speakpro .btn-large {
@@ -386,6 +480,20 @@ nav li {
     line-height: 48px;
     padding: 0 40px;
     text-transform: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+    #teach-speakpro {
+        padding: 40px 0;
+    }
+    #teach-speakpro h4 {
+        padding: 0 15px;
+    }
+    #teach-speakpro p {
+        margin: 15px auto;
+        max-width: 90%;
+        text-align: center;
+    }
 }
 
 /* Footer */
@@ -402,6 +510,7 @@ footer .row {
 .footer-brand {
     color: white;
     font-family: 'Octarine', sans-serif;
+    text-align: center;
 }
 
 .footer-menu {
@@ -413,6 +522,12 @@ footer .row {
     color: white;
     font-family: 'Octarine', sans-serif;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 767.98px) {
+    .footer-brand {
+        margin-bottom: 20px;
+    }
 }
 
 .btn.cancel {
@@ -434,10 +549,11 @@ footer .row {
     padding: 0 40px;
     text-transform: none;
 }
+
 .preloader-wrapper.very.small {
-  margin-left: 10px;
-  height: 15px;
-  width: 15px;
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
 }
 
 .forgot-password {
@@ -453,4 +569,31 @@ footer .row {
 .helper-text {
     font-family: 'Octarine', sans-serif;
     color: red;
+}
+
+#login-box .btn.submit {
+    display: block;
+    margin: auto;
+}
+
+@media only screen and (max-width: 767.98px) {
+    .modal-content {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .modal-content .btn {
+        display: block;
+        margin: auto;
+        margin-top: 10px;
+        min-width: 142px;
+    }
+    .modal#login-box {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 767.99px) and (max-width: 991.98px) {
+    .modal#login-box {
+        width: 45%;
+    }
 }
