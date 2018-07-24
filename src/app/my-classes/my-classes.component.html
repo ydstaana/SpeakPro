@@ -26,7 +26,8 @@
               <input id="max-students" name="max-students" value="1" materialize type="text" [disabled]="true"/>
             </div> -->
             <div class="col s4 m4 l2 centered-container">
-              <button class="btn-floating yellow darken-1 z-depth-0" id="create-btn" materialize="tooltip" data-position="top" data-delay="50" data-tooltip="Create Class">
+              <button class="btn-floating yellow darken-1 z-depth-0" id="create-btn" materialize="tooltip" data-position="top" data-delay="50"
+                data-tooltip="Create Class">
                 <i class="material-icons">add</i>
               </button>
             </div>
@@ -81,7 +82,8 @@
               <td>{{i+1}}</td>
               <td>{{class.timeSlot}}</td>
               <td>{{class.day}}</td>
-              <td *ngIf="class.available">Open</td>
+              <td *ngIf="class.available && !class.reservee">Open</td>
+              <td *ngIf="class.available && class.reservee">Reserved</td>
               <td *ngIf="!class.available">Closed</td>
               <td *ngIf="class.student" class="ellipsis" materialize="tooltip" data-position="left" data-delay="50" [attr.data-tooltip]="class.student.firstName + ' ' + class.student.lastName">{{class.student.firstName}} {{class.student.lastName}}</td>
               <td *ngIf="!class.student">n/a</td>

@@ -45,7 +45,8 @@
               <td>{{class.day}}</td>
               <td *ngIf="class.student">{{class.student.firstName}} {{class.student.lastName.charAt(0)}}.</td>
               <td *ngIf="!class.student">n/a</td>
-              <td *ngIf="class.available">Open</td>
+              <td *ngIf="class.available && !class.reservee">Open</td>
+              <td *ngIf="class.available && class.reservee">Reserved</td>
               <td *ngIf="!class.available">Closed</td>
             </tr>
             <tr class="empty-table" *ngIf="classes && classes.length === 0">

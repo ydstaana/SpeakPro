@@ -62,7 +62,8 @@
                 <td>
                   <a (click)="viewTeacher(classes[i].teacher.username)">{{classes[i].teacher.firstName + ' ' + classes[i].teacher.lastName}}</a>
                 </td>
-                <td *ngIf="classes[i].available">Open</td>
+                <td *ngIf="classes[i].available && !classes[i].reservee">Open</td>
+                <td *ngIf="classes[i].available && classes[i].reservee">Reserved</td>
                 <td *ngIf="!classes[i].available">Closed</td>
               </tr>
             </tbody>
