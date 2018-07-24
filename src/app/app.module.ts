@@ -41,6 +41,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { AdminGuard } from './admin.guard';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { LoggedInGuard } from './logged-in.guard';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     RoundProgressModule,
     ScrollToModule.forRoot(),
     RouterModule.forRoot([
-      { path: 'home', component: HomepageComponent },
+      { path: 'home', component: HomepageComponent, canActivate: [LoggedInGuard]},
       { path: 'confirm', component: ConfirmComponent },
       { path: 'reset', component: ResetPasswordComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -89,8 +90,6 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
           { path: 'drop-classes', component: DropClassesComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'download-materials', component: DownloadMaterialsComponent, canActivate: [StudentGuard, SessionGuard] },
           { path: 'checkout', component: CheckoutComponent, canActivate: [StudentGuard, SessionGuard] },
-
-
 
           { path: 'teachers/:username', component: ClassesByTeacherComponent, canActivate: [SessionGuard] },
           { path: 'admin/all-students', component: AllStudentsComponent, canActivate: [AdminGuard, SessionGuard] },
@@ -114,6 +113,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     TimeslotService,
     AuthService,
     PendingUploadsGuard,
+    LoggedInGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
