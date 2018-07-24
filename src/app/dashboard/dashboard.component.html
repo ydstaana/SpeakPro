@@ -12,7 +12,7 @@
       <img class="logo" src="assets/images/SpeakPRO.png">
       <ul class="right">
         <li class="logged-user">{{greetings()}}</li>
-        <li>
+        <li *ngIf="checkUserType()">
           <a routerLink="/dashboard/checkout">
             <i class="material-icons">shopping_cart</i>
           </a>

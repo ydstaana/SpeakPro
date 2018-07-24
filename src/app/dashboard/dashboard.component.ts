@@ -26,12 +26,16 @@ export class DashboardComponent implements OnInit {
     return `${user.username}`;
   }
 
+  checkUserType() {
+    const user = this.auth.decodeAccessToken(localStorage.getItem('token'));
+    return user.userType === 'STUDENT';
+  }
 
   toggleSidebar() {
     this.showSidebar = this.showSidebar ? false : true;
   }
 
-  openNotifications(){
+  openNotifications() {
     toast('Feature is not available at the moment', 1000);
   }
 }
