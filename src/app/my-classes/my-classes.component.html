@@ -85,7 +85,9 @@
               <td *ngIf="class.available && !class.reservee">Open</td>
               <td *ngIf="class.available && class.reservee">Reserved</td>
               <td *ngIf="!class.available">Closed</td>
-              <td *ngIf="class.student" class="ellipsis" materialize="tooltip" data-position="left" data-delay="50" [attr.data-tooltip]="class.student.firstName + ' ' + class.student.lastName">{{class.student.firstName}} {{class.student.lastName}}</td>
+              <td *ngIf="class.student" class="ellipsis">
+                <a (click)="viewStudent(class.student)" materialize="tooltip" data-position="top" data-delay="50" [attr.data-tooltip]="class.student.firstName + ' ' + class.student.lastName">{{class.student.firstName}} {{class.student.lastName}}</a>
+              </td>
               <td *ngIf="!class.student">n/a</td>
               <td>
                 <!-- <button class="btn red lighten-1 waves-effect waves-light" (click)="closeClass(class)">Delete Class</button> -->

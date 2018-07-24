@@ -134,6 +134,9 @@ export class MyClassesComponent implements OnInit {
           }
         })
     }
+  }
 
+  viewStudent(student) {
+    toast(`Skype ID: ${student.skypeID}`, 2000);
   }
 }

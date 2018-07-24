@@ -50,4 +50,5 @@ main{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #039be5;
 }
